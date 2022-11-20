@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using TravelGuide.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using TravelGuide.Web.ViewModels;
 
     public class HomeController : BaseController
     {

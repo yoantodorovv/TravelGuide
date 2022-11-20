@@ -1,9 +1,8 @@
 ﻿namespace TravelGuide.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

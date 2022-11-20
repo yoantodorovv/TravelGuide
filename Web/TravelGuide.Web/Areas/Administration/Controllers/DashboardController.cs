@@ -1,9 +1,8 @@
 ﻿namespace TravelGuide.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using TravelGuide.Services.Data;
     using TravelGuide.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

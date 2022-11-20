@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using TravelGuide.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using TravelGuide.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

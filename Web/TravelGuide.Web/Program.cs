@@ -2,33 +2,40 @@
 {
     using System.Reflection;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
     using TravelGuide.Data;
     using TravelGuide.Data.Common;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Data.Repositories;
     using TravelGuide.Data.Seeding;
+
     using TravelGuide.Services.Data;
     using TravelGuide.Services.Mapping;
     using TravelGuide.Services.Messaging;
-    using TravelGuide.Web.ViewModels;
 
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
+    using TravelGuide.Web.ViewModels;
 
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             ConfigureServices(builder.Services, builder.Configuration);
             var app = builder.Build();
+
             Configure(app);
+
             app.Run();
         }
 

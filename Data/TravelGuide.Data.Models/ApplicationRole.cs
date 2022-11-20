@@ -3,9 +3,8 @@ namespace TravelGuide.Data.Models
 {
     using System;
 
-    using TravelGuide.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using TravelGuide.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
