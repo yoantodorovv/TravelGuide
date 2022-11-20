@@ -50,7 +50,7 @@
             var sw = Stopwatch.StartNew();
 
             // var settingsService = serviceProvider.GetService<ISettingsService>();
-            // Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
+            //// Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
 
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
@@ -69,8 +69,18 @@
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                     .UseLoggerFactory(new LoggerFactory()));
 
-            services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = configuration.GetValue<bool>("Identity:RequireConfirmedAccount");
+                options.SignIn.RequireConfirmedEmail = configuration.GetValue<bool>("Identity:RequireConfirmedEmail");
+                options.SignIn.RequireConfirmedPhoneNumber = configuration.GetValue<bool>("Identity:RequireConfirmedPhoneNumber");
+                options.Password.RequireLowercase = configuration.GetValue<bool>("Identity:RequireLowercase");
+                options.Password.RequireUppercase = configuration.GetValue<bool>("Identity:RequireUppercase");
+                options.Password.RequireNonAlphanumeric = configuration.GetValue<bool>("Identity:RequireNonAlphanumeric");
+                options.Password.RequiredLength = configuration.GetValue<int>("Identity:RequiredLength");
+            })
+                .AddRoles<ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));

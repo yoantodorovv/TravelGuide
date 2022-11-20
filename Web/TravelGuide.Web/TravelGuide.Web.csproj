@@ -40,4 +40,7 @@
     <ProjectReference Include="..\TravelGuide.Web.Infrastructure\TravelGuide.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TravelGuide.Web.ViewModels\TravelGuide.Web.ViewModels.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="appsettings.Production.json" />
+  </ItemGroup>
 </Project>
