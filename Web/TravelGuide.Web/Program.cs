@@ -19,7 +19,6 @@
     using TravelGuide.Data.Repositories;
     using TravelGuide.Data.Seeding;
 
-    using TravelGuide.Services.Data;
     using TravelGuide.Services.Mapping;
     using TravelGuide.Services.Messaging;
 
@@ -71,7 +70,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
 
         private static void Configure(WebApplication app)
