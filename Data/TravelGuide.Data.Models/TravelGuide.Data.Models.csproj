@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TravelGuide.Data.Common\TravelGuide.Data.Common.csproj" />
+    <ProjectReference Include="..\..\TravelGuide.Common\TravelGuide.Common.csproj" />
   </ItemGroup>
   
 </Project>

@@ -44,4 +44,10 @@
     <ProjectReference Include="..\TravelGuide.Data.Models\TravelGuide.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ namespace TravelGuide.Data.Models
     using Microsoft.AspNetCore.Identity;
     using TravelGuide.Data.Common.Models;
 
-    public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
+    public class ApplicationRole : IdentityRole<Guid>, IAuditInfo, IDeletableEntity
     {
         public ApplicationRole()
             : this(null)
@@ -16,7 +16,6 @@ namespace TravelGuide.Data.Models
         public ApplicationRole(string name)
             : base(name)
         {
-            this.Id = Guid.NewGuid().ToString();
         }
 
         public DateTime CreatedOn { get; set; }

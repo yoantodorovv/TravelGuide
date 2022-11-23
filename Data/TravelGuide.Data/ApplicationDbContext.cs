@@ -11,7 +11,7 @@
     using TravelGuide.Data.Common.Models;
     using TravelGuide.Data.Models;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
             typeof(ApplicationDbContext).GetMethod(
@@ -22,6 +22,22 @@
             : base(options)
         {
         }
+
+        public DbSet<Hotel> Hotels { get; set; }
+
+        public DbSet<HotelReservation> HotelReservations { get; set; }
+
+        public DbSet<Restaurant> Restaurants { get; set; }
+
+        public DbSet<RestaurantReservation> RestaurantReservations { get; set; }
+
+        public DbSet<Amenity> Amenities { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<Discount> Discounts { get; set; }
+
+        public DbSet<Image> Images { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
