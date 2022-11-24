@@ -51,6 +51,8 @@
         [Url]
         public string MenuUrl { get; set; }
 
+        public virtual ICollection<WorkingHours> WorkingHours { get; set; } = new HashSet<WorkingHours>();
+
         public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 
         public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();

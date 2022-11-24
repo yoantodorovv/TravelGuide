@@ -9,6 +9,12 @@
         public const string RestauranteurRoleName = "Restauranteur";
         public const string UserRoleName = "User";
 
+        public static class WorkingHoursConstants
+        {
+            public const int WeekDayMinLength = 5;
+            public const int WeekDayMaxLength = 10;
+        }
+
         public static class UserConstants
         {
             public const int FirstNameMinLength = 3;
@@ -33,7 +39,7 @@
             public const double RatingMaxValue = 5;
 
             public const int DetailsMinLength = 10;
-            public const int DetailsMaxLength = 500;
+            public const int DetailsMaxLength = 2000;
 
             public const int AddressMinLength = 5;
             public const int AddressMaxLength = 50;
@@ -60,7 +66,7 @@
             public const int LocationMaxLength = 50;
 
             public const int DescriptionMinLength = 10;
-            public const int DescriptionMaxLength = 300;
+            public const int DescriptionMaxLength = 2000;
 
             public const int AddressMinLength = 5;
             public const int AddressMaxLength = 50;

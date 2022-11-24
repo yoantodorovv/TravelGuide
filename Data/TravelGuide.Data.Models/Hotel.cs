@@ -49,6 +49,10 @@
         [EmailAddress]
         public string Email { get; set; }
 
+        public virtual ICollection<WorkingHours> WorkingHours { get; set; } = new HashSet<WorkingHours>();
+
+        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+
         public virtual ICollection<Amenity> Amenities { get; set; } = new HashSet<Amenity>();
 
         public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();

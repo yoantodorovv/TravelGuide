@@ -12,13 +12,6 @@ namespace TravelGuide.Data.Models
 
     public class ApplicationUser : IdentityUser<Guid>, IAuditInfo, IDeletableEntity
     {
-        public ApplicationUser()
-        {
-            this.Roles = new HashSet<IdentityUserRole<Guid>>();
-            this.Claims = new HashSet<IdentityUserClaim<Guid>>();
-            this.Logins = new HashSet<IdentityUserLogin<Guid>>();
-        }
-
         [Required]
         [StringLength(FirstNameMaxLength)]
         public string FirstName { get; set; }
@@ -40,10 +33,14 @@ namespace TravelGuide.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
-        public virtual ICollection<IdentityUserRole<Guid>> Roles { get; set; }
+        public virtual ICollection<Discount> Discounts { get; set; } = new HashSet<Discount>();
 
-        public virtual ICollection<IdentityUserClaim<Guid>> Claims { get; set; }
+        public virtual ICollection<IdentityUserRole<Guid>> Roles { get; set; } = new HashSet<IdentityUserRole<Guid>>();
 
-        public virtual ICollection<IdentityUserLogin<Guid>> Logins { get; set; }
+        public virtual ICollection<IdentityUserClaim<Guid>> Claims { get; set; } = new HashSet<IdentityUserClaim<Guid>>();
+
+        public virtual ICollection<IdentityUserLogin<Guid>> Logins { get; set; } = new HashSet<IdentityUserLogin<Guid>>();
+
+
     }
 }
