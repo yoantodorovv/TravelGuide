@@ -15,6 +15,18 @@
         public const string RestauranteurRoleName = "Restauranteur";
         public const string UserRoleName = "User";
 
+        public static class SystemPathConstants
+        {
+            public const string SystemLoginPathConstant = "/Account/Login";
+            public const string SystemExceptionHandlerPathConstant = "/Home/Error";
+        }
+
+        public static class ActionsAndControllersConstants
+        {
+            public const string HomeControllerConstant = "Home";
+            public const string HomeIndexActionConstant = "Index";
+        }
+
         /// <summary>
         /// WorkingHours class constants.
         /// </summary>
@@ -29,11 +41,14 @@
         /// </summary>
         public static class UserConstants
         {
-            public const int FirstNameMinLength = 3;
-            public const int FirstNameMaxLength = 50;
+            public const int FirstNameMinLength = 2;
+            public const int FirstNameMaxLength = 75;
 
-            public const int LastNameMinLength = 5;
-            public const int LastNameMaxLength = 50;
+            public const int LastNameMinLength = 2;
+            public const int LastNameMaxLength = 75;
+
+            public const int UsernameOrEmailFieldMinLength = FirstNameMinLength;
+            public const int UsernameOrEmailFieldMaxLength = FirstNameMaxLength;
         }
 
         /// <summary>

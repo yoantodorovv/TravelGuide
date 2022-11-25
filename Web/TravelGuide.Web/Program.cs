@@ -24,6 +24,8 @@
     using TravelGuide.Web.Infrastructure.ModelBinders;
     using TravelGuide.Web.ViewModels;
 
+    using static TravelGuide.Common.GlobalConstants.SystemPathConstants;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -63,6 +65,8 @@
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = SystemLoginPathConstant);
 
             services.AddControllersWithViews(
                 options =>
@@ -105,7 +109,7 @@
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(SystemExceptionHandlerPathConstant);
                 app.UseHsts();
             }
 
