@@ -43,7 +43,5 @@ namespace TravelGuide.Data.Models
         public virtual ICollection<IdentityUserClaim<Guid>> Claims { get; set; } = new HashSet<IdentityUserClaim<Guid>>();
 
         public virtual ICollection<IdentityUserLogin<Guid>> Logins { get; set; } = new HashSet<IdentityUserLogin<Guid>>();
-
-
     }
 }

@@ -24,4 +24,10 @@
     <ProjectReference Include="..\TravelGuide.Services.Mapping\TravelGuide.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Service Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service Interfaces\" />
+  </ItemGroup>
 </Project>

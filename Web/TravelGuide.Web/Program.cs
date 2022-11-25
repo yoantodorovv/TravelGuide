@@ -21,7 +21,7 @@
 
     using TravelGuide.Services.Mapping;
     using TravelGuide.Services.Messaging;
-
+    using TravelGuide.Web.Infrastructure.ModelBinders;
     using TravelGuide.Web.ViewModels;
 
     public class Program
@@ -67,7 +67,10 @@
             services.AddControllersWithViews(
                 options =>
                 {
+                    //// TODO: Uncomment the decimal model binder provider.
+
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                    //// options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                 }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();

@@ -18,6 +18,12 @@
         public string Extension { get; set; }
 
         /// <summary>
+        /// Gets or sets image's remote url (if the image is not on the server).
+        /// </summary>
+        [Url]
+        public string RemoteImageUrl { get; set; }
+
+        /// <summary>
         /// Gets or sets image's author id.
         /// </summary>
         [Required]
