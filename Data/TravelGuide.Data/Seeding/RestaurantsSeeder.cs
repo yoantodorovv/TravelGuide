@@ -7,8 +7,16 @@
 
     using TravelGuide.Data.Models;
 
+    /// <summary>
+    /// A class to seed all restaurants into the restaurants table.
+    /// </summary>
     public class RestaurantsSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds all restaurants into the restaurants table.
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Restaurants.Any())
@@ -20,6 +28,7 @@
             {
                 new Restaurant()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "4324B389-2CE0-47B2-0359-08DACE3E769D").Id,
                     Name = "Robin Hood Tavern",
                     Rating = 5.0,
                     Location = "Pattaya, Chonburi Province",
@@ -30,15 +39,7 @@
                     WebsiteUrl = "http://www.rhpattaya.com/",
                     Email = "www.robinhoodtavernavenue@gmail.com",
                     MenuUrl = "https://www.facebook.com/Therobinhoodpattaya/",
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "Extremely positive!",
-                            Rating = 10.0,
-                            Description = "Everything about this restaurant was great. The place was clean and smelled good. The staff and greeter was very nice. Our waiter was awesome, the staff also worked as a team in bringing and cleaning up our food. The food was fresh and awesome. Then we also had dessert and that was really good as well. Great atmosphere with really nice people.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = new List<WorkingHours>()
                     {
                         new WorkingHours()
@@ -88,6 +89,7 @@
                 },
                 new Restaurant()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "4324B389-2CE0-47B2-0359-08DACE3E769D").Id,
                     Name = "Edge",
                     Rating = 4.5,
                     Location = "Pattaya, Chonburi Province",
@@ -98,15 +100,7 @@
                     WebsiteUrl = "http://pattaya.hilton.com",
                     Email = "BKKHP.Pattaya.Info@hilton.com",
                     MenuUrl = "http://pattaya.hilton.com",
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "A pleasent experience",
-                            Rating = 7.0,
-                            Description = "Delicious food, waiters are very attentive, and super nice atmosphere. Plus it’s all at an affordable price. Can totally recommend it and will definitely come back again.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = new List<WorkingHours>()
                     {
                         new WorkingHours()
@@ -156,6 +150,7 @@
                 },
                 new Restaurant()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "4324B389-2CE0-47B2-0359-08DACE3E769D").Id,
                     Name = "Horizon",
                     Rating = 4.5,
                     Location = "Pattaya, Chonburi Province",
@@ -166,15 +161,7 @@
                     WebsiteUrl = "http://pattaya.hilton.com",
                     Email = "BKKHP.Pattaya.Info@hilton.com",
                     MenuUrl = "https://horizon.bar",
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "A delightful experience",
-                            Rating = 8.0,
-                            Description = "Amaazing food! The whole experience from start to finish is great waitress is always so friendly and kind. The food can’t get better and the prices are fair for the portion size. Always a great spot to get great food.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = new List<WorkingHours>()
                     {
                         new WorkingHours()
@@ -224,6 +211,7 @@
                 },
                 new Restaurant()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "4324B389-2CE0-47B2-0359-08DACE3E769D").Id,
                     Name = "Cafe des Amis Fine Dining",
                     Rating = 5.0,
                     Location = "Pattaya, Chonburi Province",
@@ -234,15 +222,7 @@
                     WebsiteUrl = "http://www.cafe-des-amis.com/",
                     Email = "info@cafedesamispattaya.com",
                     MenuUrl = "https://www.cafe-des-amis.com/menus",
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "Extremely positive!",
-                            Rating = 10.0,
-                            Description = "Everything about this restaurant was great. The place was clean and smelled good. The staff and greeter was very nice. Our waiter was awesome, the staff also worked as a team in bringing and cleaning up our food. The food was fresh and awesome. Then we also had dessert and that was really good as well. Great atmosphere with really nice people.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = new List<WorkingHours>()
                     {
                         new WorkingHours()
@@ -292,6 +272,7 @@
                 },
                 new Restaurant()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "4324B389-2CE0-47B2-0359-08DACE3E769D").Id,
                     Name = "Maharani",
                     Rating = 5.0,
                     Location = "Pattaya, Chonburi Province",
@@ -302,15 +283,7 @@
                     WebsiteUrl = "http://www.royalcliff.com/restaurants-maharani.php",
                     Email = "gro-main@royalcliff.com",
                     MenuUrl = "https://www.royalcliff.com/weekly_menu.php?c=maharani",
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "Extremely positive!",
-                            Rating = 10.0,
-                            Description = "Everything about this restaurant was great. The place was clean and smelled good. The staff and greeter was very nice. Our waiter was awesome, the staff also worked as a team in bringing and cleaning up our food. The food was fresh and awesome. Then we also had dessert and that was really good as well. Great atmosphere with really nice people.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = new List<WorkingHours>()
                     {
                         new WorkingHours()
@@ -362,7 +335,23 @@
 
             foreach (var restaurant in restaurants)
             {
-                await dbContext.Restaurants.AddAsync(new Restaurant() { Name = restaurant.Name, Rating = restaurant.Rating, Location = restaurant.Location, PriceRange = restaurant.PriceRange, Description = restaurant.Description, PhoneNumber = restaurant.PhoneNumber, Address = restaurant.Address, WebsiteUrl = restaurant.WebsiteUrl, Email = restaurant.Email, MenuUrl = restaurant.MenuUrl });
+                await dbContext.Restaurants.AddAsync(new Restaurant()
+                {
+                    OwnerId = restaurant.OwnerId,
+                    Name = restaurant.Name,
+                    Rating = restaurant.Rating,
+                    Location = restaurant.Location,
+                    PriceRange = restaurant.PriceRange,
+                    Description = restaurant.Description,
+                    PhoneNumber = restaurant.PhoneNumber,
+                    Address = restaurant.Address,
+                    WebsiteUrl = restaurant.WebsiteUrl,
+                    Email = restaurant.Email,
+                    MenuUrl = restaurant.MenuUrl,
+                    Reviews = restaurant.Reviews,
+                    WorkingHours = restaurant.WorkingHours,
+                    Images = restaurant.Images,
+                });
             }
         }
     }

@@ -7,8 +7,16 @@
 
     using TravelGuide.Data.Models;
 
+    /// <summary>
+    /// Discounts seeder class.
+    /// </summary>
     public class DiscountsSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds all discounts into the discounts table.
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Discounts.Any())

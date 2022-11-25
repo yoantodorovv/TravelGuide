@@ -7,8 +7,17 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
+    /// <summary>
+    /// Central seeder.
+    /// </summary>
     public class ApplicationDbContextSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds all data that is used.
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
+        /// <exception cref="ArgumentNullException">Throws an exception if eigther the dbContext or the serviceProvider is null.</exception>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext == null)
@@ -29,12 +38,11 @@
                               new AdminSeeder(),
                               new HoteliersSeeder(),
                               new RestauranteursSeeder(),
-                              new AmenitiesSeeder(),
                               new DiscountsSeeder(),
-
-                              // new ReviewSeeder(),
-                              // new RestaurantsSeeder(),
-                              // new HotelsSeeder(),
+                              new AmenitiesSeeder(),
+                              new HotelsSeeder(),
+                              new RestaurantsSeeder(),
+                              new ReviewSeeder(),
                           };
 
             foreach (var seeder in seeders)

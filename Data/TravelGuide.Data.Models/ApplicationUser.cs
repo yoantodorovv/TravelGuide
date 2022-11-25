@@ -10,6 +10,9 @@ namespace TravelGuide.Data.Models
 
     using static TravelGuide.Common.GlobalConstants.UserConstants;
 
+    /// <summary>
+    /// ApplicationUser entity class (Extension of IdentityUser class).
+    /// </summary>
     public class ApplicationUser : IdentityUser<Guid>, IAuditInfo, IDeletableEntity
     {
         [Required]

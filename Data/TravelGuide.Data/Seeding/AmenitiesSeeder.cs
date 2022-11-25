@@ -8,8 +8,16 @@
     using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Models;
 
+    /// <summary>
+    /// Amenities table seeder.
+    /// </summary>
     public class AmenitiesSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds the amenities asynchroniously (if there are none in the database currently).
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Amenities.Any())

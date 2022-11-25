@@ -9,8 +9,16 @@
 
     using static TravelGuide.Common.GlobalConstants;
 
+    /// <summary>
+    /// A class to seed a user with role 'hotelier'.
+    /// </summary>
     public class HoteliersSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds the hotelier.
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();

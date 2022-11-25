@@ -9,8 +9,16 @@
 
     using static TravelGuide.Common.GlobalConstants;
 
+    /// <summary>
+    /// A class which seeds the admin user.
+    /// </summary>
     public class AdminSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds the admin asynchroniously.
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();

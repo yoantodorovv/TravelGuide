@@ -7,8 +7,16 @@
 
     using TravelGuide.Data.Models;
 
+    /// <summary>
+    /// A class which seeds all hotels (if there is no data in the table).
+    /// </summary>
     public class HotelsSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds all hotels into the hotels table.
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Hotels.Any())
@@ -37,13 +45,16 @@
                 new Amenity()
                 {
                     Title = "Free Wifi",
-                },new Amenity()
+                },
+                new Amenity()
                 {
                     Title = "Spa",
-                },new Amenity()
+                },
+                new Amenity()
                 {
                     Title = "Meeting Rooms",
-                },new Amenity()
+                },
+                new Amenity()
                 {
                     Title = "Poolside Bar",
                 },
@@ -103,6 +114,7 @@
             {
                 new Hotel()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "27C3248C-65EE-4837-D3C0-08DACE3D59B6").Id,
                     Name = "Centara Grand Mirage Beach Resort Pattaya",
                     Location = "Pattaya, Chonburi Province",
                     Price = 150,
@@ -113,32 +125,13 @@
                     WebsiteUrl = "http://www.centarahotelsresorts.com/centaragrand/cmbr/",
                     Email = "cmbr@chr.co.th",
                     Amenities = amenities,
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "A very delightful experience",
-                            Rating = 8.0,
-                            Description = "The rooms were clean, very comfortable, and the staff was amazing. They went over and beyond to help make our stay enjoyable. I highly recommend this hotel for anyone visiting downtown.",
-                        },
-                        new Review()
-                        {
-                            Title = "Perfect weekend getaway hotel",
-                            Rating = 10.0,
-                            Description = "This is the perfect hotel for a weekend getaway. The downtown area on Main Street is a best kept secret and the hotel offers everything you need if you don’t feel like venturing out.",
-                        },
-                        new Review()
-                        {
-                            Title = "A pleasent stay",
-                            Rating = 6.5,
-                            Description = "Overall, I had a great experience with the hotel; staff was incredibly helpful, and the amenities were great. The room was wonderful, clean, and perfect to celebrate a birthday weekend.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
                 },
                 new Hotel()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "27C3248C-65EE-4837-D3C0-08DACE3D59B6").Id,
                     Name = "Pinnacle Grand Jomtien Resort",
                     Location = "Jomtien Beach, Pattaya, Chonburi Province",
                     Price = 75,
@@ -149,32 +142,13 @@
                     WebsiteUrl = "https://pattaya.pinnaclehotels.com/",
                     Email = "prjreserv@gmail.com",
                     Amenities = amenities,
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "A very delightful experience",
-                            Rating = 8.0,
-                            Description = "The rooms were clean, very comfortable, and the staff was amazing. They went over and beyond to help make our stay enjoyable. I highly recommend this hotel for anyone visiting downtown.",
-                        },
-                        new Review()
-                        {
-                            Title = "Perfect weekend getaway hotel",
-                            Rating = 10.0,
-                            Description = "This is the perfect hotel for a weekend getaway. The downtown area on Main Street is a best kept secret and the hotel offers everything you need if you don’t feel like venturing out.",
-                        },
-                        new Review()
-                        {
-                            Title = "The Best Hotel",
-                            Rating = 10.0,
-                            Description = "The best hotel I’ve ever been privileged enough to stay at. Gorgeous building, and it only gets more breathtaking when you walk in. High quality rooms (there was even a tv by the shower), and high quality service. Also, they are one of few hotels that allow people under 21 to book a reservation.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
                 },
                 new Hotel()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "27C3248C-65EE-4837-D3C0-08DACE3D59B6").Id,
                     Name = "Mytt Beach Hotel",
                     Location = "Pattaya, Chonburi Province",
                     Price = 100,
@@ -185,26 +159,13 @@
                     WebsiteUrl = "http://www.mytthotel.com/?partner=2751&gclid=EAIaIQobChMI-JeW9vWn5QIViIqPCh2LxwLoEAAYASAAEgJ-SPD_BwE",
                     Email = "info@mytthotel.com",
                     Amenities = amenities,
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "A very delightful experience",
-                            Rating = 8.0,
-                            Description = "The rooms were clean, very comfortable, and the staff was amazing. They went over and beyond to help make our stay enjoyable. I highly recommend this hotel for anyone visiting downtown.",
-                        },
-                        new Review()
-                        {
-                            Title = "A pleasent stay",
-                            Rating = 6.5,
-                            Description = "Overall, I had a great experience with the hotel; staff was incredibly helpful, and the amenities were great. The room was wonderful, clean, and perfect to celebrate a birthday weekend.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
                 },
                 new Hotel()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "27C3248C-65EE-4837-D3C0-08DACE3D59B6").Id,
                     Name = "Red Planet Pattaya",
                     Location = "Na Kluea, Pattaya, Chonburi Province",
                     Price = 20,
@@ -215,32 +176,13 @@
                     WebsiteUrl = "http://www.redplanethotels.com/hotel/pattaya",
                     Email = "thailand@redplanethotels.com",
                     Amenities = amenities,
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "A very delightful experience",
-                            Rating = 8.0,
-                            Description = "The rooms were clean, very comfortable, and the staff was amazing. They went over and beyond to help make our stay enjoyable. I highly recommend this hotel for anyone visiting downtown.",
-                        },
-                        new Review()
-                        {
-                            Title = "Perfect weekend getaway hotel",
-                            Rating = 10.0,
-                            Description = "This is the perfect hotel for a weekend getaway. The downtown area on Main Street is a best kept secret and the hotel offers everything you need if you don’t feel like venturing out.",
-                        },
-                        new Review()
-                        {
-                            Title = "A pleasent stay",
-                            Rating = 6.5,
-                            Description = "Overall, I had a great experience with the hotel; staff was incredibly helpful, and the amenities were great. The room was wonderful, clean, and perfect to celebrate a birthday weekend.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
                 },
                 new Hotel()
                 {
+                    OwnerId = dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "27C3248C-65EE-4837-D3C0-08DACE3D59B6").Id,
                     Name = "Centre Point Hotel Pattaya",
                     Location = "Pattaya, Chonburi Province",
                     Price = 50,
@@ -251,21 +193,7 @@
                     WebsiteUrl = "http://www.verandaresort.com",
                     Email = "HA0E9-RE@accor.com",
                     Amenities = amenities,
-                    Reviews = new List<Review>()
-                    {
-                        new Review()
-                        {
-                            Title = "A very delightful experience",
-                            Rating = 8.0,
-                            Description = "The rooms were clean, very comfortable, and the staff was amazing. They went over and beyond to help make our stay enjoyable. I highly recommend this hotel for anyone visiting downtown.",
-                        },
-                        new Review()
-                        {
-                            Title = "A pleasent stay",
-                            Rating = 6.5,
-                            Description = "Overall, I had a great experience with the hotel; staff was incredibly helpful, and the amenities were great. The room was wonderful, clean, and perfect to celebrate a birthday weekend.",
-                        },
-                    },
+                    Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
                 },
@@ -273,7 +201,21 @@
 
             foreach (var hotel in hotels)
             {
-                await dbContext.Hotels.AddAsync(new Hotel() { Name = hotel.Name, Location = hotel.Location, Price = hotel.Price, Details = hotel.Details, Rating = hotel.Rating, Adress = hotel.Adress, PhoneNumber = hotel.PhoneNumber, WebsiteUrl = hotel.WebsiteUrl, Email = hotel.Email });
+                await dbContext.Hotels.AddAsync(new Hotel()
+                {
+                    OwnerId = hotel.OwnerId,
+                    Name = hotel.Name,
+                    Location = hotel.Location,
+                    Price = hotel.Price,
+                    Details = hotel.Details,
+                    Rating = hotel.Rating,
+                    Adress = hotel.Adress, PhoneNumber = hotel.PhoneNumber,
+                    WebsiteUrl = hotel.WebsiteUrl,
+                    Email = hotel.Email, Amenities = hotel.Amenities,
+                    Reviews = hotel.Reviews,
+                    WorkingHours = hotel.WorkingHours,
+                    Images = hotel.Images,
+                });
             }
         }
 

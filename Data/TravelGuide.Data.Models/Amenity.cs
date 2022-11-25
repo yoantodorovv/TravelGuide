@@ -8,12 +8,21 @@
 
     using static TravelGuide.Common.GlobalConstants.AmenityConstants;
 
+    /// <summary>
+    /// Amenity entity class.
+    /// </summary>
     public class Amenity : BaseDeletableModel<Guid>
     {
+        /// <summary>
+        /// Gets or sets amenity title property.
+        /// </summary>
         [Required]
         [StringLength(TitleMaxLength)]
         public string Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets hotels collection property.
+        /// </summary>
         public virtual ICollection<Hotel> Hotels { get; set; } = new HashSet<Hotel>();
     }
 }

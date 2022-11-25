@@ -9,8 +9,16 @@
     using TravelGuide.Common;
     using TravelGuide.Data.Models;
 
+    /// <summary>
+    /// A class to seed all roles.
+    /// </summary>
     internal class RolesSeeder : ISeeder
     {
+        /// <summary>
+        /// Seeds all roles into the AspNetRoles table.
+        /// </summary>
+        /// <param name="dbContext">The applicationDbContext.</param>
+        /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();

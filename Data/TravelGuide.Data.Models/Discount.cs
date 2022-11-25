@@ -9,18 +9,29 @@
 
     using static TravelGuide.Common.GlobalConstants.DiscountConstants;
 
+    /// <summary>
+    /// Discount entity class.
+    /// </summary>
     public class Discount : BaseDeletableModel<Guid>
     {
+        /// <summary>
+        /// Gets or sets discount's title.
+        /// </summary>
         [Required]
         [StringLength(TitleMaxLength)]
         public string Title { get; set; }
 
-        // TODO: Reform 'range' attribute
+        /// <summary>
+        /// Gets or sets discount's percentage.
+        /// </summary>
         [Required]
-        [Range(typeof(decimal), DiscountPercentageMinValue, DiscountPercentageMaxValue)]
+        [Range(typeof(decimal), DiscountPercentageMinValue, DiscountPercentageMaxValue)] // TODO: Reform 'range' attribute
         [Column(TypeName = "decimal(18,4)")]
         public decimal DiscountPercentage { get; set; }
 
+        /// <summary>
+        /// Gets or sets a collection of users that have discounts.
+        /// </summary>
         public virtual ICollection<ApplicationUser> Users { get; set; } = new HashSet<ApplicationUser>();
     }
 }
