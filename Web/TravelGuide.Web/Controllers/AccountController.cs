@@ -12,6 +12,7 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Web.ViewModels;
 
+    using static TravelGuide.Common.ErrorMessages.AccountErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
     using static TravelGuide.Common.GlobalConstants.ActionsAndControllersConstants;
 
@@ -129,16 +130,9 @@
             }
 
             // TODO: Add exception/error constants and vice versa.
-            this.ModelState.AddModelError(string.Empty, "Invalid login");
+            this.ModelState.AddModelError(string.Empty, InvalidLogin);
 
             return this.View(model);
-        }
-
-        internal async Task<bool> SignInUserAsync(ApplicationUser user, LoginViewModel model)
-        {
-            var result = await this.signInManager.PasswordSignInAsync(user, model.Password, false, false);
-
-            return result.Succeeded;
         }
 
         public async Task<IActionResult> Logout()
@@ -146,6 +140,13 @@
             await this.signInManager.SignOutAsync();
 
             return this.RedirectToAction(HomeIndexActionConstant, HomeControllerConstant);
+        }
+
+        internal async Task<bool> SignInUserAsync(ApplicationUser user, LoginViewModel model)
+        {
+            var result = await this.signInManager.PasswordSignInAsync(user, model.Password, false, false);
+
+            return result.Succeeded;
         }
     }
 }
