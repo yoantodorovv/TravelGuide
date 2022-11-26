@@ -1,10 +1,10 @@
 ﻿namespace TravelGuide.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
     using TravelGuide.Web.ViewModels;
 
     [AllowAnonymous]
@@ -12,7 +12,20 @@
     {
         public IActionResult Index()
         {
-            return this.View();
+            return this.View(new IndexSearchViewModel());
+        }
+
+        public async Task<IActionResult> Search(IndexSearchViewModel model, string searchString)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            // Use searchService!
+            //// Implement search logic
+
+            return this.View(model);
         }
 
         public IActionResult Privacy()

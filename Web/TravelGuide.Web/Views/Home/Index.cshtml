@@ -1,9 +1,16 @@
-﻿@using TravelGuide.Common
+﻿@model IndexSearchViewModel
+@using TravelGuide.Common
+
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <form asp-controller="Home" asp-action="Search" method="get">
+        <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="SearchString"/>
+            <button type="submit" class="btn btn-outline-primary">search</button>
+        </div>
+    </form>
 </div>

@@ -18,6 +18,8 @@
 
     public class AccountController : BaseController
     {
+        //// TODO: Add profile drop down (from image) with options - View Profile, Account Info, Logout
+
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<ApplicationRole> roleManager;
