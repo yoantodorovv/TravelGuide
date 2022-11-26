@@ -22,8 +22,7 @@
                 return this.View(model);
             }
 
-            // Use searchService!
-            //// Implement search logic
+            //// TODO: Implement search logic and use searchService
 
             return this.View(model);
         }
