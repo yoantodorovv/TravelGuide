@@ -18,7 +18,8 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Data.Repositories;
     using TravelGuide.Data.Seeding;
-
+    using TravelGuide.Services.Data;
+    using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Services.Mapping;
     using TravelGuide.Services.Messaging;
     using TravelGuide.Web.Infrastructure.ModelBinders;
@@ -90,6 +91,7 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IHomeUserService, HomeUserService>();
         }
 
         private static void Configure(WebApplication app)

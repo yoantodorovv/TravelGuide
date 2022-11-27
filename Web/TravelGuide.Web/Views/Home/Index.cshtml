@@ -1,4 +1,5 @@
-﻿@model IndexSearchViewModel
+﻿@model HomeIndexViewModel
+
 @using TravelGuide.Common
 
 @{
@@ -7,62 +8,67 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <hr />
-    <div class="row d-flex justify-content-center">
-        <form class="col-md-6" asp-controller="Home" asp-action="Search" method="get">
-            <div class="input-group">
-                <input type="search" class="form-control rounded" placeholder="Where to?" aria-label="Search" aria-describedby="search-addon" name="SearchString" />
-                <button type="submit" class="btn btn-outline-primary">search</button>
-            </div>
-        </form>
-    </div>
-    <hr />
+</div>
+<hr />
+<div class="row d-flex justify-content-center">
+    <form class="col-md-6" asp-controller="Home" asp-action="Search" method="get">
+        <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Where to?" aria-label="Search" aria-describedby="search-addon" name=@Model.SearchString />
+            <button type="submit" class="btn btn-outline-primary">search</button>
+        </div>
+    </form>
+</div>
+<hr />
+<div>
+    <h3>Some 5-star hotels around the world</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="Hollywood Sign on The Hill" />
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                    </p>
-                    <button type="submit" asp-area="Hotel" asp-controller="Hotel" asp-action="" asp-route-id="" class="btn btn-primary">View Hotel</button>
+        @foreach (var hotel in Model.HotelsToRender)
+        {
+            <div class="col">
+                <div class="card">
+                    <img src=@hotel.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
+                    <div class="card-body">
+                        <h5>@hotel.Name</h5>
+                        <hr />
+                        <p class="card-text">
+                            <strong>Location:</strong> @hotel.Location, @hotel.Country
+                            <br />
+                            <strong>Rating:</strong> @hotel.Rating.ToString("f1")
+                            <br />
+                            <strong>Price:</strong> $0,00 - $@hotel.Price.ToString("f2")
+                        </p>
+                        <button type="submit" asp-area="Hotel" asp-controller="Hotel" asp-action="" asp-route-id=@hotel.Id class="btn btn-primary">View More</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top" alt="Palm Springs Road" />
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                    </p>
+        }
+    </div>
+</div>
+<hr />
+<div>
+    <h3>Some 5-star restaurants around the world</h3>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var restaurant in Model.RestaurantsToRender)
+            {
+            <div class="col">
+                <div class="card">
+                    <img src=@restaurant.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
+                    <div class="card-body">
+                        <h5>@restaurant.Name</h5>
+                        <hr />
+                        <p class="card-text">
+                            <strong>Location:</strong> @restaurant.Location, @restaurant.Country
+                            <br />
+                            <strong>Rating:</strong> @restaurant.Rating.ToString("f1")
+                            <br />
+                            <strong>Price:</strong> @restaurant.PriceRange
+                            <br />
+                            <strong>Today:</strong> @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).OpenTime / 60):00 - @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).CloseTime / 60):00
+                        </p>
+                        <button type="submit" asp-area="Restaurant" asp-controller="Restaurant" asp-action="" asp-route-id=@restaurant.Id class="btn btn-primary">View More</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top" alt="Los Angeles Skyscrapers" />
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="Skyscrapers" />
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                    </p>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>

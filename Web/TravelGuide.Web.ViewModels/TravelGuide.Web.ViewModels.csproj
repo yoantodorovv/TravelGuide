@@ -23,4 +23,10 @@
     <ProjectReference Include="..\..\Services\TravelGuide.Services.Mapping\TravelGuide.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="DTOs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+  </ItemGroup>
 </Project>

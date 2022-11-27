@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\Data\TravelGuide.Data.Common\TravelGuide.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\TravelGuide.Data.Models\TravelGuide.Data.Models.csproj" />
     <ProjectReference Include="..\TravelGuide.Services.Mapping\TravelGuide.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Web\TravelGuide.Web.ViewModels\TravelGuide.Web.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,17 +5,31 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Web.ViewModels;
 
     [AllowAnonymous]
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly IHomeUserService homeUserService;
+
+        public HomeController(IHomeUserService homeUserService)
         {
-            return this.View(new IndexSearchViewModel());
+            this.homeUserService = homeUserService;
         }
 
-        public async Task<IActionResult> Search(IndexSearchViewModel model, string searchString)
+        public IActionResult Index()
+        {
+            var model = new HomeIndexViewModel()
+            {
+                HotelsToRender = this.homeUserService.GetAllHotelsToRender(),
+                RestaurantsToRender = this.homeUserService.GetAllRestaurantsToRender(),
+            };
+
+            return this.View(model);
+        }
+
+        public IActionResult Search(HomeIndexViewModel model, string searchString)
         {
             if (!this.ModelState.IsValid)
             {
