@@ -26,6 +26,8 @@
 
     using static TravelGuide.Common.GlobalConstants.SystemPathConstants;
 
+    //// TODO: Add action in Homre -> Index.cshtml (cards button)
+
     public class Program
     {
         public static void Main(string[] args)

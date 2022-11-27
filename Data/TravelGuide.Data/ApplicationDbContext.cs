@@ -41,6 +41,10 @@
 
         public DbSet<WorkingHours> WorkingHours { get; set; }
 
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<Town> Towns { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

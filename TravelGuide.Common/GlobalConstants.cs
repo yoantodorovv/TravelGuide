@@ -27,6 +27,18 @@
             public const string HomeIndexActionConstant = "Index";
         }
 
+        public static class AddressConstants
+        {
+            public const int AddressMinLength = 2;
+            public const int AddressMaxLength = 100;
+        }
+
+        public static class TownConstants
+        {
+            public const int NameMinLength = 2;
+            public const int NameMaxLength = 58;
+        }
+
         /// <summary>
         /// WorkingHours class constants.
         /// </summary>
@@ -70,9 +82,6 @@
 
             public const int DetailsMinLength = 10;
             public const int DetailsMaxLength = 3000;
-
-            public const int AddressMinLength = 5;
-            public const int AddressMaxLength = 100;
 
             public const int WebsiteMinLength = 3;
             public const int WebsiteMaxLength = 255;

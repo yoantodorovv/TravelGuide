@@ -54,8 +54,11 @@
         /// Gets or sets hotel's address.
         /// </summary>
         [Required]
-        [StringLength(AddressMaxLength)]
-        public string Adress { get; set; }
+        [ForeignKey(nameof(Address))]
+        public Guid AdressId { get; set; }
+
+        [Required]
+        public Address Address { get; set; }
 
         /// <summary>
         /// Gets or sets hotel's phone contact number.

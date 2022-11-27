@@ -40,6 +40,8 @@
                               new RestauranteursSeeder(),
                               new DiscountsSeeder(),
                               new AmenitiesSeeder(),
+                              new TownsSeeder(),
+                              new AddressSeeder(),
                               new HotelsSeeder(),
                               new RestaurantsSeeder(),
                               new ReviewSeeder(),

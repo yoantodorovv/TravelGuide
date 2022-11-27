@@ -185,6 +185,45 @@ namespace TravelGuide.Data.Migrations
                     b.ToTable("RestaurantWorkingHours");
                 });
 
+            modelBuilder.Entity("TravelGuide.Data.Models.Address", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AddressText")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("TownId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("TownId");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("TravelGuide.Data.Models.Amenity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -389,10 +428,8 @@ namespace TravelGuide.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<Guid>("AdressId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -444,6 +481,8 @@ namespace TravelGuide.Data.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdressId");
 
                     b.HasIndex("IsDeleted");
 
@@ -554,10 +593,8 @@ namespace TravelGuide.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                    b.Property<Guid>("AdressId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -614,6 +651,8 @@ namespace TravelGuide.Data.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdressId");
 
                     b.HasIndex("IsDeleted");
 
@@ -716,6 +755,36 @@ namespace TravelGuide.Data.Migrations
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("TravelGuide.Data.Models.Town", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(58)
+                        .HasColumnType("nvarchar(58)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Towns");
                 });
 
             modelBuilder.Entity("TravelGuide.Data.Models.WorkingHours", b =>
@@ -865,13 +934,32 @@ namespace TravelGuide.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TravelGuide.Data.Models.Address", b =>
+                {
+                    b.HasOne("TravelGuide.Data.Models.Town", "Town")
+                        .WithMany()
+                        .HasForeignKey("TownId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Town");
+                });
+
             modelBuilder.Entity("TravelGuide.Data.Models.Hotel", b =>
                 {
+                    b.HasOne("TravelGuide.Data.Models.Address", "Address")
+                        .WithMany("Hotels")
+                        .HasForeignKey("AdressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("TravelGuide.Data.Models.ApplicationUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("Owner");
                 });
@@ -926,11 +1014,19 @@ namespace TravelGuide.Data.Migrations
 
             modelBuilder.Entity("TravelGuide.Data.Models.Restaurant", b =>
                 {
+                    b.HasOne("TravelGuide.Data.Models.Address", "Address")
+                        .WithMany("Restaurants")
+                        .HasForeignKey("AdressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("TravelGuide.Data.Models.ApplicationUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("Owner");
                 });
@@ -981,6 +1077,13 @@ namespace TravelGuide.Data.Migrations
                     b.Navigation("Hotel");
 
                     b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("TravelGuide.Data.Models.Address", b =>
+                {
+                    b.Navigation("Hotels");
+
+                    b.Navigation("Restaurants");
                 });
 
             modelBuilder.Entity("TravelGuide.Data.Models.ApplicationUser", b =>

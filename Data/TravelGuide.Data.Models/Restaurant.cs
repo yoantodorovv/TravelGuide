@@ -59,8 +59,11 @@
         /// Gets or sets the restaurant's address.
         /// </summary>
         [Required]
-        [StringLength(AddressMaxLength)]
-        public string Address { get; set; }
+        [ForeignKey(nameof(Address))]
+        public Guid AdressId { get; set; }
+
+        [Required]
+        public Address Address { get; set; }
 
         /// <summary>
         /// Gets or sets the restaurant's website url.
