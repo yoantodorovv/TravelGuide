@@ -12,10 +12,14 @@
     public class HomeController : BaseController
     {
         private readonly IHomeUserService homeUserService;
+        private readonly ISearchService searchService;
 
-        public HomeController(IHomeUserService homeUserService)
+        public HomeController(
+            IHomeUserService homeUserService,
+            ISearchService searchService)
         {
             this.homeUserService = homeUserService;
+            this.searchService = searchService;
         }
 
         public IActionResult Index()
@@ -36,7 +40,8 @@
                 return this.View(model);
             }
 
-            //// TODO: Implement search logic and use searchService
+            model.HotelsToRender = this.searchService.GetAllHotelsInSearchArea(searchString);
+            model.RestaurantsToRender = this.searchService.GetAllRestaurantsInSearchArea(searchString);
 
             return this.View(model);
         }

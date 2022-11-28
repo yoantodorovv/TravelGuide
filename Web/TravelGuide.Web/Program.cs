@@ -92,6 +92,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IHomeUserService, HomeUserService>();
+            services.AddTransient<ISearchService, SearchService>();
         }
 
         private static void Configure(WebApplication app)

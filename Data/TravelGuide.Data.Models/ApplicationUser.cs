@@ -36,6 +36,10 @@ namespace TravelGuide.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        public virtual ICollection<Hotel> Hotels { get; set; } = new HashSet<Hotel>();
+
+        public virtual ICollection<Restaurant> Restaurants { get; set; } = new HashSet<Restaurant>();
+
         public virtual ICollection<Discount> Discounts { get; set; } = new HashSet<Discount>();
 
         public virtual ICollection<IdentityUserRole<Guid>> Roles { get; set; } = new HashSet<IdentityUserRole<Guid>>();

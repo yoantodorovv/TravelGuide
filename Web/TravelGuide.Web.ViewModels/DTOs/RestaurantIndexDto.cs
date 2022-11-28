@@ -41,7 +41,6 @@
             configuration.CreateMap<Restaurant, RestaurantIndexDto>()
                 .ForMember(x => x.Country, opt =>
                     opt.MapFrom(r => r.Address.Country));
-                //.ForMember(x => x.CurrentDayWorkingHours, opt => opt.MapFrom(r => r.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString())));
         }
     }
 }
