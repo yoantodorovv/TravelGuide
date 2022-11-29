@@ -8,13 +8,8 @@
 
     using static TravelGuide.Common.GlobalConstants;
 
-    public class HomeIndexViewModel
+    public class HomeIndexViewModel : CardVisualiseViewModel
     {
-        [Required]
         public string SearchString { get; set; }
-
-        public IEnumerable<HotelIndexDto> HotelsToRender { get; set; }
-
-        public IEnumerable<RestaurantIndexDto> RestaurantsToRender { get; set; }
     }
 }

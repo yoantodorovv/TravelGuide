@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+
     using AutoMapper;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
 
     using static TravelGuide.Common.GlobalConstants.RestaurantConstants;
 
-    // TODO: Add validation attributes
     public class RestaurantIndexDto : IMapFrom<Restaurant>, IHaveCustomMappings
     {
         public Guid Id { get; set; }

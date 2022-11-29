@@ -56,10 +56,14 @@
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="Views\Hotel\" />
     <None Remove="Areas\Administration\Controllers\" />
+    <None Remove="Views\Restaurant\" />
+    <None Remove="Views\Reservations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Hotel\" />
     <Folder Include="Areas\Administration\Controllers\" />
+    <Folder Include="Views\Restaurant\" />
+    <Folder Include="Views\Reservations\" />
   </ItemGroup>
 </Project>

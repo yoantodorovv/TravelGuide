@@ -1,18 +1,23 @@
 ﻿namespace TravelGuide.Web.Controllers
 {
     using System;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using TravelGuide.Data.Models;
+    using TravelGuide.Web.ViewModels;
 
     using static TravelGuide.Common.GlobalConstants;
 
-    [Authorize(Roles = AdministratorOrHotelier)]
     public class HotelController : BaseController
     {
-        public IActionResult Index()
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public HotelController(UserManager<ApplicationUser> userManager)
         {
-            return this.View();
+            this.userManager = userManager;
         }
 
         [AllowAnonymous]
@@ -21,17 +26,37 @@
             return this.View();
         }
 
-        [AllowAnonymous]
-        public IActionResult BecomeHotelier()
+        [Authorize(Roles = UserRoleName)]
+        public IActionResult BecomeHotelier() => this.View(new BecomeHotelierViewModel());
+
+        // TODO: Add policy
+        [HttpPost]
+        [Authorize(Roles = UserRoleName)]
+        public async Task<IActionResult> BecomeHotelier(BecomeHotelierViewModel model)
         {
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+                //// TODO: Implement admin approval functionality
+
+            var user = await this.userManager.FindByEmailAsync(model.Email);
+
+            if (user != null)
+            {
+                await this.userManager.AddToRoleAsync(user, HotelierRoleName);
+            }
+
+            return this.View("BecomeHotelierConfirmation");
         }
 
+        [Authorize(Roles = AdministratorOrHotelier)]
         public IActionResult Create()
         {
             return this.View();
         }
 
+        [Authorize(Roles = AdministratorOrHotelier)]
         public IActionResult Reservations()
         {
             return this.View();
