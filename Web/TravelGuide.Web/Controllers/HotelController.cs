@@ -15,7 +15,19 @@
             return this.View();
         }
 
+        [AllowAnonymous]
         public IActionResult All()
+        {
+            return this.View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult BecomeHotelier()
+        {
+            return this.View();
+        }
+
+        public IActionResult Create()
         {
             return this.View();
         }

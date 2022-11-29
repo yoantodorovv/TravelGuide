@@ -18,7 +18,19 @@
             return this.View();
         }
 
+        [AllowAnonymous]
         public IActionResult All()
+        {
+            return this.View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult BecomeRestauranteur()
+        {
+            return this.View();
+        }
+
+        public IActionResult Create()
         {
             return this.View();
         }

@@ -17,86 +17,35 @@
             <button type="submit" class="btn btn-outline-primary">search</button>
         </div>
     </form>
-    <div>
-
-    </div>
 </div>
-@if (!string.IsNullOrWhiteSpace(Model.SearchString))
-{
-    <div class="mt-5">
-        <h2>Hotels</h2>
+<div class="mt-5">
+    <h2>Hotels</h2>
+    @if (Model.HotelsToRender.Count() != 0)
+    {
+        <partial name="_HotelsCardVisualisePartial" />
+    }
+    else
+    {
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            @if (Model.HotelsToRender.Count() != 0)
-            {
-                @foreach (var hotel in Model.HotelsToRender)
-                {
-                    <div class="col">
-                        <div class="card">
-                            <img src=@hotel.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
-                            <div class="card-body">
-                                <h5>@hotel.Name</h5>
-                                <hr />
-                                <p class="card-text">
-                                    <strong>Location:</strong> @hotel.Location, @hotel.Country
-                                    <br />
-                                    <strong>Rating:</strong> @hotel.Rating.ToString("f1")
-                                    <br />
-                                    <strong>Price:</strong> $0,00 - $@hotel.Price.ToString("f2")
-                                </p>
-                                <button type="submit" asp-area="Hotel" asp-controller="Hotel" asp-action="" asp-route-id=@hotel.Id class="btn btn-primary">View More</button>
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <div>
-                    <h5>No hotels matching the description were found!</h5>
-                </div>
-            }
+            <div>
+                <h5>No hotels matching the description were found!</h5>
+            </div>
         </div>
-    </div>
-    <hr />
-    <div>
-        <h2>Restaurants</h2>
+    }
+</div>  
+<hr />
+<div>
+    <h2>Restaurants</h2>
+    @if (Model.RestaurantsToRender.Count() != 0)
+    {
+        <partial name="_RestaurantsCardVisualisePartial" />
+    }
+    else
+    {
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            @if (Model.RestaurantsToRender.Count() != 0)
-            {
-                @foreach (var restaurant in Model.RestaurantsToRender)
-                {
-                    <div class="col">
-                        <div class="card">
-                            <img src=@restaurant.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
-                            <div class="card-body">
-                                <h5>@restaurant.Name</h5>
-                                <hr />
-                                <p class="card-text">
-                                    <strong>Location:</strong> @restaurant.Location, @restaurant.Country
-                                    <br />
-                                    <strong>Rating:</strong> @restaurant.Rating.ToString("f1")
-                                    <br />
-                                    <strong>Price:</strong> @restaurant.PriceRange
-                                    <br />
-                                </p>
-                                <button type="submit" asp-area="Restaurant" asp-controller="Restaurant" asp-action="" asp-route-id=@restaurant.Id class="btn btn-primary">View More</button>
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <div class="d-flex justfy-content-center align-items-center">
-                    <h5>No restaurants matching the description were found!</h5>
-                </div>
-            }
-        </div>
-    </div>
-}
-else
-{
-    <div class="container-fluid vh-75 d-flex justfy-content-center align-items-center">
-        <h1>Sorry! Nothing was found!</h1>
-    </div>
-}
+            <div class="d-flex justfy-content-center align-items-center">
+                <h5>No restaurants matching the description were found!</h5>
+            </div>
+        </div>    
+    }
+</div>

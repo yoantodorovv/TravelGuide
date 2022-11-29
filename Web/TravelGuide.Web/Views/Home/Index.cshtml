@@ -10,65 +10,14 @@
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
 </div>
 <hr />
-<div class="row d-flex justify-content-center">
-    <form class="col-md-6" asp-controller="Home" asp-action="Search" method="get">
-        <div class="input-group">
-            <input type="search" class="form-control rounded" placeholder="Where to?" aria-label="Search" aria-describedby="search-addon" name="SearchString" />
-            <button type="submit" class="btn btn-outline-primary">search</button>
-        </div>
-    </form>
-</div>
+    <partial name="_SearchPartial" />
 <hr />
 <div>
     <h3>Some 5-star hotels around the world</h3>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var hotel in Model.HotelsToRender)
-        {
-            <div class="col">
-                <div class="card">
-                    <img src=@hotel.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
-                    <div class="card-body">
-                        <h5>@hotel.Name</h5>
-                        <hr />
-                        <p class="card-text">
-                            <strong>Location:</strong> @hotel.Location, @hotel.Country
-                            <br />
-                            <strong>Rating:</strong> @hotel.Rating.ToString("f1")
-                            <br />
-                            <strong>Price:</strong> $0,00 - $@hotel.Price.ToString("f2")
-                        </p>
-                        <button type="submit" asp-area="Hotel" asp-controller="Hotel" asp-action="" asp-route-id=@hotel.Id class="btn btn-primary">View More</button>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
+    <partial name="_HotelsCardVisualisePartial" />
 </div>
 <hr />
 <div>
     <h3>Some 5-star restaurants around the world</h3>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var restaurant in Model.RestaurantsToRender)
-            {
-            <div class="col">
-                <div class="card">
-                    <img src=@restaurant.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
-                    <div class="card-body">
-                        <h5>@restaurant.Name</h5>
-                        <hr />
-                        <p class="card-text">
-                            <strong>Location:</strong> @restaurant.Location, @restaurant.Country
-                            <br />
-                            <strong>Rating:</strong> @restaurant.Rating.ToString("f1")
-                            <br />
-                            <strong>Price:</strong> @restaurant.PriceRange
-                            <br />
-                            <strong>Today:</strong> @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).OpenTime / 60):00 - @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).CloseTime / 60):00
-                        </p>
-                        <button type="submit" asp-area="Restaurant" asp-controller="Restaurant" asp-action="" asp-route-id=@restaurant.Id class="btn btn-primary">View More</button>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
+    <partial name="_RestaurantsCardVisualisePartial" />
 </div>

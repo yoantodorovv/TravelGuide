@@ -1,0 +1,26 @@
+﻿@model HomeIndexViewModel
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var restaurant in Model.RestaurantsToRender)
+    {
+        <div class="col">
+            <div class="card">
+                <img src=@restaurant.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
+                <div class="card-body">
+                    <h5>@restaurant.Name</h5>
+                    <hr />
+                    <p class="card-text">
+                        <strong>Location:</strong> @restaurant.Location, @restaurant.Country
+                        <br />
+                        <strong>Rating:</strong> @restaurant.Rating.ToString("f1")
+                        <br />
+                        <strong>Price:</strong> @restaurant.PriceRange
+                        <br />
+                        <strong>Today:</strong> @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).OpenTime / 60):00 - @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).CloseTime / 60):00
+                    </p>
+                    <button type="submit" asp-area="Restaurant" asp-controller="Restaurant" asp-action="" asp-route-id=@restaurant.Id class="btn btn-primary">View More</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

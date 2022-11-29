@@ -31,20 +31,38 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hotels</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" asp-controller="Hotel" asp-action="All" asp-area="">All Hotels</a>
+                                        <a class="dropdown-item" asp-controller="Hotel" asp-action="BecomeHotelier" asp-area="">Become a Hotelier</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Restaurants</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" asp-controller="Restaurant" asp-action="All" asp-area="">All Restaurants</a>
+                                        <a class="dropdown-item" asp-controller="Restaurant" asp-action="BecomeRestauranteur" asp-area="">Become a Restauranteur</a>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                         <partial name="_LoginPartial" />
-                    </div> 
+                    </div>
                 </div>
             </nav>
         </header>
-    
+
         <div class="container">
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
                 @this.RenderBody()
             </main>
         </div>
-    
+
         <footer class="border-top footer text-muted">
             <div class="container">
                 &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -54,6 +72,7 @@
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
         @await this.RenderSectionAsync("Scripts", required: false)
