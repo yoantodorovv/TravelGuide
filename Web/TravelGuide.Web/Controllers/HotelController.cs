@@ -1,19 +1,14 @@
-﻿namespace TravelGuide.Web.Areas.Restaurant.Controllers
+﻿namespace TravelGuide.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using TravelGuide.Web.Controllers;
 
     using static TravelGuide.Common.GlobalConstants;
 
-    [Area("Restaurant")]
-    [Authorize(Roles = AdministratorOrRestauranteur)]
-    public class HomeController : BaseController
+    [Authorize(Roles = AdministratorOrHotelier)]
+    public class HotelController : BaseController
     {
         public IActionResult Index()
         {

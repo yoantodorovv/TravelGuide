@@ -27,6 +27,12 @@
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,24 +51,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Account\" />
-    <None Remove="Areas\Hotel\" />
-    <None Remove="Areas\Restaurant\" />
-    <None Remove="Areas\Hotel\Controllers\" />
-    <None Remove="Areas\Hotel\Views\" />
-    <None Remove="Areas\Restaurant\Controllers\" />
-    <None Remove="Areas\Restaurant\Views\" />
-    <None Remove="Areas\Hotel\Views\Home\" />
-    <None Remove="Areas\Hotel\Views\Menage\" />
+    <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="Microsoft.EntityFrameworkCore.Tools" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Views\Hotel\" />
+    <None Remove="Areas\Administration\Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Account\" />
-    <Folder Include="Areas\Hotel\" />
-    <Folder Include="Areas\Restaurant\" />
-    <Folder Include="Areas\Hotel\Controllers\" />
-    <Folder Include="Areas\Hotel\Views\" />
-    <Folder Include="Areas\Restaurant\Controllers\" />
-    <Folder Include="Areas\Restaurant\Views\" />
-    <Folder Include="Areas\Hotel\Views\Home\" />
-    <Folder Include="Areas\Hotel\Views\Menage\" />
+    <Folder Include="Views\Hotel\" />
+    <Folder Include="Areas\Administration\Controllers\" />
   </ItemGroup>
 </Project>
