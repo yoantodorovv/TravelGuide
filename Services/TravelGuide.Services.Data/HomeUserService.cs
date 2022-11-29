@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
@@ -24,14 +24,14 @@
             this.restaurantRepository = restaurantRepository;
         }
 
-        public IEnumerable<HotelIndexDto> GetAllHotelsToRender() => this.hotelRepository.AllAsNoTracking()
+        public async Task<IEnumerable<HotelIndexDto>> GetAllHotelsToRender() => await this.hotelRepository.AllAsNoTracking()
             .Where(h => h.Rating == 5)
             .To<HotelIndexDto>()
-            .ToList();
+            .ToListAsync();
 
-        public IEnumerable<RestaurantIndexDto> GetAllRestaurantsToRender() => this.restaurantRepository.AllAsNoTracking()
+        public async Task<IEnumerable<RestaurantIndexDto>> GetAllRestaurantsToRender() => await this.restaurantRepository.AllAsNoTracking()
             .Where(r => r.Rating == 5)
             .To<RestaurantIndexDto>()
-            .ToList();
+            .ToListAsync();
     }
 }

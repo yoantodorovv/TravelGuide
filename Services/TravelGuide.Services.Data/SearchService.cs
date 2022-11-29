@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
@@ -24,7 +24,7 @@
             this.restaurantRepository = restaurantRepository;
         }
 
-        public IEnumerable<HotelIndexDto> GetAllHotelsInSearchArea(string searchString) => this.hotelRepository.AllAsNoTracking()
+        public async Task<IEnumerable<HotelIndexDto>> GetAllHotelsInSearchArea(string searchString) => await this.hotelRepository.AllAsNoTracking()
             .Include(h => h.Address)
             .ThenInclude(a => a.Town)
             .Where(h => h.Address.Country.Contains(searchString)
@@ -32,9 +32,9 @@
                 || h.Address.AddressText.Contains(searchString)
                 || h.Location.Contains(searchString))
             .To<HotelIndexDto>()
-            .ToList();
+            .ToListAsync();
 
-        public IEnumerable<RestaurantIndexDto> GetAllRestaurantsInSearchArea(string searchString) => this.restaurantRepository.AllAsNoTracking()
+        public async Task<IEnumerable<RestaurantIndexDto>> GetAllRestaurantsInSearchArea(string searchString) => await this.restaurantRepository.AllAsNoTracking()
             .Include(r => r.Address)
             .ThenInclude(a => a.Town)
             .Where(r => r.Address.Country.Contains(searchString)
@@ -42,6 +42,6 @@
                 || r.Address.AddressText.Contains(searchString)
                 || r.Location.Contains(searchString))
             .To<RestaurantIndexDto>()
-            .ToList();
+            .ToListAsync();
     }
 }

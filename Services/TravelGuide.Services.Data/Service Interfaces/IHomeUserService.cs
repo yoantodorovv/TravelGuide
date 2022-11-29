@@ -8,8 +8,8 @@
 
     public interface IHomeUserService
     {
-        IEnumerable<HotelIndexDto> GetAllHotelsToRender();
+        Task<IEnumerable<HotelIndexDto>> GetAllHotelsToRender();
 
-        IEnumerable<RestaurantIndexDto> GetAllRestaurantsToRender();
+        Task<IEnumerable<RestaurantIndexDto>> GetAllRestaurantsToRender();
     }
 }

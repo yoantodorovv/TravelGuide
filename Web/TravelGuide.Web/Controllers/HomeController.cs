@@ -22,26 +22,26 @@
             this.searchService = searchService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var model = new HomeIndexViewModel()
             {
-                HotelsToRender = this.homeUserService.GetAllHotelsToRender(),
-                RestaurantsToRender = this.homeUserService.GetAllRestaurantsToRender(),
+                HotelsToRender = await this.homeUserService.GetAllHotelsToRender(),
+                RestaurantsToRender = await this.homeUserService.GetAllRestaurantsToRender(),
             };
 
             return this.View(model);
         }
 
-        public IActionResult Search(HomeIndexViewModel model, string searchString)
+        public async Task<IActionResult> Search(HomeIndexViewModel model, string searchString)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            model.HotelsToRender = this.searchService.GetAllHotelsInSearchArea(searchString);
-            model.RestaurantsToRender = this.searchService.GetAllRestaurantsInSearchArea(searchString);
+            model.HotelsToRender = await this.searchService.GetAllHotelsInSearchArea(searchString);
+            model.RestaurantsToRender = await this.searchService.GetAllRestaurantsInSearchArea(searchString);
 
             return this.View(model);
         }
