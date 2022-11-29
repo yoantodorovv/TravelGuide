@@ -45,8 +45,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Account\" />
+    <None Remove="Areas\Hotel\" />
+    <None Remove="Areas\Restaurant\" />
+    <None Remove="Areas\Hotel\Controllers\" />
+    <None Remove="Areas\Hotel\Views\" />
+    <None Remove="Areas\Restaurant\Controllers\" />
+    <None Remove="Areas\Restaurant\Views\" />
+    <None Remove="Areas\Hotel\Views\Home\" />
+    <None Remove="Areas\Hotel\Views\Menage\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Account\" />
+    <Folder Include="Areas\Hotel\" />
+    <Folder Include="Areas\Restaurant\" />
+    <Folder Include="Areas\Hotel\Controllers\" />
+    <Folder Include="Areas\Hotel\Views\" />
+    <Folder Include="Areas\Restaurant\Controllers\" />
+    <Folder Include="Areas\Restaurant\Views\" />
+    <Folder Include="Areas\Hotel\Views\Home\" />
+    <Folder Include="Areas\Hotel\Views\Menage\" />
   </ItemGroup>
 </Project>

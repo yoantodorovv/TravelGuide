@@ -15,6 +15,9 @@
         public const string RestauranteurRoleName = "Restauranteur";
         public const string UserRoleName = "User";
 
+        public const string AdministratorOrHotelier = $"{AdministratorRoleName}, {HotelierRoleName}";
+        public const string AdministratorOrRestauranteur = $"{AdministratorRoleName}, {RestauranteurRoleName}";
+
         public static class SystemPathConstants
         {
             public const string SystemLoginPathConstant = "/Account/Login";
