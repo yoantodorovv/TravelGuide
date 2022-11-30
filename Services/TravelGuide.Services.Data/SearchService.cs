@@ -31,7 +31,8 @@
             .Where(h => h.Address.Country.Contains(searchString)
                 || h.Address.Town.Name.Contains(searchString)
                 || h.Address.AddressText.Contains(searchString)
-                || h.Location.Contains(searchString))
+                || h.Location.Contains(searchString)
+                || h.Name.Contains(searchString))
             .To<HotelIndexDto>()
             .ToListAsync();
 
@@ -41,7 +42,8 @@
             .Where(r => r.Address.Country.Contains(searchString)
                 || r.Address.Town.Name.Contains(searchString)
                 || r.Address.AddressText.Contains(searchString)
-                || r.Location.Contains(searchString))
+                || r.Location.Contains(searchString)
+                || r.Name.Contains(searchString))
             .To<RestaurantIndexDto>()
             .ToListAsync();
     }
