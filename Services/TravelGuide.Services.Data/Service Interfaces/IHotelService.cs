@@ -8,6 +8,6 @@
 
     public interface IHotelService
     {
-        Task AddHotelAsync<T>(T createHotelDto);
+        Task AddAsync(CreateHotelDto createHotelDto);
     }
 }

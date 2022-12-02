@@ -23,7 +23,7 @@
             this.mapper = mapper;
         }
 
-        public async Task AddHotelAsync<T>(T createHotelDto)
+        public async Task AddAsync(CreateHotelDto createHotelDto)
         {
             var hotel = this.mapper.Map<Hotel>(createHotelDto);
 

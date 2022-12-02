@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
+    using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Web.ViewModels;
     using TravelGuide.Web.ViewModels.Hotel;
 
@@ -16,14 +17,14 @@
     public class HotelController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IDeletableEntityRepository<Hotel> hotelRepository;
+        private readonly IHotelService hotelService;
 
         public HotelController(
             UserManager<ApplicationUser> userManager,
-            IDeletableEntityRepository<Hotel> hotelRepository)
+            IHotelService hotelService)
         {
             this.userManager = userManager;
-            this.hotelRepository = hotelRepository;
+            this.hotelService = hotelService;
         }
 
         [AllowAnonymous]
@@ -76,7 +77,7 @@
 
             //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
 
-            await this.hotelRepository.AddAsync(new Hotel());
+            await this.hotelService.AddAsync();
 
             return this.RedirectToAction(nameof(this.All));
         }
