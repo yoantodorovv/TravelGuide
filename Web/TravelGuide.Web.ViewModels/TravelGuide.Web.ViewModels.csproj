@@ -25,8 +25,14 @@
 
   <ItemGroup>
     <None Remove="DTOs\" />
+    <None Remove="Hotel\" />
+    <None Remove="DTOs\Hotel\" />
+    <None Remove="DTOs\Restaurant\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
+    <Folder Include="Hotel\" />
+    <Folder Include="DTOs\Hotel\" />
+    <Folder Include="DTOs\Restaurant\" />
   </ItemGroup>
 </Project>

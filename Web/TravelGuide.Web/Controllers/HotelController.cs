@@ -6,22 +6,34 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Web.ViewModels;
+    using TravelGuide.Web.ViewModels.Hotel;
 
     using static TravelGuide.Common.GlobalConstants;
 
     public class HotelController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IDeletableEntityRepository<Hotel> hotelRepository;
 
-        public HotelController(UserManager<ApplicationUser> userManager)
+        public HotelController(
+            UserManager<ApplicationUser> userManager,
+            IDeletableEntityRepository<Hotel> hotelRepository)
         {
             this.userManager = userManager;
+            this.hotelRepository = hotelRepository;
         }
 
         [AllowAnonymous]
         public IActionResult All()
+        {
+            return this.View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult Mine()
         {
             return this.View();
         }
@@ -51,9 +63,22 @@
         }
 
         [Authorize(Roles = AdministratorOrHotelier)]
-        public IActionResult Create()
+        public IActionResult Create() => this.View(new HotelViewModel());
+
+        [HttpPost]
+        [Authorize(Roles = AdministratorOrHotelier)]
+        public async Task<IActionResult> Create(HotelViewModel model)
         {
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
+
+            await this.hotelRepository.AddAsync(new Hotel());
+
+            return this.RedirectToAction(nameof(this.All));
         }
 
         [Authorize(Roles = AdministratorOrHotelier)]

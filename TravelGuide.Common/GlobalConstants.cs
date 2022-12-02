@@ -71,6 +71,15 @@
         /// </summary>
         public static class HotelConstants
         {
+            public const int AddressMinLength = 5;
+            public const int AddressMaxLength = 100;
+
+            public const int TownMinLength = 1;
+            public const int TownMaxLength = 100;
+
+            public const int CountryMinLength = 3;
+            public const int CountryMaxLength = 60;
+
             public const int NameMinLength = 5;
             public const int NameMaxLength = 100;
 

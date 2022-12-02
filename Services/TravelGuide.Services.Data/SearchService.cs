@@ -11,6 +11,7 @@
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Services.Mapping;
     using TravelGuide.Web.ViewModels.DTOs;
+    using TravelGuide.Web.ViewModels.DTOs.Hotel;
 
     public class SearchService : ISearchService
     {

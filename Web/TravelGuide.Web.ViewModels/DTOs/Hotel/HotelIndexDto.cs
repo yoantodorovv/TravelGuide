@@ -1,4 +1,4 @@
-﻿namespace TravelGuide.Web.ViewModels.DTOs
+﻿namespace TravelGuide.Web.ViewModels.DTOs.Hotel
 {
     using System;
     using System.Collections.Generic;

@@ -4,12 +4,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Services.Mapping;
     using TravelGuide.Web.ViewModels.DTOs;
+    using TravelGuide.Web.ViewModels.DTOs.Hotel;
 
     public class HomeUserService : IHomeUserService
     {

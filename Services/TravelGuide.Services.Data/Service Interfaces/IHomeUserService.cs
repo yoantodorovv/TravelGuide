@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using TravelGuide.Web.ViewModels.DTOs;
+    using TravelGuide.Web.ViewModels.DTOs.Hotel;
 
     public interface IHomeUserService
     {

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using TravelGuide.Web.ViewModels.DTOs;
+    using TravelGuide.Web.ViewModels.DTOs.Hotel;
 
     public class CardVisualiseViewModel : PagingViewModel
     {
