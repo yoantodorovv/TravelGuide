@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using TravelGuide.Web.ViewModels.DTOs;
-    using TravelGuide.Web.ViewModels.DTOs.Hotel;
+    using TravelGuide.Web.ViewModels.Hotel;
+    using TravelGuide.Web.ViewModels.Restaurant;
 
     public interface ISearchService
     {
-        Task<IEnumerable<HotelIndexDto>> GetAllHotelsInSearchArea(string searchString);
+        Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsInSearchArea(string searchString);
 
-        Task<IEnumerable<RestaurantIndexDto>> GetAllRestaurantsInSearchArea(string searchString);
+        Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsInSearchArea(string searchString);
     }
 }

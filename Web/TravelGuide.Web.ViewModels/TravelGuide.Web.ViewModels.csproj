@@ -24,15 +24,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="DTOs\" />
     <None Remove="Hotel\" />
-    <None Remove="DTOs\Hotel\" />
-    <None Remove="DTOs\Restaurant\" />
+    <None Remove="Restaurant\" />
+    <None Remove="Home\" />
+    <None Remove="Account\" />
+    <None Remove="Utilities\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOs\" />
     <Folder Include="Hotel\" />
-    <Folder Include="DTOs\Hotel\" />
-    <Folder Include="DTOs\Restaurant\" />
+    <Folder Include="Restaurant\" />
+    <Folder Include="Home\" />
+    <Folder Include="Account\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 </Project>

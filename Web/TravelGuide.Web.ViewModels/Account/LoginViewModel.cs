@@ -1,4 +1,4 @@
-﻿namespace TravelGuide.Web.ViewModels
+﻿namespace TravelGuide.Web.ViewModels.Account
 {
     using System;
     using System.ComponentModel.DataAnnotations;

@@ -1,4 +1,4 @@
-﻿namespace TravelGuide.Web.ViewModels.DTOs
+﻿namespace TravelGuide.Web.ViewModels.Restaurant
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
 
     using static TravelGuide.Common.GlobalConstants.RestaurantConstants;
 
-    public class RestaurantIndexDto : IMapFrom<Restaurant>, IHaveCustomMappings
+    public class RestaurantIndexViewModel : IMapFrom<Restaurant>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
 
@@ -38,7 +38,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Restaurant, RestaurantIndexDto>()
+            configuration.CreateMap<Restaurant, RestaurantIndexViewModel>()
                 .ForMember(x => x.Country, opt =>
                     opt.MapFrom(r => r.Address.Country));
         }

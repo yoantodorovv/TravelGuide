@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Web.ViewModels;
+    using TravelGuide.Web.ViewModels.Home;
 
     [AllowAnonymous]
     public class HomeController : BaseController

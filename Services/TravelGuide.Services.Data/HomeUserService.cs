@@ -10,8 +10,8 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Services.Mapping;
-    using TravelGuide.Web.ViewModels.DTOs;
-    using TravelGuide.Web.ViewModels.DTOs.Hotel;
+    using TravelGuide.Web.ViewModels.Hotel;
+    using TravelGuide.Web.ViewModels.Restaurant;
 
     public class HomeUserService : IHomeUserService
     {
@@ -26,14 +26,14 @@
             this.restaurantRepository = restaurantRepository;
         }
 
-        public async Task<IEnumerable<HotelIndexDto>> GetAllHotelsToRender() => await this.hotelRepository.AllAsNoTracking()
+        public async Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsToRender() => await this.hotelRepository.AllAsNoTracking()
             .Where(h => h.Rating == 5)
-            .To<HotelIndexDto>()
+            .To<HotelIndexViewModel>()
             .ToListAsync();
 
-        public async Task<IEnumerable<RestaurantIndexDto>> GetAllRestaurantsToRender() => await this.restaurantRepository.AllAsNoTracking()
+        public async Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsToRender() => await this.restaurantRepository.AllAsNoTracking()
             .Where(r => r.Rating == 5)
-            .To<RestaurantIndexDto>()
+            .To<RestaurantIndexViewModel>()
             .ToListAsync();
     }
 }

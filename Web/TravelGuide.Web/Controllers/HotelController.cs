@@ -77,7 +77,7 @@
 
             //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
 
-            await this.hotelService.AddAsync();
+            await this.hotelService.AddAsync(null);
 
             return this.RedirectToAction(nameof(this.All));
         }

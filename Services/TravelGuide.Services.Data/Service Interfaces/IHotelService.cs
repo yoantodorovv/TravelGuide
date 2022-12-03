@@ -3,11 +3,10 @@
     using System;
     using System.Threading.Tasks;
 
-    using TravelGuide.Web.ViewModels.DTOs.Hotel;
     using TravelGuide.Web.ViewModels.Hotel;
 
     public interface IHotelService
     {
-        Task AddAsync(CreateHotelDto createHotelDto);
+        Task AddAsync(CreateHotelViewModel createHotelViewModel);
     }
 }

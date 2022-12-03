@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using TravelGuide.Data.Models;
-    using TravelGuide.Web.ViewModels;
+    using TravelGuide.Web.ViewModels.Account;
 
     using static TravelGuide.Common.ErrorMessages.AccountErrorMessages;
     using static TravelGuide.Common.GlobalConstants;

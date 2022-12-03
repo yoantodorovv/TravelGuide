@@ -1,4 +1,4 @@
-﻿namespace TravelGuide.Web.ViewModels.DTOs.Hotel
+﻿namespace TravelGuide.Web.ViewModels.Hotel
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using TravelGuide.Services.Mapping;
 
     // TODO: Add validation attributes
-    public class HotelIndexDto : IMapFrom<Hotel>, IHaveCustomMappings
+    public class HotelIndexViewModel : IMapFrom<Hotel>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
 
@@ -26,7 +26,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Hotel, HotelIndexDto>()
+            configuration.CreateMap<Hotel, HotelIndexViewModel>()
                 .ForMember(x => x.Country, opt =>
                     opt.MapFrom(h => h.Address.Country));
         }

@@ -1,4 +1,4 @@
-﻿namespace TravelGuide.Web.ViewModels.DTOs.Hotel
+﻿namespace TravelGuide.Web.ViewModels.Hotel
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@
 
     using static TravelGuide.Common.GlobalConstants.HotelConstants;
 
-    public class CreateHotelDto : IMapTo<Hotel>, IHaveCustomMappings
+    public class CreateHotelViewModel : IMapTo<Hotel>
     {
         /// <summary>
         /// Gets or sets hotel's name.
@@ -52,15 +52,15 @@
 
         [Required]
         [StringLength(CountryMaxLength, MinimumLength = CountryMinLength)]
-        public string Country { get; set; }
+        public string AddressCountry { get; set; }
 
         [Required]
         [StringLength(TownMaxLength, MinimumLength = TownMinLength)]
-        public string Town { get; set; }
+        public string AddressTownName { get; set; }
 
         [Required]
         [StringLength(AddressMaxLength, MinimumLength = AddressMinLength)]
-        public string Address { get; set; }
+        public string AddressAddressText { get; set; }
 
         /// <summary>
         /// Gets or sets hotel's phone contact number.
@@ -84,13 +84,6 @@
         public string Email { get; set; }
 
         /// <summary>
-        /// Gets or sets the owner of the hotel.
-        /// </summary>
-        public virtual ApplicationUser Owner { get; set; }
-
-        // TODO: DTOs
-
-        /// <summary>
         /// Gets or sets a collection of the hotel's daily working hours.
         /// </summary>
         [Required]
@@ -107,13 +100,5 @@
         /// </summary>
         [Required]
         public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
-
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration.CreateMap<CreateHotelDto, Hotel>()
-                .ForMember(x => x.Address.Country, opt => opt.MapFrom(h => h.Country))
-                .ForMember(x => x.Address.Town.Name, opt => opt.MapFrom(h => h.Town))
-                .ForMember(x => x.Address.AddressText, opt => opt.MapFrom(h => h.Address));
-        }
     }
 }

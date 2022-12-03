@@ -74,10 +74,8 @@
             services.AddControllersWithViews(
                 options =>
                 {
-                    //// TODO: Uncomment the decimal model binder provider.
-
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                    //// options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                 }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -93,6 +91,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IHomeUserService, HomeUserService>();
             services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<IHotelService, HotelService>();
         }
 
         private static void Configure(WebApplication app)
