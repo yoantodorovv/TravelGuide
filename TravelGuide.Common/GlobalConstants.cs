@@ -86,8 +86,8 @@
             public const int LocationMinLength = 5;
             public const int LocationMaxLength = 100;
 
-            public const string PriceMinValue = "0.0";
-            public const string PriceMaxValue = "10000.0";
+            public const string PriceMinValue = "0";
+            public const string PriceMaxValue = "10000";
 
             public const double RatingMinValue = 0;
             public const double RatingMaxValue = 5;

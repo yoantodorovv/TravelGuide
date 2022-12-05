@@ -10,7 +10,9 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
 
+    using static TravelGuide.Common.GlobalConstants.AmenityConstants;
     using static TravelGuide.Common.GlobalConstants.HotelConstants;
+    using static TravelGuide.Common.GlobalConstants.WorkingHoursConstants;
 
     public class CreateHotelViewModel : IMapTo<Hotel>
     {
@@ -32,8 +34,9 @@
         /// Gets or sets hotel's price.
         /// </summary>
         [Required]
-        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)] // TODO: Redo Range attribute
+        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
         [Column(TypeName = "decimal(18,4)")]
+        [Display(Name = "Price for 1 room")]
         public decimal Price { get; set; }
 
         /// <summary>
@@ -52,14 +55,17 @@
 
         [Required]
         [StringLength(CountryMaxLength, MinimumLength = CountryMinLength)]
+        [Display(Name = "Country")]
         public string AddressCountry { get; set; }
 
         [Required]
         [StringLength(TownMaxLength, MinimumLength = TownMinLength)]
+        [Display(Name = "Town")]
         public string AddressTownName { get; set; }
 
         [Required]
         [StringLength(AddressMaxLength, MinimumLength = AddressMinLength)]
+        [Display(Name = "Address")]
         public string AddressAddressText { get; set; }
 
         /// <summary>
@@ -83,22 +89,46 @@
         [EmailAddress]
         public string Email { get; set; }
 
-        /// <summary>
-        /// Gets or sets a collection of the hotel's daily working hours.
-        /// </summary>
-        [Required]
-        public virtual ICollection<WorkingHours> WorkingHours { get; set; } = new HashSet<WorkingHours>();
+        // TODO: Timepicker for working hours.
 
         /// <summary>
-        /// Gets or sets a collection of the hotel's amenities.
+        /// Gets or sets the opening time.
         /// </summary>
         [Required]
-        public virtual ICollection<Amenity> Amenities { get; set; } = new HashSet<Amenity>();
+        [Display(Name = "Open Time")]
+        public int WorkingHoursOpenTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the closing time.
+        /// </summary>
+        [Required]
+        [Display(Name = "Close Time")]
+        public int WorkingHoursCloseTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the day of the week.
+        /// </summary>
+        [StringLength(WeekDayMaxLength)]
+        public string WorkingHoursWeekDay { get; set; }
+
+        // TODO: Make Amenity Title with chips.
+
+        /// <summary>
+        /// Gets or sets amenity title property.
+        /// </summary>
+        [Required]
+        [StringLength(TitleMaxLength)]
+        [Display(Name = "Amenities")]
+        public string AmenityTitle { get; set; }
+
+        // TODO: Finish images.
 
         /// <summary>
         /// Gets or sets a collection of the hotel's images.
         /// </summary>
         [Required]
         public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
+
+        public ICollection<string> Amenities { get; set; }
     }
 }

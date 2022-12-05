@@ -64,16 +64,18 @@
         }
 
         [Authorize(Roles = AdministratorOrHotelier)]
-        public IActionResult Create() => this.View(new HotelViewModel());
+        public IActionResult Create() => this.View(new CreateHotelViewModel());
 
         [HttpPost]
         [Authorize(Roles = AdministratorOrHotelier)]
-        public async Task<IActionResult> Create(HotelViewModel model)
+        public async Task<IActionResult> Create(CreateHotelViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
+
+            model.Amenities = model.AmenityTitle.Split("  ");
 
             //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
 

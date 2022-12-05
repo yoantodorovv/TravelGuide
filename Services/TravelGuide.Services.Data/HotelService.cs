@@ -66,7 +66,8 @@
                 },
             };
 
-            //hotel = this.mapper.Map<Hotel>(createHotelViewModel);
+            //// hotel = this.mapper.Map<Hotel>(createHotelViewModel);
+            //// hotel = AutoMapperConfig.MapperInstance.Map<Hotel>(createHotelViewModel);
 
             await this.hotelRepository.AddAsync(hotel);
         }

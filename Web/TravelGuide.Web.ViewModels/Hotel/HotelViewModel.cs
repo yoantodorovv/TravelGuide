@@ -86,8 +86,6 @@
         /// </summary>
         public virtual ApplicationUser Owner { get; set; }
 
-        // TODO: DTOs
-
         /// <summary>
         /// Gets or sets a collection of the hotel's daily working hours.
         /// </summary>
