@@ -114,8 +114,8 @@ namespace TravelGuide.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     WeekDay = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    OpenTime = table.Column<int>(type: "int", nullable: false),
-                    CloseTime = table.Column<int>(type: "int", nullable: false),
+                    RegistrationTime = table.Column<int>(type: "int", nullable: false),
+                    LeaveTime = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -143,6 +143,29 @@ namespace TravelGuide.Data.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Approves",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Approves", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Approves_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -600,6 +623,16 @@ namespace TravelGuide.Data.Migrations
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Approves_IsDeleted",
+                table: "Approves",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Approves_UserId",
+                table: "Approves",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -791,6 +824,9 @@ namespace TravelGuide.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ApplicationUserDiscount");
+
+            migrationBuilder.DropTable(
+                name: "Approves");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

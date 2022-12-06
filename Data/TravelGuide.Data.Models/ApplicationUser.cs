@@ -42,6 +42,8 @@ namespace TravelGuide.Data.Models
 
         public virtual ICollection<Discount> Discounts { get; set; } = new HashSet<Discount>();
 
+        public virtual ICollection<Approve> Approves { get; set; } = new HashSet<Approve>();
+
         public virtual ICollection<IdentityUserRole<Guid>> Roles { get; set; } = new HashSet<IdentityUserRole<Guid>>();
 
         public virtual ICollection<IdentityUserClaim<Guid>> Claims { get; set; } = new HashSet<IdentityUserClaim<Guid>>();

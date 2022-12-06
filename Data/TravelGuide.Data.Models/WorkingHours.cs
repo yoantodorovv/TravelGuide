@@ -20,17 +20,19 @@
         [StringLength(WeekDayMaxLength)]
         public string WeekDay { get; set; }
 
-        /// <summary>
-        /// Gets or sets the opening time.
-        /// </summary>
-        [Required]
-        public int OpenTime { get; set; }
+        // TODO: Migration
 
         /// <summary>
-        /// Gets or sets the closing time.
+        /// Gets or sets the registration time.
         /// </summary>
         [Required]
-        public int CloseTime { get; set; }
+        public int RegistrationTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the leaving time.
+        /// </summary>
+        [Required]
+        public int LeaveTime { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of hotels.

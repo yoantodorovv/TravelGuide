@@ -389,6 +389,40 @@ namespace TravelGuide.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("TravelGuide.Data.Models.Approve", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Approves");
+                });
+
             modelBuilder.Entity("TravelGuide.Data.Models.Discount", b =>
                 {
                     b.Property<Guid>("Id")
@@ -793,9 +827,6 @@ namespace TravelGuide.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CloseTime")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -805,10 +836,13 @@ namespace TravelGuide.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("LeaveTime")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OpenTime")
+                    b.Property<int>("RegistrationTime")
                         .HasColumnType("int");
 
                     b.Property<string>("WeekDay")
@@ -945,6 +979,17 @@ namespace TravelGuide.Data.Migrations
                     b.Navigation("Town");
                 });
 
+            modelBuilder.Entity("TravelGuide.Data.Models.Approve", b =>
+                {
+                    b.HasOne("TravelGuide.Data.Models.ApplicationUser", "User")
+                        .WithMany("Approves")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TravelGuide.Data.Models.Hotel", b =>
                 {
                     b.HasOne("TravelGuide.Data.Models.Address", "Address")
@@ -954,7 +999,7 @@ namespace TravelGuide.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("TravelGuide.Data.Models.ApplicationUser", "Owner")
-                        .WithMany()
+                        .WithMany("Hotels")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1021,7 +1066,7 @@ namespace TravelGuide.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("TravelGuide.Data.Models.ApplicationUser", "Owner")
-                        .WithMany()
+                        .WithMany("Restaurants")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1088,9 +1133,15 @@ namespace TravelGuide.Data.Migrations
 
             modelBuilder.Entity("TravelGuide.Data.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Approves");
+
                     b.Navigation("Claims");
 
+                    b.Navigation("Hotels");
+
                     b.Navigation("Logins");
+
+                    b.Navigation("Restaurants");
 
                     b.Navigation("Roles");
                 });
