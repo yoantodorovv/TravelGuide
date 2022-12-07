@@ -20,8 +20,6 @@
         [StringLength(WeekDayMaxLength)]
         public string WeekDay { get; set; }
 
-        // TODO: Migration
-
         /// <summary>
         /// Gets or sets the registration time.
         /// </summary>

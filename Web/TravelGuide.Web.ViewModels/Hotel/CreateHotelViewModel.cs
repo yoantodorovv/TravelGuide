@@ -11,6 +11,7 @@
     using TravelGuide.Services.Mapping;
     using TravelGuide.Web.ViewModels.Amenity;
     using TravelGuide.Web.ViewModels.WorkingHours;
+
     using static TravelGuide.Common.GlobalConstants.AmenityConstants;
     using static TravelGuide.Common.GlobalConstants.HotelConstants;
     using static TravelGuide.Common.GlobalConstants.WorkingHoursConstants;
@@ -89,8 +90,6 @@
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        //// TODO: Finish (there should be collection and everything should be able to map to general hotel working hours).
 
         [Required]
         public virtual ICollection<WorkingHoursViewModel> WorkingHours { get; set; } = new List<WorkingHoursViewModel>();

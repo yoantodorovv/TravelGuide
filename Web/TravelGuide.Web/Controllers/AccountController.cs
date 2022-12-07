@@ -131,7 +131,6 @@
                 }
             }
 
-            // TODO: Add exception/error constants and vice versa.
             this.ModelState.AddModelError(string.Empty, InvalidLogin);
 
             return this.View(model);

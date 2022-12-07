@@ -25,7 +25,7 @@
         /// Gets or sets discount's percentage.
         /// </summary>
         [Required]
-        [Range(typeof(decimal), DiscountPercentageMinValue, DiscountPercentageMaxValue)] // TODO: Reform 'range' attribute
+        [Range(typeof(decimal), DiscountPercentageMinValue, DiscountPercentageMaxValue)]
         [Column(TypeName = "decimal(18,4)")]
         public decimal DiscountPercentage { get; set; }
 

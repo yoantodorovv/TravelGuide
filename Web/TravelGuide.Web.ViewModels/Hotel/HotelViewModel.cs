@@ -30,7 +30,7 @@
         /// Gets or sets hotel's price.
         /// </summary>
         [Required]
-        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)] // TODO: Redo Range attribute
+        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
 

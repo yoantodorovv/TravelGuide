@@ -48,7 +48,6 @@
         [Authorize(Roles = UserRoleName)]
         public IActionResult BecomeHotelier() => this.View(new BecomeHotelierViewModel());
 
-        // TODO: Add policy
         [HttpPost]
         [Authorize(Roles = UserRoleName)]
         public async Task<IActionResult> BecomeHotelier(BecomeHotelierViewModel model)
