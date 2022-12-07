@@ -3,19 +3,6 @@
 
 @{
     ViewData["Title"] = "Create a new hotel";
-
-    foreach (var day in Enum.GetValues(typeof(DayOfWeek))
-                                    .OfType<DayOfWeek>()
-                                    .ToList()
-                                    .Skip(1))
-    {
-        Model.WorkingHours.Add(new WorkingHoursViewModel()
-        {
-            WorkingHoursWeekDay = day.ToString(),
-            WorkingHoursRegistrationTime = string.Empty,
-            WorkingHoursLeaveTime = string.Empty,
-        });
-    }
 }
 
 <div class="d-flex row justify-content-center">
@@ -90,11 +77,11 @@
             </div>
             <!-- TODO: Reform Amenities, Working Hours and Images-->
             <!-- Add image from computer or URL-->
-            <!--<div class="form-floating mt-1">
-        <input asp-for="Images" class="form-control" autocomplete="images" aria-required="true" />
-        <label asp-for="Images"></label>
-        <span asp-validation-for="Images" class="text-danger"></span>
-    </div>-->
+            <div class="form-floating mt-1">
+                <input asp-for="Images" class="form-control" />
+                <label asp-for="Images"></label>
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div>
             <!-- Add as many amenities as one likes like evernote tags /Pool(x), Spa(x), .../-->
             <div class="form-floating mt-1">
                 <input type="text" asp-for="AmenityTitle" class="form-control" autocomplete="amenity-title" aria-required="true" />
@@ -103,24 +90,21 @@
             </div>
             <!-- There will be a filed with all weekdays and one just has to write the opening time and the closing time (just like in calendar)-->
             <div>
-                @foreach (var workingHour in Model.WorkingHours)
-                {
-                    <div class="row mt-1">
-                        <div class="col d-flex justify-content-end align-items-center">
-                            <h5>@workingHour.WorkingHoursWeekDay: </h5>
-                        </div>
-                        <div class="col form-floating">
-                            <input asp-for="@workingHour.WorkingHoursRegistrationTime" class="form-control" autocomplete="open-time" aria-required="true" />
-                            <label asp-for="@workingHour.WorkingHoursRegistrationTime"></label>
-                            <span asp-validation-for="@workingHour.WorkingHoursRegistrationTime" class="text-danger"></span>
-                        </div>
-                        <div class="col form-floating">
-                            <input asp-for="@workingHour.WorkingHoursLeaveTime" class="form-control" autocomplete="close-time" aria-required="true" />
-                            <label asp-for="@workingHour.WorkingHoursLeaveTime"></label>
-                            <span asp-validation-for="@workingHour.WorkingHoursLeaveTime" class="text-danger"></span>
-                        </div>
+                <div class="row mt-1">
+                    <div class="col d-flex justify-content-end align-items-center">
+                        <h5>@Model.WorkingHoursWeekDay: </h5>
                     </div>
-                }
+                    <div class="col form-floating">
+                        <input asp-for="@Model.WorkingHoursRegistrationTime" class="form-control" autocomplete="open-time" aria-required="true" />
+                        <label asp-for="@Model.WorkingHoursRegistrationTime"></label>
+                        <span asp-validation-for="@Model.WorkingHoursRegistrationTime" class="text-danger"></span>
+                    </div>
+                    <div class="col form-floating">
+                        <input asp-for="@Model.WorkingHoursLeaveTime" class="form-control" autocomplete="close-time" aria-required="true" />
+                        <label asp-for="@Model.WorkingHoursLeaveTime"></label>
+                        <span asp-validation-for="@Model.WorkingHoursLeaveTime" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 mt-3 btn btn-lg btn-primary">Create</button>
         </form>

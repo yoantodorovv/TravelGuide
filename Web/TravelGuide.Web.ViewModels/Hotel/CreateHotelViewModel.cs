@@ -6,6 +6,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using AutoMapper;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
@@ -91,8 +92,27 @@
         [EmailAddress]
         public string Email { get; set; }
 
+        /// <summary>
+        /// Gets or sets the opening time.
+        /// </summary>
         [Required]
-        public virtual ICollection<WorkingHoursViewModel> WorkingHours { get; set; } = new List<WorkingHoursViewModel>();
+        [Display(Name = "Registration Time")]
+        [RegularExpression(TimeRegex)]
+        public string WorkingHoursRegistrationTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the closing time.
+        /// </summary>
+        [Required]
+        [Display(Name = "Leave Time")]
+        [RegularExpression(TimeRegex)]
+        public string WorkingHoursLeaveTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the day of the week.
+        /// </summary>
+        [StringLength(WeekDayMaxLength)]
+        public string WorkingHoursWeekDay { get; set; } = "Working Time";
 
         // TODO: Make Amenity Title with chips.
 
@@ -109,9 +129,8 @@
         /// <summary>
         /// Gets or sets a collection of the hotel's images.
         /// </summary>
-        [Required]
-        public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
+        public virtual ICollection<IFormFile> Images { get; set; } = new List<IFormFile>();
 
-        public ICollection<AmenityViewModel> Amenities { get; set; }
+        public ICollection<AmenityViewModel> Amenities { get; set; } = new HashSet<AmenityViewModel>();
     }
 }

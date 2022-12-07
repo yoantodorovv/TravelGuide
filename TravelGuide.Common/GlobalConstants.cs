@@ -50,7 +50,7 @@
         public static class WorkingHoursConstants
         {
             public const int WeekDayMinLength = 5;
-            public const int WeekDayMaxLength = 10;
+            public const int WeekDayMaxLength = 50;
 
             public const string TimeRegex = "^(([0-9]|1[0-9]|2[0-3]):([0-9]|1[0-9]|2[0-4]){2})$";
         }
