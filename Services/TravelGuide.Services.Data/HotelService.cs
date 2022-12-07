@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -9,6 +10,7 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Services.Mapping;
+    using TravelGuide.Web.ViewModels.Amenity;
     using TravelGuide.Web.ViewModels.Hotel;
 
     public class HotelService : IHotelService
@@ -21,55 +23,60 @@
             this.hotelRepository = hotelRepository;
         }
 
-        public async Task AddAsync(CreateHotelViewModel createHotelViewModel)
+        public async Task AddAsync(CreateHotelViewModel model)
         {
+            foreach (var title in model.AmenityTitle.Split("  "))
+            {
+                model.Amenities.Add(new AmenityViewModel()
+                {
+                    Title = title,
+                });
+            }
+
             var hotel = new Hotel()
             {
-                Name = createHotelViewModel.Name,
-                Location = createHotelViewModel.Location,
-                Price = createHotelViewModel.Price,
-                Details = createHotelViewModel.Details,
-                Rating = createHotelViewModel.Rating,
+                Name = model.Name,
+                Location = model.Location,
+                Price = model.Price,
+                Details = model.Details,
+                Rating = model.Rating,
                 Address = new Address()
                 {
-                    AddressText = createHotelViewModel.AddressAddressText,
-                    Country = createHotelViewModel.AddressCountry,
+                    AddressText = model.AddressAddressText,
+                    Country = model.AddressCountry,
                     Town = new Town()
                     {
-                        Name = createHotelViewModel.AddressTownName,
+                        Name = model.AddressTownName,
                     },
                 },
-                PhoneNumber = createHotelViewModel.PhoneNumber,
-                WebsiteUrl = createHotelViewModel.WebsiteUrl,
-                Email = createHotelViewModel.Email,
-                WorkingHours = new List<WorkingHours>()
-                {
-                    // TODO: Think of a way to do the working hours.
-                    new WorkingHours()
+                PhoneNumber = model.PhoneNumber,
+                WebsiteUrl = model.WebsiteUrl,
+                Email = model.Email,
+                WorkingHours = model.WorkingHours
+                    .Select(x => new WorkingHours()
                     {
-                        WeekDay = "",
-                        //// OpenTime = null,
-                        //// CloseTime = null,
-                    },
-                },
-                Amenities = new List<Amenity>()
-                {
-                    // TODO: Think of a way to do the amenities.
-                    new Amenity()
+                        WeekDay = x.WorkingHoursWeekDay,
+                        RegistrationTime = (int.Parse(x.WorkingHoursRegistrationTime.Split(":")[0]) * 60) + int.Parse(x.WorkingHoursRegistrationTime.Split(":")[1]),
+                        LeaveTime = (int.Parse(x.WorkingHoursLeaveTime.Split(":")[0]) * 60) + int.Parse(x.WorkingHoursLeaveTime.Split(":")[1]),
+                    })
+                    .ToList(),
+                Amenities = model.Amenities
+                    .Select(x => new Amenity()
                     {
-                        Title = "",
-                    },
-                },
+                        Title = x.Title,
+                    })
+                    .ToList(),
                 Images = new List<Image>()
                 {
                     // TODO: See image functionallity
                 },
             };
 
-            //// hotel = this.mapper.Map<Hotel>(createHotelViewModel);
-            //// hotel = AutoMapperConfig.MapperInstance.Map<Hotel>(createHotelViewModel);
+            //// hotel = this.mapper.Map<Hotel>(model);
+            //// hotel = AutoMapperConfig.MapperInstance.Map<Hotel>(model);
 
             await this.hotelRepository.AddAsync(hotel);
+            await this.hotelRepository.SaveChangesAsync();
         }
     }
 }

@@ -29,6 +29,8 @@
     <None Remove="Home\" />
     <None Remove="Account\" />
     <None Remove="Utilities\" />
+    <None Remove="WorkingHours\" />
+    <None Remove="Amenity\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Hotel\" />
@@ -36,5 +38,7 @@
     <Folder Include="Home\" />
     <Folder Include="Account\" />
     <Folder Include="Utilities\" />
+    <Folder Include="WorkingHours\" />
+    <Folder Include="Amenity\" />
   </ItemGroup>
 </Project>

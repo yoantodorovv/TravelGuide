@@ -1,6 +1,7 @@
 ﻿namespace TravelGuide.Web.Controllers
 {
     using System;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -12,19 +13,23 @@
     using TravelGuide.Web.ViewModels;
     using TravelGuide.Web.ViewModels.Hotel;
 
+    using static TravelGuide.Common.ErrorMessages.HotelErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
 
     public class HotelController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IHotelService hotelService;
+        private readonly IApproveService approveService;
 
         public HotelController(
             UserManager<ApplicationUser> userManager,
-            IHotelService hotelService)
+            IHotelService hotelService,
+            IApproveService approveService)
         {
             this.userManager = userManager;
             this.hotelService = hotelService;
+            this.approveService = approveService;
         }
 
         [AllowAnonymous]
@@ -33,7 +38,8 @@
             return this.View();
         }
 
-        [AllowAnonymous]
+        // TODO: Create Policy (User + Hotelier)
+        [Authorize]
         public IActionResult Mine()
         {
             return this.View();
@@ -51,13 +57,21 @@
             {
                 return this.View(model);
             }
-                //// TODO: Implement admin approval functionality
 
-            var user = await this.userManager.FindByEmailAsync(model.Email);
-
-            if (user != null)
+            if (model.Email != this.User.FindFirst(ClaimTypes.Email).Value)
             {
-                await this.userManager.AddToRoleAsync(user, HotelierRoleName);
+                this.ModelState.AddModelError("Email", InvalidEmail);
+
+                return this.View(model);
+            }
+
+            var success = await this.approveService.AddToApprovalsAsync(model.Email, HotelierPosition);
+
+            if (!success)
+            {
+                this.ModelState.AddModelError("Email", string.Format(CannotRequestApprovalMoreThanOnce, HotelierPosition, HotelierPosition));
+
+                return this.View(model);
             }
 
             return this.View("BecomeHotelierConfirmation");
@@ -75,11 +89,9 @@
                 return this.View(model);
             }
 
-            model.Amenities = model.AmenityTitle.Split("  ");
-
             //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
 
-            await this.hotelService.AddAsync(null);
+            await this.hotelService.AddAsync(model);
 
             return this.RedirectToAction(nameof(this.All));
         }

@@ -23,7 +23,7 @@
             {
                 return;
             }
-                
+
             var hotelReviews = new List<Tuple<string, double, string, Guid, Guid>>
             {
                 new Tuple<string, double, string, Guid, Guid>("A very delightful experience", 8.0, "The rooms were clean, very comfortable, and the staff was amazing. They went over and beyond to help make our stay enjoyable. I highly recommend this hotel for anyone visiting downtown.", dbContext.Users.FirstOrDefault(x => x.Id.ToString() == "2B2D8C57-7669-47A7-165D-08DAD7506F72").Id, dbContext.Hotels.FirstOrDefault(x => x.Id.ToString() == "1E39E8B0-71A5-471D-A897-08DAD751CEB8").Id),

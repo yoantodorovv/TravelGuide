@@ -92,6 +92,7 @@
             services.AddTransient<IHomeUserService, HomeUserService>();
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IHotelService, HotelService>();
+            services.AddTransient<IApproveService, ApproveService>();
         }
 
         private static void Configure(WebApplication app)

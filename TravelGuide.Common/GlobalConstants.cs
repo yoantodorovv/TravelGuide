@@ -12,7 +12,9 @@
 
         public const string AdministratorRoleName = "Administrator";
         public const string HotelierRoleName = "Hotelier";
+        public const string HotelierPosition = "Hotelier";
         public const string RestauranteurRoleName = "Restauranteur";
+        public const string RestauranteurPosition = "Restauranteur";
         public const string UserRoleName = "User";
 
         public const string AdministratorOrHotelier = $"{AdministratorRoleName}, {HotelierRoleName}";
@@ -49,6 +51,8 @@
         {
             public const int WeekDayMinLength = 5;
             public const int WeekDayMaxLength = 10;
+
+            public const string TimeRegex = "^(([0-9]|1[0-9]|2[0-3]):([0-9]|1[0-9]|2[0-4]){2})$";
         }
 
         /// <summary>

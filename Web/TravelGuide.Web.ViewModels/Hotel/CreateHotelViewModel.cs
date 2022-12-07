@@ -9,7 +9,8 @@
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
-
+    using TravelGuide.Web.ViewModels.Amenity;
+    using TravelGuide.Web.ViewModels.WorkingHours;
     using static TravelGuide.Common.GlobalConstants.AmenityConstants;
     using static TravelGuide.Common.GlobalConstants.HotelConstants;
     using static TravelGuide.Common.GlobalConstants.WorkingHoursConstants;
@@ -89,27 +90,10 @@
         [EmailAddress]
         public string Email { get; set; }
 
-        // TODO: Timepicker for working hours.
+        //// TODO: Finish (there should be collection and everything should be able to map to general hotel working hours).
 
-        /// <summary>
-        /// Gets or sets the opening time.
-        /// </summary>
         [Required]
-        [Display(Name = "Open Time")]
-        public int WorkingHoursOpenTime { get; set; }
-
-        /// <summary>
-        /// Gets or sets the closing time.
-        /// </summary>
-        [Required]
-        [Display(Name = "Close Time")]
-        public int WorkingHoursCloseTime { get; set; }
-
-        /// <summary>
-        /// Gets or sets the day of the week.
-        /// </summary>
-        [StringLength(WeekDayMaxLength)]
-        public string WorkingHoursWeekDay { get; set; }
+        public virtual ICollection<WorkingHoursViewModel> WorkingHours { get; set; } = new List<WorkingHoursViewModel>();
 
         // TODO: Make Amenity Title with chips.
 
@@ -129,6 +113,6 @@
         [Required]
         public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
 
-        public ICollection<string> Amenities { get; set; }
+        public ICollection<AmenityViewModel> Amenities { get; set; }
     }
 }
