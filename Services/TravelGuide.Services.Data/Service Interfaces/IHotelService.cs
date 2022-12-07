@@ -5,8 +5,14 @@
 
     using TravelGuide.Web.ViewModels.Hotel;
 
+    /// <summary>
+    /// Interface for Hotel service.
+    /// </summary>
     public interface IHotelService
     {
-        Task AddAsync(CreateHotelViewModel createHotelViewModel);
+        /// <summary>
+        /// Adds a hotel to the DB asynchroniously.
+        /// </summary>
+        Task AddAsync(CreateHotelViewModel createHotelViewModel, string userId, string imagePath);
     }
 }

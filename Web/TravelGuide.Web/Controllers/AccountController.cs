@@ -16,6 +16,9 @@
     using static TravelGuide.Common.GlobalConstants;
     using static TravelGuide.Common.GlobalConstants.ActionsAndControllersConstants;
 
+    /// <summary>
+    /// Controller responsible for the identity.
+    /// </summary>
     public class AccountController : BaseController
     {
         //// TODO: Add profile drop down (from image) with options - View Profile, Account Info, Logout
@@ -24,6 +27,12 @@
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<ApplicationRole> roleManager;
 
+        /// <summary>
+        /// IoC.
+        /// </summary>
+        /// <param name="userManager">User manager injection.</param>
+        /// <param name="signInManager">SingIn manager injection.</param>
+        /// <param name="roleManager">Role manager injection.</param>
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -34,15 +43,16 @@
             this.roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Returns the view that visualises the register page.
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register()
-        {
-            var model = new RegisterViewModel();
+        public IActionResult Register() => this.View(new RegisterViewModel());
 
-            return this.View(model);
-        }
-
+        /// <summary>
+        /// Registers an user.
+        /// </summary>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -79,6 +89,10 @@
             return this.View(model);
         }
 
+        /// <summary>
+        /// Returns the view that visualises the register page.
+        /// </summary>
+        /// <param name="returnUrl">Return path if the user has accessed a view that requires registration.</param>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
@@ -91,6 +105,9 @@
             return this.View(model);
         }
 
+        /// <summary>
+        /// Logs an user in.
+        /// </summary>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -136,6 +153,10 @@
             return this.View(model);
         }
 
+        /// <summary>
+        /// Logs out an user.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Logout()
         {
             await this.signInManager.SignOutAsync();
@@ -143,6 +164,12 @@
             return this.RedirectToAction(HomeIndexActionConstant, HomeControllerConstant);
         }
 
+        /// <summary>
+        /// Internal method that signs in the user with the current password.
+        /// </summary>
+        /// <param name="user">Current Application User.</param>
+        /// <param name="model">LoginViewModel.</param>
+        /// <returns>Boolean depending on whether the user has been signed in or not.</returns>
         internal async Task<bool> SignInUserAsync(ApplicationUser user, LoginViewModel model)
         {
             var result = await this.signInManager.PasswordSignInAsync(user, model.Password, false, false);

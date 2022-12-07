@@ -9,22 +9,35 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
 
+    /// <summary>
+    /// Service for approves.
+    /// </summary>
     public class ApproveService : IApproveService
     {
-        private readonly IDeletableEntityRepository<Approve> approveService;
+        private readonly IDeletableEntityRepository<Approve> approveRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
+        /// <summary>
+        /// IoC.
+        /// </summary>
+        /// <param name="approveRepository">Approve repository injection.</param>
+        /// <param name="userRepository">User repository injection.</param>
+        /// <param name="userManager">User manager injection.</param>
         public ApproveService(
-            IDeletableEntityRepository<Approve> approveService,
+            IDeletableEntityRepository<Approve> approveRepository,
             IDeletableEntityRepository<ApplicationUser> userRepository,
             UserManager<ApplicationUser> userManager)
         {
-            this.approveService = approveService;
+            this.approveRepository = approveRepository;
             this.userRepository = userRepository;
             this.userManager = userManager;
         }
 
+        /// <summary>
+        /// Adds an approval, with the current user and position, to the DB.
+        /// </summary>
+        /// <returns>Boolean based on the success of the addition.</returns>
         public async Task<bool> AddToApprovalsAsync(string email, string position)
         {
             var user = await this.userManager.FindByEmailAsync(email);
@@ -40,13 +53,13 @@
                 return false;
             }
 
-            if (this.approveService.AllAsNoTracking().Any(a => a.User == user && a.Position == position))
+            if (this.approveRepository.AllAsNoTracking().Any(a => a.User == user && a.Position == position))
             {
                 return false;
             }
 
-            await this.approveService.AddAsync(approve);
-            await this.approveService.SaveChangesAsync();
+            await this.approveRepository.AddAsync(approve);
+            await this.approveRepository.SaveChangesAsync();
 
             return true;
         }

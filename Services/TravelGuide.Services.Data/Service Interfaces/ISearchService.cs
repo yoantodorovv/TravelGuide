@@ -7,10 +7,21 @@
     using TravelGuide.Web.ViewModels.Hotel;
     using TravelGuide.Web.ViewModels.Restaurant;
 
+    /// <summary>
+    /// Interface for Search service.
+    /// </summary>
     public interface ISearchService
     {
+        /// <summary>
+        /// Gets all Hotels that are to be searched.
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsInSearchArea(string searchString);
 
+        /// <summary>
+        /// Gets all restaurants that are to be searched.
+        /// </summary>
         Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsInSearchArea(string searchString);
     }
 }

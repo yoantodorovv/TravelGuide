@@ -9,12 +9,20 @@
     using TravelGuide.Web.ViewModels;
     using TravelGuide.Web.ViewModels.Home;
 
+    /// <summary>
+    /// Controller responsible for home functionality.
+    /// </summary>
     [AllowAnonymous]
     public class HomeController : BaseController
     {
         private readonly IHomeUserService homeUserService;
         private readonly ISearchService searchService;
 
+        /// <summary>
+        /// IoC.
+        /// </summary>
+        /// <param name="homeUserService">Home service injection.</param>
+        /// <param name="searchService">Search service injection.</param>
         public HomeController(
             IHomeUserService homeUserService,
             ISearchService searchService)
@@ -23,6 +31,9 @@
             this.searchService = searchService;
         }
 
+        /// <summary>
+        /// Returns the view that visualises the index page.
+        /// </summary>
         public async Task<IActionResult> Index()
         {
             var model = new HomeIndexViewModel()
@@ -34,6 +45,9 @@
             return this.View(model);
         }
 
+        /// <summary>
+        /// Searches ,for matching to the searchString, hotels or restaurants.
+        /// </summary>
         public async Task<IActionResult> Search(HomeIndexViewModel model, string searchString)
         {
             if (!this.ModelState.IsValid)
@@ -52,6 +66,9 @@
             return this.View();
         }
 
+        /// <summary>
+        /// Returns error page.
+        /// </summary>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

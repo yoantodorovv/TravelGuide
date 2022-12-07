@@ -5,6 +5,9 @@
 
     using TravelGuide.Data.Models;
 
+    /// <summary>
+    /// Interface for approve service.
+    /// </summary>
     public interface IApproveService
     {
         Task<bool> AddToApprovalsAsync(string email, string position);

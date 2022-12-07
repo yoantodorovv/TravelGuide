@@ -13,11 +13,19 @@
     using TravelGuide.Web.ViewModels.Hotel;
     using TravelGuide.Web.ViewModels.Restaurant;
 
+    /// <summary>
+    /// Search service.
+    /// </summary>
     public class SearchService : ISearchService
     {
         private readonly IDeletableEntityRepository<Hotel> hotelRepository;
         private readonly IDeletableEntityRepository<Restaurant> restaurantRepository;
 
+        /// <summary>
+        /// IoC.
+        /// </summary>
+        /// <param name="hotelRepository">Hotel repository injection.</param>
+        /// <param name="restaurantRepository">Restaurant repository injection.</param>
         public SearchService(
             IDeletableEntityRepository<Hotel> hotelRepository,
             IDeletableEntityRepository<Restaurant> restaurantRepository)
@@ -26,6 +34,10 @@
             this.restaurantRepository = restaurantRepository;
         }
 
+        /// <summary>
+        /// Gets all hotels that answear to the search.
+        /// </summary>
+        /// <returns>Collection of hotels to be visualised.</returns>
         public async Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsInSearchArea(string searchString) => await this.hotelRepository.AllAsNoTracking()
             .Include(h => h.Address)
             .ThenInclude(a => a.Town)
@@ -37,6 +49,10 @@
             .To<HotelIndexViewModel>()
             .ToListAsync();
 
+        /// <summary>
+        /// Gets all restaurants that answear to the search.
+        /// </summary>
+        /// <returns>Collection of restaurants to be visualised.</returns>
         public async Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsInSearchArea(string searchString) => await this.restaurantRepository.AllAsNoTracking()
             .Include(r => r.Address)
             .ThenInclude(a => a.Town)
