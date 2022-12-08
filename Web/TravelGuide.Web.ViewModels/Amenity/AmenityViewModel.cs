@@ -7,6 +7,8 @@
 
     public class AmenityViewModel
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         /// Gets or sets amenity title property.
         /// </summary>

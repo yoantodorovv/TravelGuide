@@ -56,16 +56,25 @@
         [Range(RatingMinValue, RatingMaxValue)]
         public double Rating { get; set; }
 
+        /// <summary>
+        /// Gets or sets hotel's country.
+        /// </summary>
         [Required]
         [StringLength(CountryMaxLength, MinimumLength = CountryMinLength)]
         [Display(Name = "Country")]
         public string AddressCountry { get; set; }
 
+        /// <summary>
+        /// Gets or sets hotel's town name.
+        /// </summary>
         [Required]
         [StringLength(TownMaxLength, MinimumLength = TownMinLength)]
         [Display(Name = "Town")]
         public string AddressTownName { get; set; }
 
+        /// <summary>
+        /// Gets or sets hotel's address.
+        /// </summary>
         [Required]
         [StringLength(AddressMaxLength, MinimumLength = AddressMinLength)]
         [Display(Name = "Address")]
@@ -122,7 +131,7 @@
         [Required]
         [StringLength(TitleMaxLength)]
         [Display(Name = "Amenities")]
-        public string AmenityTitle { get; set; }
+        public string AmenitiesUtil { get; set; }
 
         // TODO: Finish images.
 
@@ -130,7 +139,5 @@
         /// Gets or sets a collection of the hotel's images.
         /// </summary>
         public virtual ICollection<IFormFile> Images { get; set; } = new List<IFormFile>();
-
-        public ICollection<AmenityViewModel> Amenities { get; set; } = new HashSet<AmenityViewModel>();
     }
 }

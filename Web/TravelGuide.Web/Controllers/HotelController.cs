@@ -123,11 +123,18 @@
                 return this.View(model);
             }
 
-            //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
+            // TODO: Check if all inputs are correct and none of them are faulty. /injections/
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            await this.hotelService.AddAsync(model, userId, $"{this.environment.ContentRootPath}/hotels");
+            try
+            {
+                await this.hotelService.AddAsync(model, userId, $"{this.environment.ContentRootPath}/hotels");
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, SomethingWentWrong);
+            }
 
             return this.RedirectToAction(nameof(this.All));
         }
