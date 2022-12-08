@@ -27,7 +27,7 @@
 
     using static TravelGuide.Common.GlobalConstants.SystemPathConstants;
 
-    //// TODO: Add action in Homre -> Index.cshtml (cards button)
+    // TODO: Add action in Homre -> Index.cshtml (cards button)
 
     public class Program
     {
@@ -48,7 +48,6 @@
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            // services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = configuration.GetValue<bool>("Identity:RequireConfirmedAccount");
@@ -97,13 +96,15 @@
 
         private static void Configure(WebApplication app)
         {
+            // FIXME: Uncomment seeding configuration.
+
             // Seed data on application startup
-            using (var serviceScope = app.Services.CreateScope())
-            {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.Migrate();
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
-            }
+            //using (var serviceScope = app.Services.CreateScope())
+            //{
+                //var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                //dbContext.Database.Migrate();
+               // new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            //}
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
