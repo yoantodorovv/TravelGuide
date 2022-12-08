@@ -142,7 +142,7 @@
         public static class AmenityConstants
         {
             public const int TitleMinLength = 5;
-            public const int TitleMaxLength = 50;
+            public const int TitleMaxLength = 500;
         }
 
         /// <summary>
