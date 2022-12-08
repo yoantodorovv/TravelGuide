@@ -47,6 +47,8 @@
 
         public DbSet<Approve> Approves { get; set; }
 
+        public DbSet<AmenityHotels> AmenityHotels { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

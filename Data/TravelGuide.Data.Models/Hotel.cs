@@ -106,7 +106,7 @@
         /// <summary>
         /// Gets or sets a collection of the hotel's amenities.
         /// </summary>
-        public virtual ICollection<Amenity> Amenities { get; set; } = new HashSet<Amenity>();
+        public virtual ICollection<AmenityHotels> Amenities { get; set; } = new HashSet<AmenityHotels>();
 
         /// <summary>
         /// Gets or sets a collection of the hotel's images.

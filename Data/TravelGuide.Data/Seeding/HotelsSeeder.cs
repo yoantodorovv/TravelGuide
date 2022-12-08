@@ -124,7 +124,7 @@
                     PhoneNumber = "+66 81 863 3010",
                     WebsiteUrl = "http://www.centarahotelsresorts.com/centaragrand/cmbr/",
                     Email = "cmbr@chr.co.th",
-                    Amenities = amenities,
+                    //Amenities = amenities,
                     Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
@@ -141,7 +141,7 @@
                     PhoneNumber = "+66 38 259 100",
                     WebsiteUrl = "https://pattaya.pinnaclehotels.com/",
                     Email = "prjreserv@gmail.com",
-                    Amenities = amenities,
+                    //Amenities = amenities,
                     Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
@@ -158,7 +158,7 @@
                     PhoneNumber = "+66 91 735 8169",
                     WebsiteUrl = "http://www.mytthotel.com/?partner=2751&gclid=EAIaIQobChMI-JeW9vWn5QIViIqPCh2LxwLoEAAYASAAEgJ-SPD_BwE",
                     Email = "info@mytthotel.com",
-                    Amenities = amenities,
+                    //Amenities = amenities,
                     Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
@@ -175,7 +175,7 @@
                     PhoneNumber = "+66 2 613 5888",
                     WebsiteUrl = "http://www.redplanethotels.com/hotel/pattaya",
                     Email = "thailand@redplanethotels.com",
-                    Amenities = amenities,
+                    //Amenities = amenities,
                     Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
@@ -192,7 +192,7 @@
                     PhoneNumber = "+66 81 944 5571",
                     WebsiteUrl = "http://www.verandaresort.com",
                     Email = "HA0E9-RE@accor.com",
-                    Amenities = amenities,
+                    //Amenities = amenities,
                     Reviews = null,
                     WorkingHours = workingHours,
                     Images = null, // TODO: Finish Images
@@ -212,7 +212,8 @@
                     Address = hotel.Address,
                     PhoneNumber = hotel.PhoneNumber,
                     WebsiteUrl = hotel.WebsiteUrl,
-                    Email = hotel.Email, Amenities = hotel.Amenities,
+                    Email = hotel.Email,
+                    //Amenities = hotel.Amenities,
                     Reviews = hotel.Reviews,
                     WorkingHours = hotel.WorkingHours,
                     Images = hotel.Images,
