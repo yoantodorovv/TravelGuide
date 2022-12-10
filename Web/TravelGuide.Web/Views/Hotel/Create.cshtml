@@ -78,7 +78,7 @@
             <!-- TODO: Reform Amenities, Working Hours and Images-->
             <!-- Add image from computer or URL-->
             <div class="form-floating mt-1">
-                <input asp-for="Images" class="form-control" />
+                <input asp-for="Images" formenctype="multipart/form-data" type="file" multiple class="form-control" />
                 <label asp-for="Images"></label>
                 <span asp-validation-for="Images" class="text-danger"></span>
             </div>
@@ -92,7 +92,7 @@
             <div>
                 <div class="row mt-1">
                     <div class="col d-flex justify-content-end align-items-center">
-                        <h5>@Model.WorkingHoursWeekDay: </h5>
+                        <h5>@Model.WorkingHoursText: </h5>
                     </div>
                     <div class="col form-floating">
                         <input asp-for="@Model.WorkingHoursRegistrationTime" class="form-control" autocomplete="open-time" aria-required="true" />

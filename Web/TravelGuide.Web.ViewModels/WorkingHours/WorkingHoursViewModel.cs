@@ -26,7 +26,7 @@
         /// <summary>
         /// Gets or sets the day of the week.
         /// </summary>
-        [StringLength(WeekDayMaxLength)]
+        [StringLength(TextMaxLength)]
         public string WorkingHoursWeekDay { get; set; }
     }
 }

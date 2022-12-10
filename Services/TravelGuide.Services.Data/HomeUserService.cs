@@ -48,6 +48,8 @@
         /// </summary>
         /// <returns>A collection of RestaurantIndexViewModel.</returns>
         public async Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsToRender() => await this.restaurantRepository.AllAsNoTracking()
+            .Include(x => x.WorkingHours)
+            .ThenInclude(wh => wh.Restaurant)
             .Where(r => r.Rating == 5)
             .To<RestaurantIndexViewModel>()
             .ToListAsync();

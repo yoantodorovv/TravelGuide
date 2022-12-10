@@ -92,19 +92,21 @@
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IHotelService, HotelService>();
             services.AddTransient<IApproveService, ApproveService>();
+            services.AddTransient<ITownService, TownService>();
+            services.AddTransient<IAmenityService, AmenityService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IWorkingHoursService, WorkingHoursService>();
         }
 
         private static void Configure(WebApplication app)
         {
-            // FIXME: Uncomment seeding configuration.
-
             // Seed data on application startup
-            //using (var serviceScope = app.Services.CreateScope())
-            //{
-                //var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                //dbContext.Database.Migrate();
-               // new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
-            //}
+            using (var serviceScope = app.Services.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
+                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 

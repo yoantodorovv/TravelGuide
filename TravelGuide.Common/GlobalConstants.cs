@@ -49,8 +49,8 @@
         /// </summary>
         public static class WorkingHoursConstants
         {
-            public const int WeekDayMinLength = 5;
-            public const int WeekDayMaxLength = 50;
+            public const int TextMinLength = 5;
+            public const int TextMaxLength = 50;
 
             public const string TimeRegex = "^(([0-9]|1[0-9]|2[0-3]):([0-9]|1[0-9]|2[0-4]){2})$";
         }
@@ -68,6 +68,36 @@
 
             public const int UsernameOrEmailFieldMinLength = FirstNameMinLength;
             public const int UsernameOrEmailFieldMaxLength = FirstNameMaxLength;
+        }
+
+        public static class HotelAndRestaurantsSharedConstants
+        {
+            public const int AddressMinLength = 5;
+            public const int AddressMaxLength = 100;
+
+            public const int TownMinLength = 1;
+            public const int TownMaxLength = 100;
+
+            public const int CountryMinLength = 3;
+            public const int CountryMaxLength = 60;
+
+            public const int NameMinLength = 5;
+            public const int NameMaxLength = 100;
+
+            public const int LocationMinLength = 5;
+            public const int LocationMaxLength = 100;
+
+            public const string PriceMinValue = "0";
+            public const string PriceMaxValue = "10000";
+
+            public const double RatingMinValue = 0;
+            public const double RatingMaxValue = 5;
+
+            public const int DetailsOrDescriptionMinLength = 10;
+            public const int DetailsOrDescriptionMaxLength = 3000;
+
+            public const int WebsiteMinLength = 3;
+            public const int WebsiteMaxLength = 255;
         }
 
         /// <summary>
@@ -118,13 +148,13 @@
         public static class RestaurantConstants
         {
             public const int NameMinLength = 5;
-            public const int NameMaxLength = 50;
+            public const int NameMaxLength = 100;
 
             public const double RatingMinValue = 0;
             public const double RatingMaxValue = 5;
 
             public const int LocationMinLength = 5;
-            public const int LocationMaxLength = 50;
+            public const int LocationMaxLength = 100;
 
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 3000;

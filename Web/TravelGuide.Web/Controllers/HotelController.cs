@@ -123,7 +123,7 @@
                 return this.View(model);
             }
 
-            // TODO: Check if all inputs are correct and none of them are faulty. /injections/
+            //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -133,13 +133,17 @@
             }
             catch (Exception ex)
             {
+                //// TODO: Use Alerts not ModelState errors.
+
                 this.ModelState.AddModelError(string.Empty, SomethingWentWrong);
+
+                return this.View(model);
             }
 
             return this.RedirectToAction(nameof(this.All));
         }
 
-        // TODO: Add summary
+        //// TODO: Add summary
 
         [Authorize(Roles = AdministratorOrHotelier)]
         public IActionResult Reservations()
@@ -147,7 +151,7 @@
             return this.View();
         }
 
-        // TODO: Add summary
+        //// TODO: Add summary
 
         public IActionResult Rating()
         {

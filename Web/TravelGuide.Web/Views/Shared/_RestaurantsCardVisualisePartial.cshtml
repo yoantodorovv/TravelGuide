@@ -16,7 +16,7 @@
                         <br />
                         <strong>Price:</strong> @restaurant.PriceRange
                         <br />
-                        <strong>Today:</strong> @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).RegistrationTime / 60):00 - @(restaurant.WorkingHours.FirstOrDefault(wh => wh.WeekDay == DateTime.UtcNow.DayOfWeek.ToString()).LeaveTime / 60):00
+                        <strong>Today:</strong> @(restaurant.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault(wh => wh.Text == DateTime.UtcNow.DayOfWeek.ToString()).RegistrationTime / 60):00 - @(restaurant.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault(wh => wh.Text == DateTime.UtcNow.DayOfWeek.ToString()).LeaveTime / 60):00
                     </p>
                     <button type="submit" asp-area="Restaurant" asp-controller="Restaurant" asp-action="" asp-route-id=@restaurant.Id class="btn btn-primary">View More</button>
                 </div>

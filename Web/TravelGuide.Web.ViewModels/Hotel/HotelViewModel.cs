@@ -96,7 +96,7 @@
         /// Gets or sets a collection of the hotel's reviews.
         /// </summary>
         [Required]
-        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public virtual ICollection<HotelReview> Reviews { get; set; } = new HashSet<HotelReview>();
 
         /// <summary>
         /// Gets or sets a collection of the hotel's amenities.
