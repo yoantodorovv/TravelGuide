@@ -8,11 +8,19 @@
 
     using static TravelGuide.Common.GlobalConstants.ReviewConstants;
 
-    /// <summary>
-    /// Review entity model class.
-    /// </summary>
-    public class Review : BaseDeletableModel<Guid>
+    public class HotelReview : BaseDeletableModel<Guid>
     {
+        /// <summary>
+        /// Gets or sets the review's hotel id.
+        /// </summary>
+        [ForeignKey(nameof(Hotel))]
+        public Guid? HotelId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the review's hotel.
+        /// </summary>
+        public virtual Hotel Hotel { get; set; }
+
         /// <summary>
         /// Gets or sets the review's title.
         /// </summary>
@@ -45,27 +53,5 @@
         /// </summary>
         [Required]
         public virtual ApplicationUser Author { get; set; }
-
-        /// <summary>
-        /// Gets or sets the review's hotel id.
-        /// </summary>
-        [ForeignKey(nameof(Hotel))]
-        public Guid? HotelId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the review's hotel.
-        /// </summary>
-        public virtual Hotel Hotel { get; set; }
-
-        /// <summary>
-        /// Gets or sets the review's restaurant id.
-        /// </summary>
-        [ForeignKey(nameof(Restaurant))]
-        public Guid? RestaurantId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the review's restaurant.
-        /// </summary>
-        public virtual Restaurant Restaurant { get; set; }
     }
 }

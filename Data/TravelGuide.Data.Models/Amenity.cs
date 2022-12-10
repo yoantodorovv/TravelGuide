@@ -23,6 +23,6 @@
         /// <summary>
         /// Gets or sets hotels collection property.
         /// </summary>
-        public virtual ICollection<AmenityHotels> Hotels { get; set; } = new HashSet<AmenityHotels>();
+        public virtual ICollection<AmenityHotel> Hotels { get; set; } = new HashSet<AmenityHotel>();
     }
 }

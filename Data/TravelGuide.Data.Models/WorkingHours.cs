@@ -17,8 +17,8 @@
         /// Gets or sets the day of the week.
         /// </summary>
         [Required]
-        [StringLength(WeekDayMaxLength)]
-        public string WeekDay { get; set; }
+        [StringLength(TextMaxLength)]
+        public string Text { get; set; }
 
         /// <summary>
         /// Gets or sets the registration time.
@@ -35,11 +35,11 @@
         /// <summary>
         /// Gets or sets a collection of hotels.
         /// </summary>
-        public virtual ICollection<Hotel> Hotels { get; set; } = new HashSet<Hotel>();
+        public virtual ICollection<HotelWorkingHours> Hotels { get; set; } = new HashSet<HotelWorkingHours>();
 
         /// <summary>
         /// Gets or sets a collection of restaurants.
         /// </summary>
-        public virtual ICollection<Restaurant> Restaurants { get; set; } = new HashSet<Restaurant>();
+        public virtual ICollection<RestaurantWorkingHours> Restaurants { get; set; } = new HashSet<RestaurantWorkingHours>();
     }
 }

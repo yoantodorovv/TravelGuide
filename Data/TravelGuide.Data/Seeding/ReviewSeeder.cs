@@ -19,10 +19,12 @@
         /// <param name="serviceProvider">Injection of desired service.</param>
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            if (dbContext.Reviews.Any())
+            if (dbContext.HotelReviews.Any() || dbContext.RestaurantReviews.Any())
             {
                 return;
             }
+
+            //// TODO: Reform seeder.
 
             var hotelReviews = new List<Tuple<string, double, string, Guid, Guid>>
             {
@@ -46,12 +48,12 @@
 
             foreach (var review in hotelReviews)
             {
-                await dbContext.AddAsync(new Review() { Title = review.Item1, Rating = review.Item2, Description = review.Item3, AuthorId = review.Item4, HotelId = review.Item5 });
+                await dbContext.AddAsync(new HotelReview() { Title = review.Item1, Rating = review.Item2, Description = review.Item3, AuthorId = review.Item4 });
             }
 
             foreach (var review in restaurantReviews)
             {
-                await dbContext.AddAsync(new Review() { Title = review.Item1, Rating = review.Item2, Description = review.Item3, AuthorId = review.Item4, RestaurantId = review.Item5 });
+                await dbContext.AddAsync(new RestaurantReview() { Title = review.Item1, Rating = review.Item2, Description = review.Item3, AuthorId = review.Item4 });
             }
         }
     }

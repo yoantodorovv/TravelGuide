@@ -40,11 +40,11 @@
                               new RestauranteursSeeder(),
                               new DiscountsSeeder(),
                               new AmenitiesSeeder(),
-                              new TownsSeeder(),
-                              new AddressSeeder(),
-                              new HotelsSeeder(),
-                              new RestaurantsSeeder(),
-                              new ReviewSeeder(),
+                              //new TownsSeeder(),
+                              //new AddressSeeder(),
+                              //new HotelsSeeder(),
+                              //new RestaurantsSeeder(),
+                              //new ReviewSeeder(),
                           };
 
             foreach (var seeder in seeders)

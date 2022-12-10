@@ -1,17 +1,15 @@
 ﻿namespace TravelGuide.Data.Configurations
 {
-    using System;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using TravelGuide.Data.Models;
 
-    public class AmenityHotelsConfiguration : IEntityTypeConfiguration<AmenityHotel>
+    public class HotelWorkingHoursConfiguration : IEntityTypeConfiguration<HotelWorkingHours>
     {
-        public void Configure(EntityTypeBuilder<AmenityHotel> builder)
+        public void Configure(EntityTypeBuilder<HotelWorkingHours> builder)
         {
             builder
-                .HasKey(x => new { x.AmenityId, x.HotelId });
+                .HasKey(x => new { x.HotelId, x.WorkingHoursId });
         }
     }
 }

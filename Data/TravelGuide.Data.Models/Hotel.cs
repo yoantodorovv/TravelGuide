@@ -96,17 +96,17 @@
         /// <summary>
         /// Gets or sets a collection of the hotel's daily working hours.
         /// </summary>
-        public virtual ICollection<WorkingHours> WorkingHours { get; set; } = new HashSet<WorkingHours>();
+        public virtual ICollection<HotelWorkingHours> WorkingHours { get; set; } = new HashSet<HotelWorkingHours>();
 
         /// <summary>
         /// Gets or sets a collection of the hotel's reviews.
         /// </summary>
-        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public virtual ICollection<HotelReview> Reviews { get; set; } = new HashSet<HotelReview>();
 
         /// <summary>
         /// Gets or sets a collection of the hotel's amenities.
         /// </summary>
-        public virtual ICollection<AmenityHotels> Amenities { get; set; } = new HashSet<AmenityHotels>();
+        public virtual ICollection<AmenityHotel> Amenities { get; set; } = new HashSet<AmenityHotel>();
 
         /// <summary>
         /// Gets or sets a collection of the hotel's images.

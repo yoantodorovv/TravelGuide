@@ -33,9 +33,13 @@
 
         public DbSet<Amenity> Amenities { get; set; }
 
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<HotelReview> HotelReviews { get; set; }
+
+        public DbSet<RestaurantReview> RestaurantReviews { get; set; }
 
         public DbSet<Discount> Discounts { get; set; }
+
+        //// TODO: Implement cloudinary. Images might be removed.
 
         public DbSet<Image> Images { get; set; }
 
@@ -47,7 +51,11 @@
 
         public DbSet<Approve> Approves { get; set; }
 
-        public DbSet<AmenityHotels> AmenityHotels { get; set; }
+        public DbSet<AmenityHotel> AmenityHotels { get; set; }
+
+        public DbSet<HotelWorkingHours> HotelWorkingHours { get; set; }
+
+        public DbSet<RestaurantWorkingHours> RestaurantWorkingHours { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

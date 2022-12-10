@@ -101,12 +101,12 @@
         /// <summary>
         /// Gets or sets a collection of the restaurant's daily working hours.
         /// </summary>
-        public virtual ICollection<WorkingHours> WorkingHours { get; set; } = new HashSet<WorkingHours>();
+        public virtual ICollection<RestaurantWorkingHours> WorkingHours { get; set; } = new HashSet<RestaurantWorkingHours>();
 
         /// <summary>
         /// Gets or sets a collection of the restaurant's reviews.
         /// </summary>
-        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public virtual ICollection<RestaurantReview> Reviews { get; set; } = new HashSet<RestaurantReview>();
 
         /// <summary>
         /// Gets or sets a collection of the restaurant's images.
