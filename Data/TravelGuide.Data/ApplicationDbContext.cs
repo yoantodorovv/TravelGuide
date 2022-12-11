@@ -39,9 +39,9 @@
 
         public DbSet<Discount> Discounts { get; set; }
 
-        //// TODO: Implement cloudinary. Images might be removed.
+        public DbSet<HotelImage> HotelImages { get; set; }
 
-        public DbSet<Image> Images { get; set; }
+        public DbSet<RestaurantImage> RestaurantImages { get; set; }
 
         public DbSet<WorkingHours> WorkingHours { get; set; }
 
