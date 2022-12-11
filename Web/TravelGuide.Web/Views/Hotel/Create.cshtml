@@ -9,7 +9,7 @@
     <h1 class="text-center">@ViewData["Title"]</h1>
     <hr />
     <div class="col-md-6">
-        <form id="registerForm" method="post" asp-controller="Hotel" asp-action="Create">
+        <form id="registerForm" method="post" asp-controller="Hotel" asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
                 <input type="text" asp-for="Name" class="form-control" autocomplete="name" aria-required="true" />
@@ -75,11 +75,9 @@
                     <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
                 </div>
             </div>
-            <!-- TODO: Reform Amenities, Working Hours and Images-->
-            <!-- Add image from computer or URL-->
-            <div class="form-floating mt-1">
-                <input asp-for="Images" formenctype="multipart/form-data" type="file" multiple class="form-control" />
-                <label asp-for="Images"></label>
+            <div class="mt-1">
+                <label asp-for="Images" accept="image/*"></label>
+                <input asp-for="Images" class="form-control" />
                 <span asp-validation-for="Images" class="text-danger"></span>
             </div>
             <!-- Add as many amenities as one likes like evernote tags /Pool(x), Spa(x), .../-->

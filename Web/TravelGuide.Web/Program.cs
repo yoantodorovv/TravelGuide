@@ -96,6 +96,8 @@
             services.AddTransient<IAmenityService, AmenityService>();
             services.AddTransient<IAddressService, AddressService>();
             services.AddTransient<IWorkingHoursService, WorkingHoursService>();
+            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         private static void Configure(WebApplication app)

@@ -102,6 +102,7 @@
         /// <summary>
         /// Gets or sets a collection of the hotel's images.
         /// </summary>
+        [Required]
         public virtual IFormFileCollection Images { get; set; }
     }
 }

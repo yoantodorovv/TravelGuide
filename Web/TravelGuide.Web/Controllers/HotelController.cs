@@ -8,7 +8,6 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Web.ViewModels;
@@ -74,8 +73,6 @@
         /// <summary>
         /// Sends a request to become a hotelier.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = UserRoleName)]
         public async Task<IActionResult> BecomeHotelier(BecomeHotelierViewModel model)
@@ -107,7 +104,6 @@
         /// <summary>
         /// Returns the view that visualises the create hotel form.
         /// </summary>
-        /// <returns></returns>
         [Authorize(Roles = AdministratorOrHotelier)]
         public IActionResult Create() => this.View(new CreateHotelViewModel());
 
