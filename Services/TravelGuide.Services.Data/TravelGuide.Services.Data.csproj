@@ -18,6 +18,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.20.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,7 @@
     <None Remove="Microsoft.AspNetCore.Http.Features" />
     <None Remove="Microsoft.Extensions.Hosting.Abstractions" />
     <None Remove="Microsoft.AspNetCore.Hosting" />
+    <None Remove="CloudinaryDotNet" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service Interfaces\" />
