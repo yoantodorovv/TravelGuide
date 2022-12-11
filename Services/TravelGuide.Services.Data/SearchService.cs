@@ -38,7 +38,7 @@
         /// Gets all hotels that answear to the search.
         /// </summary>
         /// <returns>Collection of hotels to be visualised.</returns>
-        public async Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsInSearchArea(string searchString) => await this.hotelRepository.AllAsNoTracking()
+        public async Task<IEnumerable<HotelPagingViewModel>> GetAllHotelsInSearchArea(string searchString) => await this.hotelRepository.AllAsNoTracking()
             .Include(h => h.Address)
             .ThenInclude(a => a.Town)
             .Where(h => h.Address.Country.Contains(searchString)
@@ -46,7 +46,7 @@
                 || h.Address.AddressText.Contains(searchString)
                 || h.Location.Contains(searchString)
                 || h.Name.Contains(searchString))
-            .To<HotelIndexViewModel>()
+            .To<HotelPagingViewModel>()
             .ToListAsync();
 
         /// <summary>

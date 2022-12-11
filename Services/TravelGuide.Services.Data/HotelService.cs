@@ -1,11 +1,15 @@
 ﻿namespace TravelGuide.Services.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
+    using TravelGuide.Services.Mapping;
     using TravelGuide.Web.ViewModels.Hotel;
 
     /// <summary>
@@ -44,7 +48,8 @@
         /// <summary>
         /// Adds hotel to the DB asynchroniously.
         /// </summary>
-        public async Task AddAsync(CreateHotelViewModel model, string userId, string imagePath)
+        /// TODO: Exception handling (if there is an error dont add hotel.)
+        public async Task AddAsync(CreateHotelViewModel model, string userId)
         {
             var hotel = new Hotel()
             {
@@ -77,5 +82,14 @@
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage = 12) => await this.hotelRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToListAsync();
+
+        public async Task<int> GetCountAsync() => await this.hotelRepository.AllAsNoTracking().CountAsync();
     }
 }

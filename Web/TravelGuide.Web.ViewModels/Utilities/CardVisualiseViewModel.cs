@@ -8,7 +8,7 @@
 
     public class CardVisualiseViewModel : PagingViewModel
     {
-        public IEnumerable<HotelIndexViewModel> HotelsToRender { get; set; }
+        public IEnumerable<HotelPagingViewModel> HotelsToRender { get; set; }
 
         public IEnumerable<RestaurantIndexViewModel> RestaurantsToRender { get; set; }
     }

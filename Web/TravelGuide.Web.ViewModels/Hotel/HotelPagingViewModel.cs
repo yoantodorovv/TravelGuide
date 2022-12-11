@@ -1,14 +1,13 @@
 ﻿namespace TravelGuide.Web.ViewModels.Hotel
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
 
     using AutoMapper;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
 
-    // TODO: Add validation attributes
-    public class HotelIndexViewModel : IMapFrom<Hotel>, IHaveCustomMappings
+    public class HotelPagingViewModel : IMapFrom<Hotel>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
 
@@ -26,9 +25,11 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Hotel, HotelIndexViewModel>()
+            configuration.CreateMap<Hotel, HotelPagingViewModel>()
                 .ForMember(x => x.Country, opt =>
-                    opt.MapFrom(h => h.Address.Country));
+                    opt.MapFrom(h => h.Address.Country))
+                .ForMember(x => x.ImageUrl, opt =>
+                    opt.MapFrom(h => h.Images.FirstOrDefault().ImageUrl));
         }
     }
 }

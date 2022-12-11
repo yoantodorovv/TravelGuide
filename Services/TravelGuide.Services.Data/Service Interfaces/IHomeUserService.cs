@@ -15,13 +15,13 @@
         /// <summary>
         /// Gets all hotels to render in home page.
         /// </summary>
-        /// <returns>Collection of HotelIndexViewModel.</returns>
-        Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsToRender();
+        /// <returns>Collection of T.</returns>
+        Task<IEnumerable<T>> GetAllHotelsToRender<T>();
 
         /// <summary>
         /// Gets all restaurants to render in home page.
         /// </summary>
-        /// <returns>Collection of RestaurantIndexViewModel.</returns>
-        Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsToRender();
+        /// <returns>Collection of T.</returns>
+        Task<IEnumerable<T>> GetAllRestaurantsToRender<T>();
     }
 }

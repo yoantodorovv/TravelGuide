@@ -1,6 +1,5 @@
 ﻿namespace TravelGuide.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -38,20 +37,22 @@
         /// Gets all hotels that are to be rendered asynchroniously.
         /// </summary>
         /// <returns>A collection of HotelIndexViewModel.</returns>
-        public async Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsToRender() => await this.hotelRepository.AllAsNoTracking()
+        public async Task<IEnumerable<T>> GetAllHotelsToRender<T>() => await this.hotelRepository.AllAsNoTracking()
+            .Include(h => h.Images)
             .Where(h => h.Rating == 5)
-            .To<HotelIndexViewModel>()
+            .To<T>()
             .ToListAsync();
 
         /// <summary>
         /// Gets all restaurants that are to be rendered asynchroniously.
         /// </summary>
         /// <returns>A collection of RestaurantIndexViewModel.</returns>
-        public async Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsToRender() => await this.restaurantRepository.AllAsNoTracking()
+        public async Task<IEnumerable<T>> GetAllRestaurantsToRender<T>() => await this.restaurantRepository.AllAsNoTracking()
+            .Include(x => x.Images)
             .Include(x => x.WorkingHours)
             .ThenInclude(wh => wh.Restaurant)
             .Where(r => r.Rating == 5)
-            .To<RestaurantIndexViewModel>()
+            .To<T>()
             .ToListAsync();
     }
 }

@@ -8,6 +8,8 @@
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Web.ViewModels;
     using TravelGuide.Web.ViewModels.Home;
+    using TravelGuide.Web.ViewModels.Hotel;
+    using TravelGuide.Web.ViewModels.Restaurant;
 
     /// <summary>
     /// Controller responsible for home functionality.
@@ -38,8 +40,8 @@
         {
             var model = new HomeIndexViewModel()
             {
-                HotelsToRender = await this.homeUserService.GetAllHotelsToRender(),
-                RestaurantsToRender = await this.homeUserService.GetAllRestaurantsToRender(),
+                HotelsToRender = await this.homeUserService.GetAllHotelsToRender<HotelPagingViewModel>(),
+                RestaurantsToRender = await this.homeUserService.GetAllRestaurantsToRender<RestaurantIndexViewModel>(),
             };
 
             return this.View(model);

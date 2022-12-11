@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using TravelGuide.Data.Models;
@@ -24,7 +23,6 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IHotelService hotelService;
         private readonly IApproveService approveService;
-        private readonly IWebHostEnvironment environment;
 
         /// <summary>
         /// IoC.
@@ -35,22 +33,30 @@
         public HotelController(
             UserManager<ApplicationUser> userManager,
             IHotelService hotelService,
-            IApproveService approveService,
-            IWebHostEnvironment environment)
+            IApproveService approveService)
         {
             this.userManager = userManager;
             this.hotelService = hotelService;
             this.approveService = approveService;
-            this.environment = environment;
         }
 
         /// <summary>
         /// Returns the view that visualises all hotels.
         /// </summary>
         [AllowAnonymous]
-        public IActionResult All()
+        public async Task<IActionResult> All(int id = 1)
         {
-            return this.View();
+            const int ItemsPerPage = 6;
+
+            var model = new AllHotelsViewModel()
+            {
+                ItemsPerPage = ItemsPerPage,
+                Hotels = await this.hotelService.GetAllAsync<HotelPagingViewModel>(id, ItemsPerPage),
+                EntityCount = await this.hotelService.GetCountAsync(),
+                PageNumber = id,
+            };
+
+            return this.View(model);
         }
 
         // TODO: Create Policy (User + Hotelier)
@@ -125,7 +131,7 @@
 
             try
             {
-                await this.hotelService.AddAsync(model, userId, $"{this.environment.ContentRootPath}/hotels");
+                await this.hotelService.AddAsync(model, userId);
             }
             catch (Exception ex)
             {

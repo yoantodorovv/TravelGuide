@@ -1,6 +1,5 @@
 ﻿namespace TravelGuide.Services.Data.ServiceInterfaces
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -17,7 +16,7 @@
         /// </summary>
         /// <param name="searchString"></param>
         /// <returns></returns>
-        Task<IEnumerable<HotelIndexViewModel>> GetAllHotelsInSearchArea(string searchString);
+        Task<IEnumerable<HotelPagingViewModel>> GetAllHotelsInSearchArea(string searchString);
 
         /// <summary>
         /// Gets all restaurants that are to be searched.
