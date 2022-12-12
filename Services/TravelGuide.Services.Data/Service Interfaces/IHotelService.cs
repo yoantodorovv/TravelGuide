@@ -19,5 +19,9 @@
         Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage = 12);
 
         Task<int> GetCountAsync();
+
+        Task<IEnumerable<HotelPagingViewModel>> GetAllUserHotelsAsync(int page, string userId, int itemsPerPage = 12);
+
+        Task<int> GetUserHotelsCountAsync(string userId);
     }
 }

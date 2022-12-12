@@ -88,6 +88,7 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IHomeUserService, HomeUserService>();
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IHotelService, HotelService>();

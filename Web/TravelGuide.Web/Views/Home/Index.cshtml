@@ -14,10 +14,20 @@
 <hr />
 <div>
     <h3>Some 5-star hotels around the world</h3>
-    <partial name="_HotelsCardVisualisePartial"/>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var hotel in Model.HotelsToRender)
+        {
+            <partial name="_HotelInListPartial" model="hotel"/>
+        }
+    </div>
 </div>
 <hr />
 <div>
     <h3>Some 5-star restaurants around the world</h3>
-    <partial name="_RestaurantsCardVisualisePartial"/>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var restaurant in Model.RestaurantsToRender)
+         {
+            <partial name="_RestaurantInListPartial" model="restaurant" />
+         }
+    </div>
 </div>

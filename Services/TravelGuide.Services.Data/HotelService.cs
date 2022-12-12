@@ -22,6 +22,7 @@
         private readonly IAddressService addressService;
         private readonly IWorkingHoursService workingHoursService;
         private readonly IImageService imageService;
+        private readonly IUserService userService;
 
         /// <summary>
         /// IoC.
@@ -36,18 +37,21 @@
             IAmenityService amenityService,
             IAddressService addressService,
             IWorkingHoursService workingHoursService,
-            IImageService imageService)
+            IImageService imageService,
+            IUserService userService)
         {
             this.hotelRepository = hotelRepository;
             this.amenityService = amenityService;
             this.addressService = addressService;
             this.workingHoursService = workingHoursService;
             this.imageService = imageService;
+            this.userService = userService;
         }
 
         /// <summary>
         /// Adds hotel to the DB asynchroniously.
         /// </summary>
+        /// TODO: Add hotel to User collection!
         /// TODO: Exception handling (if there is an error dont add hotel.)
         public async Task AddAsync(CreateHotelViewModel model, string userId)
         {
@@ -83,6 +87,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets all hotels and maps them to a view model.
+        /// </summary>
         public async Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage = 12) => await this.hotelRepository.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage)
@@ -90,6 +97,44 @@
                 .To<T>()
                 .ToListAsync();
 
+        public async Task<IEnumerable<HotelPagingViewModel>> GetAllUserHotelsAsync(int page, string userId, int itemsPerPage = 12)
+        {
+            var userHotels = await this.userService.GetUserHotelsAsync(userId);
+
+            //    = new List<Hotel>()
+            //{
+            //    new Hotel()
+            //    {
+            //        Name = "ddsdsdsd",
+            //    },
+            //};
+
+            return userHotels
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(x => new HotelPagingViewModel()
+                {
+                    Name = x.Name,
+                    Country = x.Address.Country,
+                    Location = x.Location,
+                    Price = x.Price,
+                    Rating = x.Rating,
+                    ImageUrl = x.Images.FirstOrDefault().ImageUrl,
+                })
+                .ToList();
+        }
+
+        /// <summary>
+        /// Gets the count of all hotels.
+        /// </summary>
         public async Task<int> GetCountAsync() => await this.hotelRepository.AllAsNoTracking().CountAsync();
+
+        public async Task<int> GetUserHotelsCountAsync(string userId)
+        {
+            var userHotels = await this.userService.GetUserHotelsAsync(userId);
+
+            return userHotels.Count;
+        }
     }
 }

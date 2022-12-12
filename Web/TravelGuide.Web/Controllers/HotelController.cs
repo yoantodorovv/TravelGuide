@@ -65,9 +65,20 @@
         /// Returns the view that visualises all hotels owned by the current user.
         /// </summary>
         [Authorize]
-        public IActionResult Mine()
+        public async Task<IActionResult> Mine(int id = 1)
         {
-            return this.View();
+            const int ItemsPerPage = 6;
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var model = new AllHotelsViewModel()
+            {
+                ItemsPerPage = ItemsPerPage,
+                Hotels = await this.hotelService.GetAllUserHotelsAsync(id, userId, ItemsPerPage),
+                EntityCount = await this.hotelService.GetUserHotelsCountAsync(userId),
+                PageNumber = id,
+            };
+
+            return this.View(model);
         }
 
         /// <summary>
@@ -149,13 +160,6 @@
 
         [Authorize(Roles = AdministratorOrHotelier)]
         public IActionResult Reservations()
-        {
-            return this.View();
-        }
-
-        //// TODO: Add summary
-
-        public IActionResult Rating()
         {
             return this.View();
         }
