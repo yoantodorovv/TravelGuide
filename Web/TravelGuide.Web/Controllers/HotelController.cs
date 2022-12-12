@@ -50,6 +50,8 @@
 
             var model = new AllHotelsViewModel()
             {
+                ControllerName = "Hotel",
+                ActionName = nameof(this.All),
                 ItemsPerPage = ItemsPerPage,
                 Hotels = await this.hotelService.GetAllAsync<HotelPagingViewModel>(id, ItemsPerPage),
                 EntityCount = await this.hotelService.GetCountAsync(),
@@ -72,8 +74,10 @@
 
             var model = new AllHotelsViewModel()
             {
+                ControllerName = "Hotel",
+                ActionName = nameof(this.Mine),
                 ItemsPerPage = ItemsPerPage,
-                Hotels = await this.hotelService.GetAllUserHotelsAsync(id, userId, ItemsPerPage),
+                Hotels = await this.hotelService.GetAllUserHotelsAsync<HotelPagingViewModel>(id, userId, ItemsPerPage),
                 EntityCount = await this.hotelService.GetUserHotelsCountAsync(userId),
                 PageNumber = id,
             };
@@ -148,7 +152,7 @@
             {
                 //// TODO: Use Alerts not ModelState errors.
 
-                this.ModelState.AddModelError(string.Empty, SomethingWentWrong);
+                this.ModelState.AddModelError(string.Empty, ex.Message); //SomethingWentWrong);
 
                 return this.View(model);
             }

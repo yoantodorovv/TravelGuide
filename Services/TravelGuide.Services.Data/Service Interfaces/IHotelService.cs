@@ -16,11 +16,11 @@
         /// </summary>
         Task AddAsync(CreateHotelViewModel createHotelViewModel, string userId);
 
-        Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage = 12);
+        Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage);
 
         Task<int> GetCountAsync();
 
-        Task<IEnumerable<HotelPagingViewModel>> GetAllUserHotelsAsync(int page, string userId, int itemsPerPage = 12);
+        Task<IEnumerable<T>> GetAllUserHotelsAsync<T>(int page, string userId, int itemsPerPage);
 
         Task<int> GetUserHotelsCountAsync(string userId);
     }

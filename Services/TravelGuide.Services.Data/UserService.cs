@@ -19,12 +19,5 @@
         }
 
         public async Task<ApplicationUser> GetUser(string userId) => await this.userRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == userId);
-
-        public async Task<ICollection<Hotel>> GetUserHotelsAsync(string userId)
-        {
-            var user = await GetUser(userId);
-
-            return user.Hotels;
-        }
     }
 }

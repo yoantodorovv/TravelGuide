@@ -38,28 +38,5 @@
 
             return foundTown;
         }
-
-        // FIXME: /New folder (Shared) in ViewModels/Create ViewModel containing AddressTownName and extend CreateHotelViewModel and CreateRestaurantViewModel with it. Then -> whete T : SpecialViewModel
-
-        //public async Task<Town> AddTownAsync<T>(T model)
-        //    where T : CreateHotelViewModel, CreateRestaurantViewModel
-        //{
-        //    var foundTown = this.townRepository.All().ToList().FirstOrDefault(x => x.Name == model.AddressTownName);
-
-        //    if (foundTown == null)
-        //    {
-        //        var town = new Town()
-        //        {
-        //            Name = model.AddressTownName,
-        //        };
-
-        //        await this.townRepository.AddAsync(town);
-        //        await this.townRepository.SaveChangesAsync();
-
-        //        foundTown = town;
-        //    }
-
-        //    return foundTown;
-        //}
     }
 }

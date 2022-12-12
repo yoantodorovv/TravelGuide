@@ -4,6 +4,10 @@
 
     public class PagingViewModel
     {
+        public string ActionName { get; set; }
+
+        public string ControllerName { get; set; }
+
         public int PageNumber { get; set; }
 
         public int EntityCount { get; set; }

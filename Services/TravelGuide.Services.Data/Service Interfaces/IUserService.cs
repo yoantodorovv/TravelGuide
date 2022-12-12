@@ -8,7 +8,5 @@
     public interface IUserService
     {
         Task<ApplicationUser> GetUser(string userId);
-
-        Task<ICollection<Hotel>> GetUserHotelsAsync(string userId);
     }
 }
