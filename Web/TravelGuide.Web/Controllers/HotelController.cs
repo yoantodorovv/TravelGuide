@@ -12,7 +12,7 @@
     using TravelGuide.Web.ViewModels;
     using TravelGuide.Web.ViewModels.Hotel;
 
-    using static TravelGuide.Common.ErrorMessages.HotelErrorMessages;
+    using static TravelGuide.Common.ErrorMessages.BecomeErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
 
     /// <summary>
@@ -89,7 +89,17 @@
         /// Returns the view that visualises the view to submit a request to become a hotelier.
         /// </summary>
         [Authorize(Roles = UserRoleName)]
-        public IActionResult BecomeHotelier() => this.View(new BecomeHotelierViewModel());
+        public async Task<IActionResult> BecomeHotelier()
+        {
+            var user = await this.userManager.FindByEmailAsync(this.User.FindFirst(ClaimTypes.Email).Value);
+
+            if (this.approveService.Contains(user, RestauranteurPosition))
+            {
+                return this.View("BecomeHotelierConfirmation");
+            }
+
+            return this.View(new BecomeHotelierViewModel());
+        }
 
         /// <summary>
         /// Sends a request to become a hotelier.

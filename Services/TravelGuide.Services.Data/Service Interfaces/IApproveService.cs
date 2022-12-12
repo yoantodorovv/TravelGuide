@@ -11,5 +11,7 @@
     public interface IApproveService
     {
         Task<bool> AddToApprovalsAsync(string email, string position);
+
+        bool Contains(ApplicationUser user, string position);
     }
 }

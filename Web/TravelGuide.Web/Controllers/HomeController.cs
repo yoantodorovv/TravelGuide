@@ -41,7 +41,7 @@
             var model = new HomeIndexViewModel()
             {
                 HotelsToRender = await this.homeUserService.GetAllHotelsToRender<HotelPagingViewModel>(),
-                RestaurantsToRender = await this.homeUserService.GetAllRestaurantsToRender<RestaurantIndexViewModel>(),
+                RestaurantsToRender = await this.homeUserService.GetAllRestaurantsToRender<RestaurantPagingViewModel>(),
             };
 
             return this.View(model);

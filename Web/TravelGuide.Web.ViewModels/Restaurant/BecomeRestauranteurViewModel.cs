@@ -1,8 +1,8 @@
-﻿namespace TravelGuide.Web.ViewModels
+﻿namespace TravelGuide.Web.ViewModels.Restaurant
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class BecomeHotelierViewModel
+    public class BecomeRestauranteurViewModel
     {
         [Required]
         [EmailAddress]

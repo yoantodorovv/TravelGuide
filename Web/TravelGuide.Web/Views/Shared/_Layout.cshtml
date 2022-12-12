@@ -53,7 +53,15 @@
                                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Restaurants</button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" asp-controller="Restaurant" asp-action="All" asp-area="">All Restaurants</a>
-                                        <a class="dropdown-item" asp-controller="Restaurant" asp-action="BecomeRestauranteur" asp-area="">Become a Restauranteur</a>
+                                        @if (User.IsInRole(RestauranteurRoleName))
+                                        {
+                                            <a class="dropdown-item" asp-controller="Restaurant" asp-action="Mine" asp-area="">My Restaurants</a>
+                                            <a class="dropdown-item" asp-controller="Restaurant" asp-action="Create" asp-area="">Create a Restaurant</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" asp-controller="Restaurant" asp-action="BecomeRestauranteur" asp-area="">Become a Restauranteur</a>
+                                        }
                                     </div>
                                 </div>
                             </li>

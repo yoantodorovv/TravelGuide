@@ -22,7 +22,6 @@
         private readonly IAddressService addressService;
         private readonly IWorkingHoursService workingHoursService;
         private readonly IImageService imageService;
-        private readonly IUserService userService;
 
         /// <summary>
         /// IoC.
@@ -37,15 +36,13 @@
             IAmenityService amenityService,
             IAddressService addressService,
             IWorkingHoursService workingHoursService,
-            IImageService imageService,
-            IUserService userService)
+            IImageService imageService)
         {
             this.hotelRepository = hotelRepository;
             this.amenityService = amenityService;
             this.addressService = addressService;
             this.workingHoursService = workingHoursService;
             this.imageService = imageService;
-            this.userService = userService;
         }
 
         /// <summary>

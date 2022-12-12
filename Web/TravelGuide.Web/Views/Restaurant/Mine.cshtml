@@ -1,7 +1,7 @@
-﻿@model AllHotelsViewModel
+﻿@model AllRestaurantsViewModel
 
 @{
-    this.ViewData["Title"] = "My Restaurants";
+    this.ViewData["Title"] = "My Hotels";
 }
 
 <div class="text-center">
@@ -11,9 +11,9 @@
 <div>
     <h3>Page @Model.PageNumber</h3>
     <div class="row row-cols-1 row-cols-md-3">
-        @foreach (var hotel in Model.Hotels)
+        @foreach (var restaurant in Model.Restaurants)
         {
-            <partial name="_HotelInListPartial" model="hotel" />
+            <partial name="_RestaurantInListPartial" model="restaurant" />
         }
     </div>
 </div>

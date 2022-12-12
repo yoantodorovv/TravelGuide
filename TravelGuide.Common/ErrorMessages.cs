@@ -6,9 +6,9 @@
     public static class ErrorMessages
     {
         /// <summary>
-        /// Static class for hotel error messages.
+        /// Static class for become error messages.
         /// </summary>
-        public static class HotelErrorMessages
+        public static class BecomeErrorMessages
         {
             public const string SomethingWentWrong = "Something went wrong!";
 

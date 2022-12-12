@@ -16,12 +16,24 @@
         /// </summary>
         Task AddAsync(CreateHotelViewModel createHotelViewModel, string userId);
 
+        /// <summary>
+        /// Gets all hotels in the DB and maps them to a view model.
+        /// </summary>
         Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage);
 
+        /// <summary>
+        /// Gets the count of all hotels in the DB.
+        /// </summary>
         Task<int> GetCountAsync();
 
+        /// <summary>
+        /// Gets all user hotels in the DB and maps them to a view model.
+        /// </summary>
         Task<IEnumerable<T>> GetAllUserHotelsAsync<T>(int page, string userId, int itemsPerPage);
 
+        /// <summary>
+        /// Gets the count of all user hotels in the DB.
+        /// </summary>
         Task<int> GetUserHotelsCountAsync(string userId);
     }
 }

@@ -53,7 +53,7 @@
         /// Gets all restaurants that answear to the search.
         /// </summary>
         /// <returns>Collection of restaurants to be visualised.</returns>
-        public async Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsInSearchArea(string searchString) => await this.restaurantRepository.AllAsNoTracking()
+        public async Task<IEnumerable<RestaurantPagingViewModel>> GetAllRestaurantsInSearchArea(string searchString) => await this.restaurantRepository.AllAsNoTracking()
             .Include(r => r.Address)
             .ThenInclude(a => a.Town)
             .Where(r => r.Address.Country.Contains(searchString)
@@ -61,7 +61,7 @@
                 || r.Address.AddressText.Contains(searchString)
                 || r.Location.Contains(searchString)
                 || r.Name.Contains(searchString))
-            .To<RestaurantIndexViewModel>()
+            .To<RestaurantPagingViewModel>()
             .ToListAsync();
     }
 }

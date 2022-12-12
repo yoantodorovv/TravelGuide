@@ -21,6 +21,6 @@
         /// <summary>
         /// Gets all restaurants that are to be searched.
         /// </summary>
-        Task<IEnumerable<RestaurantIndexViewModel>> GetAllRestaurantsInSearchArea(string searchString);
+        Task<IEnumerable<RestaurantPagingViewModel>> GetAllRestaurantsInSearchArea(string searchString);
     }
 }

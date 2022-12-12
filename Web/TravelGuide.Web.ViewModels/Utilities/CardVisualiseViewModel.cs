@@ -10,6 +10,6 @@
     {
         public IEnumerable<HotelPagingViewModel> HotelsToRender { get; set; }
 
-        public IEnumerable<RestaurantIndexViewModel> RestaurantsToRender { get; set; }
+        public IEnumerable<RestaurantPagingViewModel> RestaurantsToRender { get; set; }
     }
 }

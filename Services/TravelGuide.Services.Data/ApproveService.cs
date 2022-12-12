@@ -53,7 +53,7 @@
                 return false;
             }
 
-            if (this.approveRepository.AllAsNoTracking().Any(a => a.User == user && a.Position == position))
+            if (this.Contains(user, position))
             {
                 return false;
             }
@@ -63,5 +63,7 @@
 
             return true;
         }
+
+        public bool Contains(ApplicationUser user, string position) => this.approveRepository.AllAsNoTracking().Any(a => a.User == user && a.Position == position);
     }
 }
