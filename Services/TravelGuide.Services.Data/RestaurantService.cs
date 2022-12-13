@@ -120,6 +120,17 @@
                 .To<T>()
                 .ToListAsync();
 
+        public async Task<T> GetById<T>(string restaurantId) => await this.restaurantRepository.AllAsNoTracking()
+            .Include(x => x.Images)
+            .Include(x => x.Reviews)
+            .Include(x => x.WorkingHours)
+            .ThenInclude(wh => wh.WorkingHours)
+            .Include(x => x.Address)
+            .ThenInclude(a => a.Town)
+            .Where(x => x.Id.ToString() == restaurantId)
+            .To<T>()
+            .FirstOrDefaultAsync();
+
         /// <summary>
         /// Gets the count of all hotels.
         /// </summary>

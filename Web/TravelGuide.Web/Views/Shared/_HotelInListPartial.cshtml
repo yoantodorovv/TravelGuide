@@ -4,7 +4,7 @@
     <div class="card">
         <img src="@Model.ImageUrl" class="card-img-top" />
         <div class="card-body">
-            <h5>@Model.Name</h5>
+            <h5><a class="text-decoration-none text-body" asp-controller="Hotel" asp-action="ById" asp-route-id="@Model.Id">@Model.Name</a></h5>
             <hr />
             <p class="card-text">
                 <strong>Location:</strong> @Model.Location, @Model.Country
@@ -13,7 +13,7 @@
                 <br />
                 <strong>Price:</strong> $0,00 - $@Model.Price.ToString("f2")
             </p>
-            <button type="submit" asp-area="Hotel" asp-controller="Hotel" asp-action="" asp-route-id=@Model.Id class="btn btn-primary">View More</button>
+            <a type="button" asp-controller="Hotel" asp-action="ById" asp-route-id=@Model.Id class="btn btn-primary">View More</a>
         </div>
     </div>
 </div>

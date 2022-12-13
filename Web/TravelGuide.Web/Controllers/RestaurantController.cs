@@ -17,6 +17,8 @@
     using static TravelGuide.Common.SuccessMessages.BecomeSuccessMessages;
     using static TravelGuide.Common.SuccessMessages.CreateSuccessMessages;
 
+    //// TODO: Add all properties from view models to ById view (Hotel and Restaurant).
+
     public class RestaurantController : BaseController
     {
         private readonly IRestaurantService restaurantService;
@@ -78,7 +80,7 @@
         {
             var user = await this.userManager.FindByEmailAsync(this.User.FindFirst(ClaimTypes.Email).Value);
 
-            if (this.approveService.Contains(user, RestauranteurPosition))
+            if (this.approveService.Contains(user.Id, RestauranteurPosition))
             {
                 this.TempData[ErrorMessage] = string.Format(CannotRequestApprovalMoreThanOnce, RestauranteurPosition, RestauranteurPosition);
 
@@ -152,6 +154,13 @@
             this.TempData[SuccessMessage] = string.Format(SuccessfullyCreated, "restaurant");
 
             return this.RedirectToAction(nameof(this.Mine));
+        }
+
+        public async Task<IActionResult> ById(string id)
+        {
+            var restaurant = await this.restaurantService.GetById<RestaurantViewModel>(id);
+
+            return this.View(restaurant);
         }
 
         public IActionResult Reservations()

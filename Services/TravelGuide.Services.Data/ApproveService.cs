@@ -53,7 +53,7 @@
                 return false;
             }
 
-            if (this.Contains(user, position))
+            if (this.Contains(user.Id, position))
             {
                 return false;
             }
@@ -64,6 +64,6 @@
             return true;
         }
 
-        public bool Contains(ApplicationUser user, string position) => this.approveRepository.AllAsNoTracking().Any(a => a.User == user && a.Position == position);
+        public bool Contains(Guid userId, string position) => this.approveRepository.AllAsNoTracking().Any(a => a.User.Id == userId && a.Position == position);
     }
 }

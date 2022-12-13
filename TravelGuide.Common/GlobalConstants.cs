@@ -161,14 +161,17 @@
             public const double RatingMinValue = 0;
             public const double RatingMaxValue = 5;
 
+            public const int CountryMinLength = 3;
+            public const int CountryMaxLength = 60;
+
+            public const int TownMinLength = 1;
+            public const int TownMaxLength = 100;
+
             public const int LocationMinLength = 5;
             public const int LocationMaxLength = 100;
 
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 3000;
-
-            public const int AddressMinLength = 5;
-            public const int AddressMaxLength = 150;
 
             public const int WebsiteMinLength = 3;
             public const int WebsiteMaxLength = 255;

@@ -1,20 +1,17 @@
-﻿namespace TravelGuide.Web.ViewModels.Hotel
+﻿namespace TravelGuide.Web.ViewModels.Restaurant
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
-    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
-    using TravelGuide.Web.ViewModels.Amenity;
     using TravelGuide.Web.ViewModels.Image;
     using TravelGuide.Web.ViewModels.Review;
 
-    using static TravelGuide.Common.GlobalConstants.HotelConstants;
+    using static TravelGuide.Common.GlobalConstants.AddressConstants;
+    using static TravelGuide.Common.GlobalConstants.RestaurantConstants;
 
-    public class HotelViewModel : IMapFrom<Hotel>
+    public class RestaurantViewModel : IMapFrom<Restaurant>
     {
         /// <summary>
         /// Gets or sets hotel's name.
@@ -34,16 +31,14 @@
         /// Gets or sets hotel's price.
         /// </summary>
         [Required]
-        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
-        [Column(TypeName = "decimal(18,4)")]
-        public decimal Price { get; set; }
+        public string PriceRange { get; set; }
 
         /// <summary>
         /// Gets or sets hotel's details.
         /// </summary>
         [Required]
-        [StringLength(DetailsMaxLength, MinimumLength = DetailsMinLength)]
-        public string Details { get; set; }
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets hotel's rating.
@@ -100,18 +95,12 @@
         /// Gets or sets a collection of the hotel's reviews.
         /// </summary>
         [Required]
-        public virtual ICollection<HotelReviewViewModel> Reviews { get; set; } = new HashSet<HotelReviewViewModel>();
-
-        /// <summary>
-        /// Gets or sets a collection of the hotel's amenities.
-        /// </summary>
-        [Required]
-        public virtual ICollection<AmenityViewModel> Amenities { get; set; } = new HashSet<AmenityViewModel>();
+        public virtual ICollection<RestaurantReviewViewModel> Reviews { get; set; } = new HashSet<RestaurantReviewViewModel>();
 
         /// <summary>
         /// Gets or sets a collection of the hotel's images.
         /// </summary>
         [Required]
-        public virtual ICollection<HotelImageViewModel> Images { get; set; } = new HashSet<HotelImageViewModel>();
+        public virtual ICollection<RestaurantImageViewModel> Images { get; set; } = new HashSet<RestaurantImageViewModel>();
     }
 }

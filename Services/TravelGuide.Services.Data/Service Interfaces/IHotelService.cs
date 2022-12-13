@@ -35,5 +35,7 @@
         /// Gets the count of all user hotels in the DB.
         /// </summary>
         Task<int> GetUserHotelsCountAsync(string userId);
+
+        Task<T> GetById<T>(string hotelId);
     }
 }

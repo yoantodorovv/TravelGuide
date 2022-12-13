@@ -12,6 +12,6 @@
     {
         Task<bool> AddToApprovalsAsync(string email, string position);
 
-        bool Contains(ApplicationUser user, string position);
+        bool Contains(Guid userId, string position);
     }
 }

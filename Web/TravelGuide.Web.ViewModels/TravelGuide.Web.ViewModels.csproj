@@ -33,6 +33,8 @@
     <None Remove="WorkingHours\" />
     <None Remove="Amenity\" />
     <None Remove="Microsoft.AspNetCore.Http.Features" />
+    <None Remove="Image\" />
+    <None Remove="Review\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Hotel\" />
@@ -42,5 +44,7 @@
     <Folder Include="Utilities\" />
     <Folder Include="WorkingHours\" />
     <Folder Include="Amenity\" />
+    <Folder Include="Image\" />
+    <Folder Include="Review\" />
   </ItemGroup>
 </Project>

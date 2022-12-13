@@ -1,9 +1,5 @@
 ﻿namespace TravelGuide.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -15,6 +11,8 @@
     using static TravelGuide.Common.ErrorMessages.AccountErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
     using static TravelGuide.Common.GlobalConstants.ActionsAndControllersConstants;
+    using static TravelGuide.Common.GlobalConstants.ToastrMessageConstants;
+    using static TravelGuide.Common.SuccessMessages.AccountSuccessMessages;
 
     /// <summary>
     /// Controller responsible for the identity.
@@ -78,7 +76,9 @@
                 await this.signInManager.SignInAsync(user, isPersistent: false);
                 await this.userManager.AddToRoleAsync(user, UserRoleName);
 
-                return this.RedirectToAction(HomeIndexActionConstant, HomeControllerConstant);
+                this.TempData[SuccessMessage] = SuccessfullyRegistered;
+
+                return this.RedirectToAction(nameof(this.Login));
             }
 
             foreach (var item in result.Errors)
@@ -127,8 +127,12 @@
                 {
                     if (model.ReturnUrl != null)
                     {
+                        this.TempData[SuccessMessage] = SuccessfullyLogedIn;
+
                         return this.Redirect(model.ReturnUrl);
                     }
+
+                    this.TempData[SuccessMessage] = SuccessfullyLogedIn;
 
                     return this.RedirectToAction(HomeIndexActionConstant, HomeControllerConstant);
                 }
@@ -141,14 +145,18 @@
                 {
                     if (model.ReturnUrl != null)
                     {
+                        this.TempData[SuccessMessage] = SuccessfullyLogedIn;
+
                         return this.Redirect(model.ReturnUrl);
                     }
+
+                    this.TempData[SuccessMessage] = SuccessfullyLogedIn;
 
                     return this.RedirectToAction(HomeIndexActionConstant, HomeControllerConstant);
                 }
             }
 
-            this.ModelState.AddModelError(string.Empty, InvalidLogin);
+            this.TempData[ErrorMessage] = InvalidLogin;
 
             return this.View(model);
         }
@@ -160,6 +168,8 @@
         public async Task<IActionResult> Logout()
         {
             await this.signInManager.SignOutAsync();
+
+            this.TempData[SuccessMessage] = SuccessfullyLogedOut;
 
             return this.RedirectToAction(HomeIndexActionConstant, HomeControllerConstant);
         }

@@ -3,9 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using TravelGuide.Data.Models;
+    using TravelGuide.Services.Mapping;
+
     using static TravelGuide.Common.GlobalConstants.AmenityConstants;
 
-    public class AmenityViewModel
+    public class AmenityViewModel : IMapFrom<AmenityHotel>
     {
         public Guid Id { get; set; }
 
@@ -14,6 +17,6 @@
         /// </summary>
         [Required]
         [StringLength(TitleMaxLength)]
-        public string Title { get; set; }
+        public string AmenityTitle { get; set; }
     }
 }

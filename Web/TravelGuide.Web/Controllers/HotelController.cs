@@ -89,12 +89,13 @@
         /// <summary>
         /// Returns the view that visualises the view to submit a request to become a hotelier.
         /// </summary>
+        // TODO: Test
         [Authorize(Roles = UserRoleName)]
         public async Task<IActionResult> BecomeHotelier()
         {
             var user = await this.userManager.FindByEmailAsync(this.User.FindFirst(ClaimTypes.Email).Value);
 
-            if (this.approveService.Contains(user, RestauranteurPosition))
+            if (this.approveService.Contains(user.Id, HotelierPosition))
             {
                 this.TempData[ErrorMessage] = string.Format(CannotRequestApprovalMoreThanOnce, HotelierPosition, HotelierPosition);
 
@@ -173,6 +174,14 @@
             this.TempData[SuccessMessage] = string.Format(SuccessfullyCreated, "hotel");
 
             return this.RedirectToAction(nameof(this.Mine));
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ById(string id)
+        {
+            var hotel = await this.hotelService.GetById<HotelViewModel>(id);
+
+            return this.View(hotel);
         }
 
         //// TODO: Add summary

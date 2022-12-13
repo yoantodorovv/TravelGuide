@@ -4,7 +4,7 @@
     <div class="card">
         <img src=@Model.ImageUrl class="card-img-top" alt="Hollywood Sign on The Hill" />
         <div class="card-body">
-            <h5>@Model.Name</h5>
+            <h5><a class="text-decoration-none text-body" asp-controller="Restaurant" asp-action="ById" asp-route-id="@Model.Id">@Model.Name</a></h5>
             <hr />
             <p class="card-text">
                 <strong>Location:</strong> @Model.Location, @Model.Country
@@ -15,7 +15,7 @@
                 <br />
                 <strong>@DateTime.UtcNow.DayOfWeek (Today):</strong> @(Model.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault().RegistrationTime / 60):00 - @(Model.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault().LeaveTime / 60):00
             </p>
-            <button type="submit" asp-area="Restaurant" asp-controller="Restaurant" asp-action="" asp-route-id=@Model.Id class="btn btn-primary">View More</button>
+            <a type="button" asp-controller="Restaurant" asp-action="ById" asp-route-id=@Model.Id class="btn btn-primary">View More</a>
         </div>
     </div>
 </div>

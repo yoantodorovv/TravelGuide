@@ -34,5 +34,7 @@
         /// Gets the count of all user restaurants in the DB.
         /// </summary>
         Task<int> GetUserRestaurantsCountAsync(string userId);
+
+        Task<T> GetById<T>(string restaurantId);
     }
 }

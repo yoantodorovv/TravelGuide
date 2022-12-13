@@ -124,6 +124,19 @@
                 .To<T>()
                 .ToListAsync();
 
+        public async Task<T> GetById<T>(string hotelId) => await this.hotelRepository.AllAsNoTracking()
+            .Include(x => x.Amenities)
+            .ThenInclude(a => a.Amenity)
+            .Include(x => x.Images)
+            .Include(x => x.Reviews)
+            .Include(x => x.WorkingHours)
+            .ThenInclude(wh => wh.WorkingHours)
+            .Include(x => x.Address)
+            .ThenInclude(a => a.Town)
+            .Where(x => x.Id.ToString() == hotelId)
+            .To<T>()
+            .FirstOrDefaultAsync();
+
         /// <summary>
         /// Gets the count of all hotels.
         /// </summary>
