@@ -2,22 +2,23 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        @if (this.ViewData["Title"].ToString() == "Home Page")
-        {
-            <title>@GlobalConstants.SystemName</title>
-        }
-        else
-        {
-            <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
-        }
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" asp-append-version="true" />
-        @await Html.PartialAsync("_Favicons")
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @if (this.ViewData["Title"].ToString() == "Home Page")
+    {
+        <title>@GlobalConstants.SystemName</title>
+    }
+    else
+    {
+        <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    }
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    @await Html.PartialAsync("_Favicons")
+</head>
     <body>
         <partial name="_ToastrMessagesPartial" />
         <header>
@@ -87,7 +88,6 @@
             </div>
         </footer>
 
-        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
         <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

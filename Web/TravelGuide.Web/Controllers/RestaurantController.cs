@@ -13,6 +13,9 @@
 
     using static TravelGuide.Common.ErrorMessages.BecomeErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
+    using static TravelGuide.Common.GlobalConstants.ToastrMessageConstants;
+    using static TravelGuide.Common.SuccessMessages.BecomeSuccessMessages;
+    using static TravelGuide.Common.SuccessMessages.CreateSuccessMessages;
 
     public class RestaurantController : BaseController
     {
@@ -77,7 +80,9 @@
 
             if (this.approveService.Contains(user, RestauranteurPosition))
             {
-                return this.View("BecomeRestauranteurConfirmation");
+                this.TempData[ErrorMessage] = string.Format(CannotRequestApprovalMoreThanOnce, RestauranteurPosition, RestauranteurPosition);
+
+                return this.RedirectToAction("Index", "Home");
             }
 
             return this.View(new BecomeRestauranteurViewModel());
@@ -97,7 +102,7 @@
 
             if (model.Email != this.User.FindFirst(ClaimTypes.Email).Value)
             {
-                this.ModelState.AddModelError("Email", InvalidEmail);
+                this.TempData[ErrorMessage] = InvalidEmail;
 
                 return this.View(model);
             }
@@ -106,12 +111,14 @@
 
             if (!success)
             {
-                this.ModelState.AddModelError("Email", string.Format(CannotRequestApprovalMoreThanOnce, RestauranteurPosition, RestauranteurPosition));
+                this.TempData[ErrorMessage] = string.Format(CannotRequestApprovalMoreThanOnce, RestauranteurPosition, RestauranteurPosition);
 
                 return this.View(model);
             }
 
-            return this.View("BecomeRestauranteurConfirmation");
+            this.TempData[SuccessMessage] = string.Format(SuccessfullyRequested, RestauranteurPosition);
+
+            return this.RedirectToAction("Index", "Home");
         }
 
         [Authorize(Roles = AdministratorOrRestauranteur)]
@@ -133,17 +140,16 @@
             try
             {
                 // TODO: SaveChanges for last!
-                // TODO: If there is an existing hotel already in db -> do smth
                 await this.restaurantService.AddAsync(model, userId);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //// TODO: Use Alerts not ModelState errors.
-
-                this.ModelState.AddModelError(string.Empty, SomethingWentWrong);
+                this.TempData[ErrorMessage] = ex.Message;
 
                 return this.View(model);
             }
+
+            this.TempData[SuccessMessage] = string.Format(SuccessfullyCreated, "restaurant");
 
             return this.RedirectToAction(nameof(this.Mine));
         }

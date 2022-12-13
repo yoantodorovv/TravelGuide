@@ -14,6 +14,9 @@
 
     using static TravelGuide.Common.ErrorMessages.BecomeErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
+    using static TravelGuide.Common.GlobalConstants.ToastrMessageConstants;
+    using static TravelGuide.Common.SuccessMessages.BecomeSuccessMessages;
+    using static TravelGuide.Common.SuccessMessages.CreateSuccessMessages;
 
     /// <summary>
     /// Controller responsible for hotel functionality.
@@ -61,8 +64,6 @@
             return this.View(model);
         }
 
-        // TODO: Create Policy (User + Hotelier)
-
         /// <summary>
         /// Returns the view that visualises all hotels owned by the current user.
         /// </summary>
@@ -95,7 +96,9 @@
 
             if (this.approveService.Contains(user, RestauranteurPosition))
             {
-                return this.View("BecomeHotelierConfirmation");
+                this.TempData[ErrorMessage] = string.Format(CannotRequestApprovalMoreThanOnce, HotelierPosition, HotelierPosition);
+
+                return this.RedirectToAction("Index", "Home");
             }
 
             return this.View(new BecomeHotelierViewModel());
@@ -115,7 +118,7 @@
 
             if (model.Email != this.User.FindFirst(ClaimTypes.Email).Value)
             {
-                this.ModelState.AddModelError("Email", InvalidEmail);
+                this.TempData[ErrorMessage] = InvalidEmail;
 
                 return this.View(model);
             }
@@ -124,12 +127,14 @@
 
             if (!success)
             {
-                this.ModelState.AddModelError("Email", string.Format(CannotRequestApprovalMoreThanOnce, HotelierPosition, HotelierPosition));
+                this.TempData[ErrorMessage] = string.Format(CannotRequestApprovalMoreThanOnce, HotelierPosition, HotelierPosition);
 
                 return this.View(model);
             }
 
-            return this.View("BecomeHotelierConfirmation");
+            this.TempData[SuccessMessage] = string.Format(SuccessfullyRequested, HotelierPosition);
+
+            return this.RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -160,12 +165,12 @@
             }
             catch (Exception ex)
             {
-                //// TODO: Use Alerts not ModelState errors.
-
-                this.ModelState.AddModelError(string.Empty, ex.Message); //SomethingWentWrong);
+                this.TempData[ErrorMessage] = ex.Message;
 
                 return this.View(model);
             }
+
+            this.TempData[SuccessMessage] = string.Format(SuccessfullyCreated, "hotel");
 
             return this.RedirectToAction(nameof(this.Mine));
         }
