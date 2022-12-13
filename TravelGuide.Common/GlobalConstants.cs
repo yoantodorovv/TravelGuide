@@ -26,6 +26,14 @@
             public const string SystemExceptionHandlerPathConstant = "/Home/Error";
         }
 
+        public static class ToastrMessageConstants
+        {
+            public const string ErrorMessage = "ErrorMessage";
+            public const string WarningMessage = "WarningMessage";
+            public const string SuccessMessage = "SuccessMessage";
+            public const string InfoMessage = "InfoMessage";
+        }
+
         public static class ActionsAndControllersConstants
         {
             public const string HomeControllerConstant = "Home";

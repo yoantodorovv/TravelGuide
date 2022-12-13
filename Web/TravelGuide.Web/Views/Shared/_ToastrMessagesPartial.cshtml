@@ -1,0 +1,29 @@
+﻿@using static TravelGuide.Common.GlobalConstants.ToastrMessageConstants
+
+@if (TempData[ErrorMessage] != null)
+{
+    <script>
+        $(function () { toastr.error('@TempData[ErrorMessage].ToString()'); });
+    </script>
+}
+
+@if (TempData[SuccessMessage] != null)
+{
+    <script>
+        $(function () { toastr.success('@TempData[SuccessMessage].ToString()'); });
+    </script>
+}
+
+@if (TempData[WarningMessage] != null)
+{
+    <script>
+        $(function () { toastr.warning('@TempData[WarningMessage].ToString()'); });
+    </script>
+}
+
+@if (TempData[InfoMessage] != null)
+{
+    <script>
+        $(function () { toastr.info('@TempData[InfoMessage].ToString()'); });
+    </script>
+}
