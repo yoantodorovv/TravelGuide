@@ -8,6 +8,8 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
     using TravelGuide.Web.ViewModels.Hotel;
+    using TravelGuide.Web.ViewModels.Restaurant;
+    using TravelGuide.Web.ViewModels.Utilities;
 
     public class AddressService : IAddressService
     {
@@ -22,9 +24,10 @@
             this.townService = townService;
         }
 
-        public async Task<Address> GetAddressAsync(CreateHotelViewModel model)
+        public async Task<Address> GetAddressAsync<T>(T model)
+            where T : CreateViewModel
         {
-            var foundTown = await this.townService.GetTownAsync(model);
+            var foundTown = await this.townService.GetTownAsync<T>(model);
 
             var foundAddress = this.addressRepository.All()
                 .Include(a => a.Town)

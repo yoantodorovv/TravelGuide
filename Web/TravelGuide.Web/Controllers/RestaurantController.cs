@@ -1,5 +1,6 @@
 ﻿namespace TravelGuide.Web.Controllers
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -8,7 +9,6 @@
     using Microsoft.AspNetCore.Mvc;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
-    using TravelGuide.Web.ViewModels;
     using TravelGuide.Web.ViewModels.Restaurant;
 
     using static TravelGuide.Common.ErrorMessages.BecomeErrorMessages;
@@ -48,8 +48,6 @@
             return this.View(model);
         }
 
-        // TODO: Create Policy (User + Restauranteur)
-
         /// <summary>
         /// Returns the view that visualises all restaurants owned by the current user.
         /// </summary>
@@ -72,7 +70,6 @@
             return this.View(model);
         }
 
-        // TODO: Do the same for Hotel.
         [Authorize(Roles = UserRoleName)]
         public async Task<IActionResult> BecomeRestauranteur()
         {
@@ -117,9 +114,38 @@
             return this.View("BecomeRestauranteurConfirmation");
         }
 
-        public IActionResult Create()
+        [Authorize(Roles = AdministratorOrRestauranteur)]
+        public IActionResult Create() => this.View(new CreateRestaurantViewModel());
+
+        [HttpPost]
+        [Authorize(Roles = AdministratorOrRestauranteur)]
+        public async Task<IActionResult> Create(CreateRestaurantViewModel model)
         {
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
+
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            try
+            {
+                // TODO: SaveChanges for last!
+                // TODO: If there is an existing hotel already in db -> do smth
+                await this.restaurantService.AddAsync(model, userId);
+            }
+            catch (Exception)
+            {
+                //// TODO: Use Alerts not ModelState errors.
+
+                this.ModelState.AddModelError(string.Empty, SomethingWentWrong);
+
+                return this.View(model);
+            }
+
+            return this.RedirectToAction(nameof(this.Mine));
         }
 
         public IActionResult Reservations()

@@ -50,7 +50,7 @@
         public async Task<IEnumerable<T>> GetAllRestaurantsToRender<T>() => await this.restaurantRepository.AllAsNoTracking()
             .Include(x => x.Images)
             .Include(x => x.WorkingHours)
-            .ThenInclude(wh => wh.Restaurant)
+            .ThenInclude(wh => wh.WorkingHours)
             .Where(r => r.Rating == 5)
             .To<T>()
             .ToListAsync();

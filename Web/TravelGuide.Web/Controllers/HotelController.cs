@@ -167,7 +167,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction(nameof(this.All));
+            return this.RedirectToAction(nameof(this.Mine));
         }
 
         //// TODO: Add summary

@@ -17,6 +17,14 @@
             public const string InvalidEmail = "Email cannot be different from yours! Please try again.";
         }
 
+        public static class CreateErrorMessages
+        {
+            public const string SomethingWentWrongException = "Something went wrong!";
+
+            public const string AlreadyExistsException = "The {0} already exists!";
+
+        }
+
         /// <summary>
         /// Static class for account error messages.
         /// </summary>

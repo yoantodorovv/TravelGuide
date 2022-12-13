@@ -9,6 +9,8 @@
 
     public interface IImageService
     {
-        Task<ICollection<HotelImage>> UploadAndGetImageCollectionAsync(IFormFileCollection images, Guid hotelId);
+        Task<ICollection<HotelImage>> UploadAndGetHotelImageCollectionAsync(IFormFileCollection images, Guid hotelId);
+
+        Task<ICollection<RestaurantImage>> UploadAndGetRestaurantImageCollectionAsync(IFormFileCollection images, Guid restaurantId);
     }
 }

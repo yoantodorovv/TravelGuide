@@ -7,8 +7,7 @@
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
-    using TravelGuide.Web.ViewModels.Hotel;
-    using TravelGuide.Web.ViewModels.Restaurant;
+    using TravelGuide.Web.ViewModels.Utilities;
 
     public class TownService : ITownService
     {
@@ -19,7 +18,8 @@
             this.townRepository = townRepository;
         }
 
-        public async Task<Town> GetTownAsync(CreateHotelViewModel model)
+        public async Task<Town> GetTownAsync<T>(T model)
+            where T : CreateViewModel
         {
             var foundTown = this.townRepository.All().ToList().FirstOrDefault(x => x.Name == model.AddressTownName);
 

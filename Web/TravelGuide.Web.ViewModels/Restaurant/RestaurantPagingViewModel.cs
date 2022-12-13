@@ -24,10 +24,8 @@
 
         public string PriceRange { get; set; }
 
-        // FIXME: Might need reform
         public IEnumerable<RestaurantWorkingHours> WorkingHours { get; set; }
 
-        // FIXME: If not working -> WorkingHours
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Restaurant, RestaurantPagingViewModel>()

@@ -12,6 +12,8 @@
     using TravelGuide.Services.Mapping;
     using TravelGuide.Web.ViewModels.Hotel;
 
+    using static TravelGuide.Common.ErrorMessages.CreateErrorMessages;
+
     /// <summary>
     /// Hotel service.
     /// </summary>
@@ -52,8 +54,8 @@
         /// TODO: Exception handling (if there is an error dont add hotel.)
         public async Task AddAsync(CreateHotelViewModel model, string userId)
         {
-            var foundHotel = this.hotelRepository.All()
-                .FirstOrDefault(x => x.Owner.Id.ToString() == userId
+            var foundHotel = await this.hotelRepository.All()
+                .FirstOrDefaultAsync(x => x.Owner.Id.ToString() == userId
                     && x.Name == model.Name
                     && x.Location == model.Location
                     && x.Details == model.Details
@@ -79,21 +81,25 @@
 
                 try
                 {
-                    hotel.Address = await this.addressService.GetAddressAsync(model);
+                    hotel.Address = await this.addressService.GetAddressAsync<CreateHotelViewModel>(model);
 
                     await this.hotelRepository.AddAsync(hotel);
 
-                    hotel.Images = await this.imageService.UploadAndGetImageCollectionAsync(model.Images, hotel.Id);
+                    hotel.Images = await this.imageService.UploadAndGetHotelImageCollectionAsync(model.Images, hotel.Id);
 
                     await this.hotelRepository.SaveChangesAsync();
 
                     await this.amenityService.AddAmenitiesToHotelAsync(model, hotel);
                     await this.workingHoursService.AddWorkingHoursToHotelAsync(model, hotel.Id);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw new Exception(ex.Message);
+                    throw new Exception(SomethingWentWrongException);
                 }
+            }
+            else
+            {
+                throw new Exception(string.Format(AlreadyExistsException, "hotel"));
             }
         }
 

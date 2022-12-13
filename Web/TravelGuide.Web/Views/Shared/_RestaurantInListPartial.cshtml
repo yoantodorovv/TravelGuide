@@ -13,7 +13,7 @@
                 <br />
                 <strong>Price:</strong> @Model.PriceRange
                 <br />
-                <strong>Today:</strong> @(Model.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault(wh => wh.Text == DateTime.UtcNow.DayOfWeek.ToString()).RegistrationTime / 60):00 - @(Model.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault(wh => wh.Text == DateTime.UtcNow.DayOfWeek.ToString()).LeaveTime / 60):00
+                <strong>@DateTime.UtcNow.DayOfWeek (Today):</strong> @(Model.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault().RegistrationTime / 60):00 - @(Model.WorkingHours.Select(x => x.WorkingHours).FirstOrDefault().LeaveTime / 60):00
             </p>
             <button type="submit" asp-area="Restaurant" asp-controller="Restaurant" asp-action="" asp-route-id=@Model.Id class="btn btn-primary">View More</button>
         </div>

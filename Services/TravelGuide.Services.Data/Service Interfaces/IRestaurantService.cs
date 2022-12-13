@@ -3,13 +3,20 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using TravelGuide.Web.ViewModels.Restaurant;
+
     /// <summary>
-    /// Interface for Hotel service.
+    /// Interface for Restaurant service.
     /// </summary>
     public interface IRestaurantService
     {
         /// <summary>
-        /// Gets all hotels in the DB and maps them to a view model.
+        /// Adds a restaurant to the DB asynchroniously.
+        /// </summary>
+        Task AddAsync(CreateRestaurantViewModel model, string userId);
+
+        /// <summary>
+        /// Gets all restaurants in the DB and maps them to a view model.
         /// </summary>
         Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage);
 
