@@ -112,5 +112,7 @@
         /// Gets or sets a collection of the hotel's images.
         /// </summary>
         public virtual ICollection<HotelImage> Images { get; set; } = new HashSet<HotelImage>();
+
+        public virtual ICollection<HotelReservation> Reservations { get; set; } = new HashSet<HotelReservation>();
     }
 }

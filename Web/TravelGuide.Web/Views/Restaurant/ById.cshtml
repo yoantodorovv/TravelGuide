@@ -3,6 +3,8 @@
 @{
     this.ViewData["Title"] = Model.Name;
     bool first = true;
+
+    this.Model.ReservationDate = DateTime.Today;
 }
 
 <div>
@@ -10,12 +12,15 @@
         <h1>@Model.Name</h1>
     </div>
     <hr />
-    <div class="row">
-        <div class="col">
+    <div class="d-flex justify-content-between flex-row">
+        <div class="d-flex">
             <h1>@Model.AddressAddressText, @Model.AddressTownName, @Model.AddressCountry</h1>
         </div>
-        <div class="col">
+        <div class="d-flex">
             <h1>Rating: @Model.Rating</h1>
+        </div>
+        <div class="d-flex align-items-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Make a Reservation</button>
         </div>
     </div>
     <div class="mb-5"></div>
@@ -51,6 +56,32 @@
             <p><strong>Email:</strong> @Model.Email</p>
             <p><strong>PhoneNumber:</strong> @Model.PhoneNumber</p>
             <p><strong>WebsiteUrl:</strong> @Model.WebsiteUrl</p>
+        </div>
+    </div>
+</div>
+
+<!--Modal (Reservation Pop-Up)-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Create a reservation for @Model.Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="loginForm" method="post">
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-floating">
+                        <input asp-for="ReservationDate" class="form-control" autocomplete="reservationdate" aria-required="true" />
+                        <label asp-for="ReservationDate"></label>
+                        <span asp-validation-for="ReservationDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" asp-controller="Reservations" asp-action="CreateRestaurant" asp-route-id=@Model.Id class="btn btn-primary">Create</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

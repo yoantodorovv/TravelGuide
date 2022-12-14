@@ -1,5 +1,6 @@
 ﻿namespace TravelGuide.Web.ViewModels.Restaurant
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,8 @@
 
     public class RestaurantViewModel : IMapFrom<Restaurant>
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         /// Gets or sets hotel's name.
         /// </summary>
@@ -90,6 +93,12 @@
         public string WorkingHoursRegistrationTime { get; set; }
 
         public string WorkingHoursLeaveTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reservation's date and time.
+        /// </summary>
+        [Required]
+        public DateTime ReservationDate { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of the hotel's reviews.

@@ -93,6 +93,7 @@
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IHotelService, HotelService>();
             services.AddTransient<IRestaurantService, RestaurantService>();
+            services.AddTransient<IReservationService, ReservationService>();
             services.AddTransient<IApproveService, ApproveService>();
             services.AddTransient<ITownService, TownService>();
             services.AddTransient<IAmenityService, AmenityService>();

@@ -3,9 +3,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using TravelGuide.Web.ViewModels.Hotel;
-    using TravelGuide.Web.ViewModels.Restaurant;
-
     /// <summary>
     /// Interface for Search service.
     /// </summary>
@@ -16,11 +13,11 @@
         /// </summary>
         /// <param name="searchString"></param>
         /// <returns></returns>
-        Task<IEnumerable<HotelPagingViewModel>> GetAllHotelsInSearchArea(string searchString);
+        Task<IEnumerable<T>> GetAllHotelsInSearchArea<T>(string searchString);
 
         /// <summary>
         /// Gets all restaurants that are to be searched.
         /// </summary>
-        Task<IEnumerable<RestaurantPagingViewModel>> GetAllRestaurantsInSearchArea(string searchString);
+        Task<IEnumerable<T>> GetAllRestaurantsInSearchArea<T>(string searchString);
     }
 }

@@ -112,5 +112,7 @@
         /// Gets or sets a collection of the restaurant's images.
         /// </summary>
         public virtual ICollection<RestaurantImage> Images { get; set; } = new HashSet<RestaurantImage>();
+
+        public virtual ICollection<RestaurantReservation> Reservations { get; set; } = new HashSet<RestaurantReservation>();
     }
 }

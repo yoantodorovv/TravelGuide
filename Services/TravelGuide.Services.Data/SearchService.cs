@@ -38,7 +38,9 @@
         /// Gets all hotels that answear to the search.
         /// </summary>
         /// <returns>Collection of hotels to be visualised.</returns>
-        public async Task<IEnumerable<HotelPagingViewModel>> GetAllHotelsInSearchArea(string searchString) => await this.hotelRepository.AllAsNoTracking()
+        public async Task<IEnumerable<T>> GetAllHotelsInSearchArea<T>(string searchString) => await this.hotelRepository.AllAsNoTracking()
+            .Include(h => h.WorkingHours)
+            .ThenInclude(wh => wh.WorkingHours)
             .Include(h => h.Address)
             .ThenInclude(a => a.Town)
             .Where(h => h.Address.Country.Contains(searchString)
@@ -46,14 +48,16 @@
                 || h.Address.AddressText.Contains(searchString)
                 || h.Location.Contains(searchString)
                 || h.Name.Contains(searchString))
-            .To<HotelPagingViewModel>()
+            .To<T>()
             .ToListAsync();
 
         /// <summary>
         /// Gets all restaurants that answear to the search.
         /// </summary>
         /// <returns>Collection of restaurants to be visualised.</returns>
-        public async Task<IEnumerable<RestaurantPagingViewModel>> GetAllRestaurantsInSearchArea(string searchString) => await this.restaurantRepository.AllAsNoTracking()
+        public async Task<IEnumerable<T>> GetAllRestaurantsInSearchArea<T>(string searchString) => await this.restaurantRepository.AllAsNoTracking()
+            .Include(h => h.WorkingHours)
+            .ThenInclude(wh => wh.WorkingHours)
             .Include(r => r.Address)
             .ThenInclude(a => a.Town)
             .Where(r => r.Address.Country.Contains(searchString)
@@ -61,7 +65,7 @@
                 || r.Address.AddressText.Contains(searchString)
                 || r.Location.Contains(searchString)
                 || r.Name.Contains(searchString))
-            .To<RestaurantPagingViewModel>()
+            .To<T>()
             .ToListAsync();
     }
 }

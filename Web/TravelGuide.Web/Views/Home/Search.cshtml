@@ -22,7 +22,12 @@
     <h2>Hotels</h2>
     @if (Model.HotelsToRender.Count() != 0)
     {
-        <partial name="_HotelsCardVisualisePartial" />
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var hotel in Model.HotelsToRender)
+            {
+                <partial name="_HotelInListPartial" model="hotel" />
+            }
+        </div>
     }
     else
     {
@@ -38,7 +43,12 @@
     <h2>Restaurants</h2>
     @if (Model.RestaurantsToRender.Count() != 0)
     {
-        <partial name="_RestaurantsCardVisualisePartial" />
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var restaurant in Model.RestaurantsToRender)
+            {
+                <partial name="_RestaurantInListPartial" model="restaurant" />
+            }
+        </div>
     }
     else
     {
@@ -46,6 +56,6 @@
             <div class="d-flex justfy-content-center align-items-center">
                 <h5>No restaurants matching the description were found!</h5>
             </div>
-        </div>    
+        </div>
     }
 </div>

@@ -16,6 +16,11 @@
             public const string SuccessfullyCreated = "The {0} was successfully created!";
         }
 
+        public static class ReservationSuccessMessages
+        {
+            public const string SuccessfullyCreatedReservation = "The reservation has been successfully made! We are looking forward to seeing you soon!";
+        }
+
         public static class BecomeSuccessMessages
         {
             public const string SuccessfullyRequested = "You have successfully requested to become {0}! Your request will be reviewed soon.";

@@ -16,6 +16,8 @@
 
     public class HotelViewModel : IMapFrom<Hotel>
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         /// Gets or sets hotel's name.
         /// </summary>
@@ -95,6 +97,24 @@
         public string WorkingHoursRegistrationTime { get; set; }
 
         public string WorkingHoursLeaveTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reservation's price.
+        /// </summary>
+        [Required]
+        public decimal ReservationPrice { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reservation's start date and time.
+        /// </summary>
+        [Required]
+        public DateTime ReservationStartDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reservation's end date and time.
+        /// </summary>
+        [Required]
+        public DateTime ReservationEndDate { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of the hotel's reviews.

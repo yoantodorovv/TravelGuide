@@ -121,6 +121,7 @@
                 .ToListAsync();
 
         public async Task<T> GetById<T>(string restaurantId) => await this.restaurantRepository.AllAsNoTracking()
+            .Include(x => x.Reservations)
             .Include(x => x.Images)
             .Include(x => x.Reviews)
             .Include(x => x.WorkingHours)

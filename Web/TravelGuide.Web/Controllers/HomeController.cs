@@ -57,8 +57,8 @@
                 return this.View(model);
             }
 
-            model.HotelsToRender = await this.searchService.GetAllHotelsInSearchArea(searchString);
-            model.RestaurantsToRender = await this.searchService.GetAllRestaurantsInSearchArea(searchString);
+            model.HotelsToRender = await this.searchService.GetAllHotelsInSearchArea<HotelPagingViewModel>(searchString);
+            model.RestaurantsToRender = await this.searchService.GetAllRestaurantsInSearchArea<RestaurantPagingViewModel>(searchString);
 
             return this.View(model);
         }

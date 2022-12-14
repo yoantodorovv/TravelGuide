@@ -3,8 +3,7 @@
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Mapping;
 
-    public class HotelImageViewModel : IMapFrom<HotelImage>
+    public class HotelImageViewModel : ImageViewModel, IMapFrom<HotelImage>
     {
-        public string ImageUrl { get; set; }
     }
 }
