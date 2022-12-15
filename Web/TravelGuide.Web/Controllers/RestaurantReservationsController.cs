@@ -16,11 +16,11 @@
     using static TravelGuide.Common.SuccessMessages.ReservationSuccessMessages;
 
     [Authorize]
-    public class ReservationsController : BaseController
+    public class RestaurantReservationsController : BaseController
     {
         private readonly IReservationService reservationService;
 
-        public ReservationsController(IReservationService reservationService)
+        public RestaurantReservationsController(IReservationService reservationService)
         {
             this.reservationService = reservationService;
         }
@@ -31,34 +31,13 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRestaurant(RestaurantViewModel model)
+        public async Task<IActionResult> Create(RestaurantViewModel model)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             try
             {
                 await this.reservationService.CreateRestaurantReservation(model, userId);
-            }
-            catch (Exception ex)
-            {
-                this.TempData[ErrorMessage] = ex.Message;
-
-                return this.RedirectToAction("Index", "Home");
-            }
-
-            this.TempData[SuccessMessage] = SuccessfullyCreatedReservation;
-
-            return this.RedirectToAction(nameof(this.Mine));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateHotel(HotelViewModel model)
-        {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            try
-            {
-                await this.reservationService.CreateHotelReservation(model, userId);
             }
             catch (Exception ex)
             {
