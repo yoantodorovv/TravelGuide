@@ -1,6 +1,7 @@
 ﻿namespace TravelGuide.Services.Data.ServiceInterfaces
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using TravelGuide.Web.ViewModels.Administration.HotelReservations;
@@ -13,6 +14,10 @@
 
         Task CreateHotelReservation(HotelViewModel model, string userId);
 
-        Task AddAsync(CreateViewModel model);
+        Task AddHotelReservationAsync(HotelReservationViewModel model);
+
+        Task<ICollection<T>> GetAllHotelReservationsAsync<T>();
+
+        Task<ICollection<T>> GetAllRestaurantReservationsAsync<T>();
     }
 }

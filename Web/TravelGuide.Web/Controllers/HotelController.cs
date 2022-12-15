@@ -183,13 +183,5 @@
 
             return this.View(hotel);
         }
-
-        //// TODO: Add summary
-
-        [Authorize(Roles = AdministratorOrHotelier)]
-        public IActionResult Reservations()
-        {
-            return this.View();
-        }
     }
 }

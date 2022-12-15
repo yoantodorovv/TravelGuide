@@ -6,10 +6,11 @@
 
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using TravelGuide.Data.Models;
+    using TravelGuide.Services.Mapping;
 
     using static TravelGuide.Common.GlobalConstants.HotelReservationConstants;
 
-    public class CreateViewModel
+    public class HotelReservationViewModel : IMapFrom<HotelReservation>
     {
         [Required]
         public string Id { get; set; }

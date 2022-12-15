@@ -28,8 +28,8 @@
         <div class="carousel-inner">
             @foreach (var image in Model.Images)
             {
-                <div class="carousel-item @(first ? "active" : string.Empty)">
-                    <img class="d-block w-100" style="height:500px"
+                <div class="carousel-item @(first ? "active" : string.Empty)" style="background-color: #d9d9d9;">
+                    <img class="d-block w-100" style="height: 500px;object-fit: contain;"
                          src="@image.ImageUrl" alt="image">
                 </div>
 

@@ -162,10 +162,5 @@
 
             return this.View(restaurant);
         }
-
-        public IActionResult Reservations()
-        {
-            return this.View();
-        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace TravelGuide.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
+    using TravelGuide.Services.Mapping;
     using TravelGuide.Web.ViewModels.Administration.HotelReservations;
     using TravelGuide.Web.ViewModels.Hotel;
     using TravelGuide.Web.ViewModels.Restaurant;
@@ -33,7 +35,7 @@
             this.hotelRepository = hotelRepository;
         }
 
-        public async Task AddAsync(CreateViewModel model)
+        public async Task AddHotelReservationAsync(HotelReservationViewModel model)
         {
             var reservation = new HotelReservation()
             {
@@ -102,5 +104,13 @@
 
             await this.restaurantRepository.SaveChangesAsync();
         }
+
+        public async Task<ICollection<T>> GetAllHotelReservationsAsync<T>() => await this.hotelReservationsRepository.AllAsNoTracking()
+            .To<T>()
+            .ToListAsync();
+
+        public async Task<ICollection<T>> GetAllRestaurantReservationsAsync<T>() => await this.restaurantReservationsRepository.AllAsNoTracking()
+            .To<T>()
+            .ToListAsync();
     }
 }

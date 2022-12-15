@@ -29,9 +29,19 @@
             this.reservationService = reservationService;
         }
 
-        public async Task<IActionResult> Index() => this.View(await this.hotelReservationRepository.AllAsNoTracking().ToListAsync());
+        public async Task<IActionResult> Index()
+        {
+            var hotels = await this.hotelReservationRepository.AllAsNoTracking().ToListAsync();
 
-        public async Task<IActionResult> Details(string? id)
+            var model = new IndexViewModel()
+            {
+                Hotels = await this.reservationService.GetAllHotelReservationsAsync<HotelReservationViewModel>(),
+            };
+
+            return this.View(model);
+        }
+
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -54,8 +64,7 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateViewModel model)
+        public async Task<IActionResult> Create(HotelReservationViewModel model)
         {
             if (this.ModelState.IsValid)
             {
@@ -64,7 +73,7 @@
 
             try
             {
-                await this.reservationService.AddAsync(model);
+                await this.reservationService.AddHotelReservationAsync(model);
             }
             catch (Exception ex)
             {
@@ -96,7 +105,6 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Id,Price,UserId,HotelId,DiscountId,StartDay,EndDay,CreatedOn,ModifiedOn,IsDeleted,DeletedOn")] HotelReservation hotelReservation)
         {
             if (id != hotelReservation.Id.ToString())
@@ -129,7 +137,7 @@
             return this.View(hotelReservation);
         }
 
-        public async Task<IActionResult> Delete(string? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -148,7 +156,6 @@
 
         [HttpPost]
         [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var hotelReservation = await this.hotelReservationRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == id);

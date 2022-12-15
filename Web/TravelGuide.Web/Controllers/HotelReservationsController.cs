@@ -21,11 +21,6 @@
             this.reservationService = reservationService;
         }
 
-        public IActionResult Mine()
-        {
-            return this.View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(HotelViewModel model)
         {
@@ -39,27 +34,12 @@
             {
                 this.TempData[ErrorMessage] = ex.Message;
 
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("ById", "Hotel", new { model.Id });
             }
 
             this.TempData[SuccessMessage] = SuccessfullyCreatedReservation;
 
-            return this.RedirectToAction(nameof(this.Mine));
-        }
-
-        public IActionResult Edit()
-        {
-            return this.View();
-        }
-
-        public IActionResult Delete()
-        {
-            return this.View();
-        }
-
-        public IActionResult History()
-        {
-            return this.View();
+            return this.RedirectToAction("ById", "Hotel", new { model.Id });
         }
     }
 }
