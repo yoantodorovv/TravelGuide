@@ -8,6 +8,7 @@
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
+    using TravelGuide.Web.ViewModels.Administration.HotelReservations;
     using TravelGuide.Web.ViewModels.Hotel;
     using TravelGuide.Web.ViewModels.Restaurant;
 
@@ -30,6 +31,21 @@
             this.hotelReservationsRepository = hotelReservationsRepository;
             this.restaurantRepository = restaurantRepository;
             this.hotelRepository = hotelRepository;
+        }
+
+        public async Task AddAsync(CreateViewModel model)
+        {
+            var reservation = new HotelReservation()
+            {
+                HotelId = model.HotelId,
+                UserId = model.UserId,
+                Price = model.Price,
+                StartDay = model.StartDay,
+                EndDay = model.EndDay,
+            };
+
+            await this.hotelReservationsRepository.AddAsync(reservation);
+            await this.hotelReservationsRepository.SaveChangesAsync();
         }
 
         public async Task CreateHotelReservation(HotelViewModel model, string userId)
