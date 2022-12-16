@@ -85,6 +85,11 @@
                         <label asp-for="ReservationEndDate"></label>
                         <span asp-validation-for="ReservationEndDate" class="text-danger"></span>
                     </div>
+                    <div class="form-floating">
+                        <input asp-for="Price" class="form-control" autocomplete="reservationdate" aria-required="true" />
+                        <label asp-for="Price"></label>
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

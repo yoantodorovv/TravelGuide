@@ -146,8 +146,8 @@
         /// </summary>
         public static class HotelReservationConstants
         {
-            public const string PriceMinValue = "0.0";
-            public const string PriceMaxValue = "1000.0";
+            public const string PriceMinValue = "0";
+            public const string PriceMaxValue = "1000";
         }
 
         /// <summary>

@@ -1,0 +1,83 @@
+﻿@model HotelViewModel
+
+@{
+    ViewData["Title"] = "Edit Hotel";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="col-md-6">
+    <form class="d-flex row justify-content-center" id="registerForm" method="post" asp-area="Administration" asp-controller="Hotel" asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-floating col">
+            <input type="text" asp-for="Name" class="form-control" autocomplete="name" aria-required="true" />
+            <label asp-for="Name"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="form-floating mt-1 col">
+                <input type="email" asp-for="Email" class="form-control" autocomplete="email" aria-required="true" />
+                <label asp-for="Email"></label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mt-1 col">
+                <input type="number" asp-for="Price" class="form-control" autocomplete="price" aria-required="true" />
+                <label asp-for="Price"></label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-floating mt-1 col">
+                <input type="text" asp-for="Location" class="form-control" autocomplete="location" aria-required="true" />
+                <label asp-for="Location"></label>
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-floating mt-1 col">
+                <input type="text" asp-for="AddressTownName" class="form-control" autocomplete="address-town-name" aria-required="true" />
+                <label asp-for="AddressTownName"></label>
+                <span asp-validation-for="AddressTownName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mt-1 col">
+                <input type="text" asp-for="AddressCountry" class="form-control" autocomplete="address-country" aria-required="true" />
+                <label asp-for="AddressCountry"></label>
+                <span asp-validation-for="AddressCountry" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-floating mt-1">
+            <input type="text" asp-for="AddressAddressText" class="form-control" autocomplete="address-address-text" aria-required="true" />
+            <label asp-for="AddressAddressText"></label>
+            <span asp-validation-for="AddressAddressText" class="text-danger"></span>
+        </div>
+        <select class="form-select mt-1" asp-for="Rating" aria-label="Default select example">
+            <option selected>Select Rating</option>
+            <option value="1">1 (One)</option>
+            <option value="2">2 (Two)</option>
+            <option value="3">3 (Three)</option>
+            <option value="4">4 (Four)</option>
+            <option value="5">5 (Five)</option>
+        </select>
+        <div class="mt-1">
+            <label asp-for="AddedImages" accept="image/*"></label>
+            <input asp-for="AddedImages" class="form-control" />
+            <span asp-validation-for="AddedImages" class="text-danger"></span>
+        </div>
+        <div class="form-floating mt-1">
+            <textarea type="text" asp-for="Details" class="form-control" autocomplete="details" aria-required="true" rows="4"></textarea>
+            <label asp-for="Details"></label>
+            <span asp-validation-for="Details" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="form-floating mt-1 col">
+                <input type="tel" asp-for="PhoneNumber" class="form-control" autocomplete="phone-number" aria-required="true" />
+                <label asp-for="PhoneNumber"></label>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating mt-1 col">
+                <input type="url" asp-for="WebsiteUrl" class="form-control" autocomplete="website-url" aria-required="true" />
+                <label asp-for="WebsiteUrl"></label>
+                <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+            </div>
+        </div>
+        <button id="registerSubmit" type="submit" class="w-100 mt-3 btn btn-lg btn-primary">Edit</button>
+    </form>
+</div>

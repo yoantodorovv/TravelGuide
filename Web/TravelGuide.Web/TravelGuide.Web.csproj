@@ -60,6 +60,7 @@
     <None Remove="Views\Restaurant\" />
     <None Remove="Views\Reservations\" />
     <None Remove="toastr" />
+    <None Remove="Areas\Administration\Views\Hotel\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Account\" />
@@ -67,5 +68,6 @@
     <Folder Include="Areas\Administration\Controllers\" />
     <Folder Include="Views\Restaurant\" />
     <Folder Include="Views\Reservations\" />
+    <Folder Include="Areas\Administration\Views\Hotel\" />
   </ItemGroup>
 </Project>

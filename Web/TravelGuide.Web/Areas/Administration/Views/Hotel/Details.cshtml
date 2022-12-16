@@ -1,0 +1,66 @@
+﻿@model HotelViewModel
+
+@{
+    ViewData["Title"] = $"{Model.Name}'s Details";
+
+    bool first = true;
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="d-flex flex-column justify-content-between align-items-center">
+    <div>
+        <div class="mb-5"></div>
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach (var image in Model.Images)
+                {
+                    <div class="carousel-item @(first ? "active" : string.Empty)">
+                        <img class="d-block w-100" style="height: 500px; object-fit: contain;"
+                             src="@image.ImageUrl" alt="image">
+                    </div>
+
+                    first = false;
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div>
+            <p><strong>Name:</strong> @Model.Name</p>
+        </div>
+        <div>
+            <p><strong>Location:</strong> @Model.Location</p>
+        </div>
+        <div>
+            <p><strong>Price:</strong> $0,00 - $@Model.Price.ToString("f2")</p>
+        </div>
+        <div>
+            <p><strong>Rating:</strong> @Model.Rating</p>
+        </div>
+        <div>
+            <p><strong>Address:</strong> @Model.AddressAddressText, @Model.AddressTownName, @Model.AddressCountry</p>
+        </div>
+        <div>
+            <p><strong>WebsiteUrl:</strong> @Model.WebsiteUrl</p>
+        </div>
+        <div>
+            <p><strong>Email:</strong> @Model.Email</p>
+        </div>
+        <div>
+            <p><strong>PhoneNumber:</strong> @Model.PhoneNumber</p>
+        </div>
+        <div>
+            <p><strong>Details:</strong> @Model.Details</p>
+        </div>
+    </div>
+</div>

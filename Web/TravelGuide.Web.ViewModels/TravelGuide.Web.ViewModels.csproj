@@ -36,6 +36,7 @@
     <None Remove="Image\" />
     <None Remove="Review\" />
     <None Remove="Administration\HotelReservations\" />
+    <None Remove="Administration\Hotel\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Hotel\" />
@@ -48,5 +49,6 @@
     <Folder Include="Image\" />
     <Folder Include="Review\" />
     <Folder Include="Administration\HotelReservations\" />
+    <Folder Include="Administration\Hotel\" />
   </ItemGroup>
 </Project>

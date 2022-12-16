@@ -2,6 +2,13 @@
 {
     public static class SuccessMessages
     {
+        public static class HotelSuccessMessages
+        {
+            public const string SuccessfullyEditedHotel = "The hotel has been successfully edited!";
+
+            public const string SuccessfullyDeletedHotel = "The hotel has been successfully deleted!";
+        }
+
         public static class AccountSuccessMessages
         {
             public const string SuccessfullyRegistered = "You have successfully registered!";
@@ -18,6 +25,10 @@
 
         public static class ReservationSuccessMessages
         {
+            public const string SuccessfullyDeletedReservation = "The reservation has been successfully deleted!";
+
+            public const string SuccessfullyEditedReservation = "The reservation has been successfully edited!";
+
             public const string SuccessfullyCreatedReservation = "The reservation has been successfully made! We are looking forward to seeing you soon!";
         }
 

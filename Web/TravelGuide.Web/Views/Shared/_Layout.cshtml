@@ -6,13 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @if (this.ViewData["Title"].ToString() == "Home Page")
-    {
+        {
         <title>@GlobalConstants.SystemName</title>
-    }
-    else
-    {
+        }
+        else
+        {
         <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
-    }
+        }
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" asp-append-version="true" />
@@ -40,14 +40,14 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" asp-controller="Hotel" asp-action="All" asp-area="">All Hotels</a>
                                         @if (User.IsInRole(HotelierRoleName))
-                                        {
+                                            {
                                             <a class="dropdown-item" asp-controller="Hotel" asp-action="Mine" asp-area="">My Hotels</a>
                                             <a class="dropdown-item" asp-controller="Hotel" asp-action="Create" asp-area="">Create a Hotel</a>
-                                        }
-                                        else
-                                        {
+                                            }
+                                            else
+                                            {
                                             <a class="dropdown-item" asp-controller="Hotel" asp-action="BecomeHotelier" asp-area="">Become a Hotelier</a>
-                                        }
+                                            }
                                     </div>
                                 </div>
                             </li>
@@ -57,17 +57,42 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" asp-controller="Restaurant" asp-action="All" asp-area="">All Restaurants</a>
                                         @if (User.IsInRole(RestauranteurRoleName))
-                                        {
+                                            {
                                             <a class="dropdown-item" asp-controller="Restaurant" asp-action="Mine" asp-area="">My Restaurants</a>
                                             <a class="dropdown-item" asp-controller="Restaurant" asp-action="Create" asp-area="">Create a Restaurant</a>
-                                        }
-                                        else
-                                        {
+                                            }
+                                            else
+                                            {
                                             <a class="dropdown-item" asp-controller="Restaurant" asp-action="BecomeRestauranteur" asp-area="">Become a Restauranteur</a>
-                                        }
+                                            }
                                     </div>
                                 </div>
                             </li>
+                            @if (User.IsInRole(RestauranteurRoleName)
+                                    || User.IsInRole(HotelierRoleName)
+                                    || User.IsInRole(AdministratorRoleName))
+                            {
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @if (User.IsInRole(HotelierRoleName)
+                                                   || User.IsInRole(AdministratorRoleName))
+                                            {
+                                                @*TODO: Add other administration links!*@
+                                                <a class="dropdown-item" asp-area="Administration" asp-controller="Hotel" asp-action="Index">Hotels</a>
+                                                <a class="dropdown-item" asp-area="Administration" asp-controller="HotelReservations" asp-action="Index">Hotel Reservations</a>
+                                            }
+                                            @if (User.IsInRole(RestauranteurRoleName)
+                                                   || User.IsInRole(AdministratorRoleName))
+                                            {
+                                                @*TODO: Add other administration links!*@
+                                                <a class="dropdown-item" asp-area="Administration" asp-controller="RestaurantReservations" asp-action="Index">Restaurant Reservations</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            }
                         </ul>
                         <partial name="_LoginPartial" />
                     </div>

@@ -113,6 +113,11 @@
                 .To<T>()
                 .ToListAsync();
 
+        public async Task<ICollection<T>> GetAllAsync<T>() => await this.hotelRepository.AllAsNoTrackingWithDeleted()
+                .OrderByDescending(x => x.CreatedOn)
+                .To<T>()
+                .ToListAsync();
+
         /// <summary>
         /// Gets all user hotels and maps them to a view model.
         /// </summary>
@@ -121,6 +126,11 @@
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
+                .To<T>()
+                .ToListAsync();
+
+        public async Task<IEnumerable<T>> GetAllUserHotelsAsync<T>(string userId) => await this.hotelRepository.AllAsNoTrackingWithDeleted()
+                .Where(x => x.OwnerId.ToString() == userId)
                 .To<T>()
                 .ToListAsync();
 
@@ -136,6 +146,17 @@
             .Where(x => x.Id.ToString() == hotelId)
             .To<T>()
             .FirstOrDefaultAsync();
+
+        public async Task<Hotel> GetById(string hotelId) => await this.hotelRepository.AllAsNoTracking()
+            .Include(x => x.Amenities)
+            .ThenInclude(a => a.Amenity)
+            .Include(x => x.Images)
+            .Include(x => x.Reviews)
+            .Include(x => x.WorkingHours)
+            .ThenInclude(wh => wh.WorkingHours)
+            .Include(x => x.Address)
+            .ThenInclude(a => a.Town)
+            .FirstOrDefaultAsync(x => x.Id.ToString() == hotelId);
 
         /// <summary>
         /// Gets the count of all hotels.
