@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using TravelGuide.Data.Models;
     using TravelGuide.Web.ViewModels.Administration.HotelReservations;
     using TravelGuide.Web.ViewModels.Hotel;
     using TravelGuide.Web.ViewModels.Restaurant;
@@ -14,7 +15,11 @@
 
         Task CreateHotelReservation(HotelViewModel model, string userId);
 
-        Task AddHotelReservationAsync(HotelReservationViewModel model);
+        Task<T> GetHotelReservationByIdAsync<T>(string id);
+
+        Task<HotelReservation> GetHotelReservationByIdAsync(string id);
+
+        //// Task<T> GetRestaurantReservationByIdAsync<T>(string id);
 
         Task<ICollection<T>> GetAllHotelReservationsAsync<T>();
 

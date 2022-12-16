@@ -35,21 +35,6 @@
             this.hotelRepository = hotelRepository;
         }
 
-        public async Task AddHotelReservationAsync(HotelReservationViewModel model)
-        {
-            var reservation = new HotelReservation()
-            {
-                HotelId = model.HotelId,
-                UserId = model.UserId,
-                Price = model.Price,
-                StartDay = model.StartDay,
-                EndDay = model.EndDay,
-            };
-
-            await this.hotelReservationsRepository.AddAsync(reservation);
-            await this.hotelReservationsRepository.SaveChangesAsync();
-        }
-
         public async Task CreateHotelReservation(HotelViewModel model, string userId)
         {
             var hotel = await this.hotelRepository.All().FirstOrDefaultAsync(x => x.Id == model.Id);
@@ -71,6 +56,7 @@
 
             hotel.Reservations.Add(new HotelReservation()
             {
+                Price = model.Price,
                 StartDay = model.ReservationStartDate,
                 EndDay = model.ReservationEndDate,
                 UserId = Guid.Parse(userId),
@@ -105,12 +91,23 @@
             await this.restaurantRepository.SaveChangesAsync();
         }
 
-        public async Task<ICollection<T>> GetAllHotelReservationsAsync<T>() => await this.hotelReservationsRepository.AllAsNoTracking()
+        public async Task<ICollection<T>> GetAllHotelReservationsAsync<T>() => await this.hotelReservationsRepository.AllAsNoTrackingWithDeleted()
+            .OrderByDescending(x => x.CreatedOn)
             .To<T>()
             .ToListAsync();
 
-        public async Task<ICollection<T>> GetAllRestaurantReservationsAsync<T>() => await this.restaurantReservationsRepository.AllAsNoTracking()
+        public async Task<ICollection<T>> GetAllRestaurantReservationsAsync<T>() => await this.restaurantReservationsRepository.AllAsNoTrackingWithDeleted()
             .To<T>()
             .ToListAsync();
+
+        public async Task<T> GetHotelReservationByIdAsync<T>(string id) => await this.hotelReservationsRepository.AllAsNoTracking()
+            .Include(x => x.Discount)
+            .Where(x => x.Id.ToString() == id)
+            .To<T>()
+            .FirstOrDefaultAsync();
+
+        public async Task<HotelReservation> GetHotelReservationByIdAsync(string id) => await this.hotelReservationsRepository.AllAsNoTracking()
+            .Include(x => x.Discount)
+            .FirstOrDefaultAsync(x => x.Id.ToString() == id);
     }
 }

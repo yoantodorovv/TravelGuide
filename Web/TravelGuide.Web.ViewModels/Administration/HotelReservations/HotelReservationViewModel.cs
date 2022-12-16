@@ -24,22 +24,21 @@
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Gets or sets the user's id -> that has made the reservation.
+        /// Gets or sets the user that has made the reservation.
         /// </summary>
         [Required]
-        public Guid UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         /// <summary>
-        /// Gets or sets the hotel's id -> which holds the reservation.
+        /// Gets or sets the hotel which holds the reservation.
         /// </summary>
         [Required]
-        public Guid HotelId { get; set; }
+        public virtual Hotel Hotel { get; set; }
 
         /// <summary>
-        /// Gets or sets the user's discount id (if he has one).
+        /// Gets or sets the user's discount (if he has one).
         /// </summary>
-        [ForeignKey(nameof(Discount))]
-        public Guid? DicountId { get; set; }
+        public virtual Discount Discount { get; set; }
 
         /// <summary>
         /// Gets or sets the start day of the reservation.
@@ -52,5 +51,13 @@
         /// </summary>
         [Required]
         public DateTime EndDay { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
     }
 }

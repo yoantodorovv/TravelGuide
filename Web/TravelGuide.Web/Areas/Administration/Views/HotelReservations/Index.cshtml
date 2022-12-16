@@ -1,0 +1,59 @@
+﻿@model ICollection<HotelReservationViewModel>
+
+@{
+    ViewData["Title"] = "All Hotel Reservations";
+
+    int i = 0;
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div>
+    <table class="table table-hover table-stripped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().CreatedOn)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().StartDay)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().EndDay)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().Price)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().IsDeleted)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().ModifiedOn)</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var modelItem in Model)
+            {
+                i++;
+
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@modelItem.CreatedOn</td>
+                    <td>@modelItem.StartDay</td>
+                    <td>@modelItem.EndDay</td>
+                    <td>@modelItem.Price.ToString("f2")</td>
+                    <td>
+                        @(modelItem.IsDeleted == false ? modelItem.IsDeleted : string.Empty)
+                        @modelItem.DeletedOn
+                    </td>
+                    <td>@modelItem.ModifiedOn</td>
+                    <td>
+                        @if (modelItem.IsDeleted)
+                        {
+                            <a class="btn btn-primary disabled" role="button" aria-disabled="true" asp-area="Administration" asp-controller="HotelReservations" asp-action="Details" asp-route-id="@modelItem.Id">Details</a>
+                            <a class="btn btn-primary disabled" role="button" aria-disabled="true" asp-area="Administration" asp-controller="HotelReservations" asp-action="Edit" asp-route-id="@modelItem.Id">Edit</a>
+                            <a class="btn btn-danger disabled" role="button" aria-disabled="true" asp-area="Administration" asp-controller="HotelReservations" asp-action="Delete" asp-route-id="@modelItem.Id">Delete</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-primary" asp-area="Administration" asp-controller="HotelReservations" asp-action="Details" asp-route-id="@modelItem.Id">Details</a>
+                            <a class="btn btn-primary" asp-area="Administration" asp-controller="HotelReservations" asp-action="Edit" asp-route-id="@modelItem.Id">Edit</a>
+                            <a class="btn btn-danger" asp-area="Administration" asp-controller="HotelReservations" asp-action="Delete" asp-route-id="@modelItem.Id">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }    
+        </tbody>
+    </table>
+</div>
