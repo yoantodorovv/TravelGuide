@@ -97,6 +97,7 @@
             .ToListAsync();
 
         public async Task<ICollection<T>> GetAllRestaurantReservationsAsync<T>() => await this.restaurantReservationsRepository.AllAsNoTrackingWithDeleted()
+            .OrderByDescending(x => x.CreatedOn)
             .To<T>()
             .ToListAsync();
 
@@ -107,6 +108,16 @@
             .FirstOrDefaultAsync();
 
         public async Task<HotelReservation> GetHotelReservationByIdAsync(string id) => await this.hotelReservationsRepository.AllAsNoTracking()
+            .Include(x => x.Discount)
+            .FirstOrDefaultAsync(x => x.Id.ToString() == id);
+
+        public async Task<T> GetRestaurantReservationByIdAsync<T>(string id) => await this.restaurantReservationsRepository.AllAsNoTracking()
+            .Include(x => x.Discount)
+            .Where(x => x.Id.ToString() == id)
+            .To<T>()
+            .FirstOrDefaultAsync();
+
+        public async Task<RestaurantReservation> GetRestaurantReservationByIdAsync(string id) => await this.restaurantReservationsRepository.AllAsNoTracking()
             .Include(x => x.Discount)
             .FirstOrDefaultAsync(x => x.Id.ToString() == id);
     }

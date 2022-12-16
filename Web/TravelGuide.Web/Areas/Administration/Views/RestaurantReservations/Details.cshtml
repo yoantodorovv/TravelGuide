@@ -1,0 +1,19 @@
+﻿@model RestaurantReservationViewModel
+
+@{
+    ViewData["Title"] = "Restaurant Reservation";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div>
+    <div>
+        <p><strong>EndDay:</strong> @Model.ReservationDate</p>
+    </div>
+    <div>
+        <p><strong>User:</strong> @Model.User.UserName</p>
+    </div>
+    <div>
+        <p><strong>For Hotel:</strong> @Model.Restaurant.Name</p>
+    </div>
+</div>

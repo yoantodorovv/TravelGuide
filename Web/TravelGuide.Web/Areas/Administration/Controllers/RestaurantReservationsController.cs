@@ -1,44 +1,40 @@
 ﻿namespace TravelGuide.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
-    using TravelGuide.Web.Controllers;
-    using TravelGuide.Web.ViewModels.Administration.HotelReservations;
+    using TravelGuide.Web.ViewModels.Administration.RestaurantReservations;
 
     using static TravelGuide.Common.ErrorMessages.ReservationErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
     using static TravelGuide.Common.GlobalConstants.ToastrMessageConstants;
     using static TravelGuide.Common.SuccessMessages.ReservationSuccessMessages;
 
-    [Authorize(Roles = AdministratorOrHotelier)]
     [Area("Administration")]
-    public class HotelReservationsController : BaseController
+    [Authorize(Roles = AdministratorOrRestauranteur)]
+    public class RestaurantReservationsController : Controller
     {
-        private readonly IDeletableEntityRepository<HotelReservation> hotelReservationRepository;
+        private readonly IDeletableEntityRepository<RestaurantReservation> restaurantReservationRepository;
         private readonly IReservationService reservationService;
 
-        public HotelReservationsController(
-            IDeletableEntityRepository<HotelReservation> hotelReservationRepository,
+        public RestaurantReservationsController(
+            IDeletableEntityRepository<RestaurantReservation> restaurantReservationRepository,
             IReservationService reservationService)
         {
-            this.hotelReservationRepository = hotelReservationRepository;
+            this.restaurantReservationRepository = restaurantReservationRepository;
             this.reservationService = reservationService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var hotelReservations = await this.reservationService.GetAllHotelReservationsAsync<HotelReservationViewModel>();
+            var restaurantReservations = await this.reservationService.GetAllRestaurantReservationsAsync<RestaurantReservationViewModel>();
 
-            return this.View(hotelReservations);
+            return this.View(restaurantReservations);
         }
 
         public async Task<IActionResult> Details(string id)
@@ -50,16 +46,16 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            var hotelReservation = await this.reservationService.GetHotelReservationByIdAsync<HotelReservationViewModel>(id);
+            var restaurantReservation = await this.reservationService.GetRestaurantReservationByIdAsync<RestaurantReservationViewModel>(id);
 
-            if (hotelReservation == null)
+            if (restaurantReservation == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            return this.View(hotelReservation);
+            return this.View(restaurantReservation);
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -71,20 +67,20 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            var hotelReservation = await this.reservationService.GetHotelReservationByIdAsync<HotelReservationViewModel>(id);
+            var restaurantReservation = await this.reservationService.GetRestaurantReservationByIdAsync<RestaurantReservationViewModel>(id);
 
-            if (hotelReservation == null)
+            if (restaurantReservation == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            return this.View(hotelReservation);
+            return this.View(restaurantReservation);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, HotelReservationViewModel model)
+        public async Task<IActionResult> Edit(string id, RestaurantReservationViewModel model)
         {
             if (id == null)
             {
@@ -93,9 +89,9 @@
                 return this.RedirectToAction(nameof(this.Edit));
             }
 
-            var hotelReservation = await this.reservationService.GetHotelReservationByIdAsync(id);
+            var restaurantReservation = await this.reservationService.GetRestaurantReservationByIdAsync(id);
 
-            if (hotelReservation == null)
+            if (restaurantReservation == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
@@ -104,22 +100,18 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.View(new HotelReservationViewModel()
+                return this.View(new RestaurantReservationViewModel()
                 {
-                    Price = hotelReservation.Price,
-                    StartDay = hotelReservation.StartDay,
-                    EndDay = hotelReservation.EndDay,
+                    ReservationDate = restaurantReservation.ReservationDate,
                 });
             }
 
             try
             {
-                hotelReservation.Price = model.Price;
-                hotelReservation.StartDay = model.StartDay;
-                hotelReservation.EndDay = model.EndDay;
+                restaurantReservation.ReservationDate = model.ReservationDate;
 
-                this.hotelReservationRepository.Update(hotelReservation);
-                await this.hotelReservationRepository.SaveChangesAsync();
+                this.restaurantReservationRepository.Update(restaurantReservation);
+                await this.restaurantReservationRepository.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -142,16 +134,16 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            var hotelReservation = await this.reservationService.GetHotelReservationByIdAsync<HotelReservationViewModel>(id);
+            var restaurantReservation = await this.reservationService.GetRestaurantReservationByIdAsync<RestaurantReservationViewModel>(id);
 
-            if (hotelReservation == null)
+            if (restaurantReservation == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            return this.View(hotelReservation);
+            return this.View(restaurantReservation);
         }
 
         [HttpPost]
@@ -165,9 +157,9 @@
                 return this.RedirectToAction(nameof(this.Edit));
             }
 
-            var hotelReservation = await this.reservationService.GetHotelReservationByIdAsync(id);
+            var restaurantReservation = await this.reservationService.GetRestaurantReservationByIdAsync(id);
 
-            if (hotelReservation == null)
+            if (restaurantReservation == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
@@ -176,8 +168,8 @@
 
             try
             {
-                this.hotelReservationRepository.Delete(hotelReservation);
-                await this.hotelReservationRepository.SaveChangesAsync();
+                this.restaurantReservationRepository.Delete(restaurantReservation);
+                await this.restaurantReservationRepository.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -191,6 +183,6 @@
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        private async Task<bool> HotelReservationExists(string id) => await this.hotelReservationRepository.AllAsNoTracking().AnyAsync(x => x.Id.ToString() == id);
+        private async Task<bool> RestaurantReservationExists(string id) => await this.restaurantReservationRepository.AllAsNoTracking().AnyAsync(x => x.Id.ToString() == id);
     }
 }

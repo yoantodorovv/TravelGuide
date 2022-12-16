@@ -1,0 +1,19 @@
+﻿@model RestaurantReservationViewModel
+
+@{
+    ViewData["Title"] = "Edit Reservation";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="col-md-6">
+    <form class="d-flex row justify-content-center" id="registerForm" method="post" asp-area="Administration" asp-controller="RestaurantReservations" asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-floating mt-1">
+            <input type="date" asp-for="ReservationDate" class="form-control" autocomplete="reservationdate" aria-required="true" />
+            <label asp-for="ReservationDate"></label>
+            <span asp-validation-for="ReservationDate" class="text-danger"></span>
+        </div>
+        <button id="registerSubmit" type="submit" class="w-100 mt-3 btn btn-lg btn-primary">Edit</button>
+    </form>
+</div>

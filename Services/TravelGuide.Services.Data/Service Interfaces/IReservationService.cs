@@ -19,6 +19,10 @@
 
         Task<HotelReservation> GetHotelReservationByIdAsync(string id);
 
+        Task<T> GetRestaurantReservationByIdAsync<T>(string id);
+
+        Task<RestaurantReservation> GetRestaurantReservationByIdAsync(string id);
+
         //// Task<T> GetRestaurantReservationByIdAsync<T>(string id);
 
         Task<ICollection<T>> GetAllHotelReservationsAsync<T>();

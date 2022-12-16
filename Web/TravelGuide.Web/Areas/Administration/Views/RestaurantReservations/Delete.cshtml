@@ -1,0 +1,22 @@
+﻿@model RestaurantReservationViewModel
+
+@{
+    ViewData["Title"] = "Delete this restaurant reservation";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="d-flex justify-content-center flex-column">
+    <div class="d-flex justify-content-center">
+        <p><strong>EndDay:</strong> @Model.ReservationDate</p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p><strong>User:</strong> @Model.User.UserName</p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p><strong>For Hotel:</strong> @Model.Restaurant.Name</p>
+    </div>
+</div>
+<form method="post" class="d-flex justify-content-center">
+    <button type="submit" asp-area="Administration" asp-controller="RestaurantReservations" asp-action="Delete" class="btn btn-danger w-25">Delete</button>
+</form>

@@ -62,6 +62,7 @@
     <None Remove="toastr" />
     <None Remove="Areas\Administration\Views\Hotel\" />
     <None Remove="Areas\Administration\Views\Restaurant\" />
+    <None Remove="Areas\Administration\Views\RestaurantReservations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Account\" />
@@ -71,5 +72,6 @@
     <Folder Include="Views\Reservations\" />
     <Folder Include="Areas\Administration\Views\Hotel\" />
     <Folder Include="Areas\Administration\Views\Restaurant\" />
+    <Folder Include="Areas\Administration\Views\RestaurantReservations\" />
   </ItemGroup>
 </Project>
