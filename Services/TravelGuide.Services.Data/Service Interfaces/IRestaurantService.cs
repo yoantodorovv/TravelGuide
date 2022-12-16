@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using TravelGuide.Data.Models;
     using TravelGuide.Web.ViewModels.Restaurant;
 
     /// <summary>
@@ -18,12 +18,22 @@
         /// <summary>
         /// Gets all restaurants in the DB and maps them to a view model.
         /// </summary>
+        Task<ICollection<T>> GetAllAsync<T>();
+
+        /// <summary>
+        /// Gets all restaurants in the DB and maps them to a view model.
+        /// </summary>
         Task<ICollection<T>> GetAllAsync<T>(int page, int itemsPerPage);
 
         /// <summary>
         /// Gets the count of all restaurants in the DB.
         /// </summary>
         Task<int> GetCountAsync();
+
+        /// <summary>
+        /// Gets all user restaurants in the DB and maps them to a view model.
+        /// </summary>
+        Task<IEnumerable<T>> GetAllUserRestaurantsAsync<T>(string userId);
 
         /// <summary>
         /// Gets all user restaurants in the DB and maps them to a view model.
@@ -36,5 +46,7 @@
         Task<int> GetUserRestaurantsCountAsync(string userId);
 
         Task<T> GetById<T>(string restaurantId);
+
+        Task<Restaurant> GetById(string restaurantId);
     }
 }

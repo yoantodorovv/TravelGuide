@@ -9,32 +9,32 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using TravelGuide.Common;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
-    using TravelGuide.Services.Mapping;
-    using TravelGuide.Web.ViewModels.Administration.Hotel;
+    using TravelGuide.Web.ViewModels.Administration.Restaurant;
 
-    using static TravelGuide.Common.ErrorMessages.HotelErrorMessages;
+    using static TravelGuide.Common.ErrorMessages.RestaurantErrorMessages;
     using static TravelGuide.Common.GlobalConstants;
     using static TravelGuide.Common.GlobalConstants.ToastrMessageConstants;
-    using static TravelGuide.Common.SuccessMessages.HotelSuccessMessages;
+    using static TravelGuide.Common.SuccessMessages.RestaurantSuccessMessages;
 
     [Area("Administration")]
-    [Authorize(Roles = AdministratorOrHotelier)]
-    public class HotelController : Controller
+    [Authorize(Roles = AdministratorOrRestauranteur)]
+    public class RestaurantController : Controller
     {
-        private readonly IDeletableEntityRepository<Hotel> hotelRepository;
-        private readonly IHotelService hotelService;
+        private readonly IDeletableEntityRepository<Restaurant> restaurantRepository;
+        private readonly IRestaurantService restaurantService;
         private readonly IImageService imageService;
 
-        public HotelController(
-            IDeletableEntityRepository<Hotel> hotelRepository,
-            IHotelService hotelService,
+        public RestaurantController(
+            IDeletableEntityRepository<Restaurant> restaurantRepository,
+            IRestaurantService restaurantService,
             IImageService imageService)
         {
-            this.hotelRepository = hotelRepository;
-            this.hotelService = hotelService;
+            this.restaurantRepository = restaurantRepository;
+            this.restaurantService = restaurantService;
             this.imageService = imageService;
         }
 
@@ -42,14 +42,14 @@
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var hotels = await this.hotelService.GetAllUserHotelsAsync<HotelViewModel>(userId);
+            var restaurants = await this.restaurantService.GetAllUserRestaurantsAsync<RestaurantViewModel>(userId);
 
             if (this.User.IsInRole(AdministratorRoleName))
             {
-                hotels = await this.hotelService.GetAllAsync<HotelViewModel>();
+                restaurants = await this.restaurantService.GetAllAsync<RestaurantViewModel>();
             }
 
-            return this.View(hotels);
+            return this.View(restaurants);
         }
 
         public async Task<IActionResult> Details(string id)
@@ -61,16 +61,16 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            var hotel = await this.hotelService.GetById<HotelViewModel>(id);
+            var restaurant = await this.restaurantService.GetById<RestaurantViewModel>(id);
 
-            if (hotel == null)
+            if (restaurant == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            return this.View(hotel);
+            return this.View(restaurant);
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -82,20 +82,20 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            var hotel = await this.hotelService.GetById<HotelViewModel>(id);
+            var restaurant = await this.restaurantService.GetById<RestaurantViewModel>(id);
 
-            if (hotel == null)
+            if (restaurant == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            return this.View(hotel);
+            return this.View(restaurant);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, HotelViewModel model)
+        public async Task<IActionResult> Edit(string id, RestaurantViewModel model)
         {
             if (id == null)
             {
@@ -104,9 +104,9 @@
                 return this.RedirectToAction(nameof(this.Edit));
             }
 
-            var hotel = await this.hotelService.GetById(id);
+            var restaurant = await this.restaurantService.GetById(id);
 
-            if (hotel == null)
+            if (restaurant == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
@@ -120,26 +120,27 @@
 
             try
             {
-                hotel.Name = model.Name;
-                hotel.Email = model.Email;
-                hotel.Price = model.Price;
-                hotel.Location = model.Location;
-                hotel.Address.Town.Name = model.AddressTownName;
-                hotel.Address.Country = model.AddressCountry;
-                hotel.Address.AddressText = model.AddressAddressText;
-                hotel.Rating = model.Rating;
-                hotel.Details = model.Details;
-                hotel.PhoneNumber = model.PhoneNumber;
-                hotel.WebsiteUrl = model.WebsiteUrl;
+                restaurant.Name = model.Name;
+                restaurant.Email = model.Email;
+                restaurant.PriceRange = model.PriceRange;
+                restaurant.Location = model.Location;
+                restaurant.Address.Town.Name = model.AddressTownName;
+                restaurant.Address.Country = model.AddressCountry;
+                restaurant.Address.AddressText = model.AddressAddressText;
+                restaurant.Rating = model.Rating;
+                restaurant.Description = model.Description;
+                restaurant.PhoneNumber = model.PhoneNumber;
+                restaurant.WebsiteUrl = model.WebsiteUrl;
+                restaurant.MenuUrl = model.MenuUrl;
 
-                await this.imageService.UploadAndGetHotelImageCollectionAsync(model.AddedImages, hotel.Id);
+                await this.imageService.UploadAndGetRestaurantImageCollectionAsync(model.AddedImages, restaurant.Id);
 
-                this.hotelRepository.Update(hotel);
-                await this.hotelRepository.SaveChangesAsync();
+                this.restaurantRepository.Update(restaurant);
+                await this.restaurantRepository.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await this.HotelExists(id))
+                if (!await this.RestaurantExists(id))
                 {
                     this.TempData[ErrorMessage] = SomethingWentWrong;
 
@@ -153,7 +154,7 @@
                 }
             }
 
-            this.TempData[SuccessMessage] = SuccessfullyEditedHotel;
+            this.TempData[SuccessMessage] = SuccessfullyEditedRestaurant;
 
             return this.RedirectToAction(nameof(this.Index));
         }
@@ -167,16 +168,16 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            var hotel = await this.hotelService.GetById<HotelViewModel>(id);
+            var restaurant = await this.restaurantService.GetById<RestaurantViewModel>(id);
 
-            if (hotel == null)
+            if (restaurant == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            return this.View(hotel);
+            return this.View(restaurant);
         }
 
         [HttpPost]
@@ -190,23 +191,23 @@
                 return this.RedirectToAction(nameof(this.Delete));
             }
 
-            var hotel = await this.hotelService.GetById(id);
+            var restaurant = await this.restaurantService.GetById(id);
 
-            if (hotel == null)
+            if (restaurant == null)
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction(nameof(this.Delete));
             }
 
-            this.hotelRepository.Delete(hotel);
-            await this.hotelRepository.SaveChangesAsync();
+            this.restaurantRepository.Delete(restaurant);
+            await this.restaurantRepository.SaveChangesAsync();
 
-            this.TempData[SuccessMessage] = SuccessfullyDeletedHotel;
+            this.TempData[SuccessMessage] = SuccessfullyDeletedRestaurant;
 
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        private async Task<bool> HotelExists(string id) => await this.hotelRepository.AllAsNoTracking().AnyAsync(x => x.Id.ToString() == id);
+        private async Task<bool> RestaurantExists(string id) => await this.restaurantRepository.AllAsNoTracking().AnyAsync(x => x.Id.ToString() == id);
     }
 }

@@ -118,18 +118,6 @@
         public DateTime ReservationEndDate { get; set; }
 
         /// <summary>
-        /// Gets or sets a collection of the hotel's reviews.
-        /// </summary>
-        [Required]
-        public virtual ICollection<HotelReviewViewModel> Reviews { get; set; } = new HashSet<HotelReviewViewModel>();
-
-        /// <summary>
-        /// Gets or sets a collection of the hotel's amenities.
-        /// </summary>
-        [Required]
-        public virtual ICollection<AmenityViewModel> Amenities { get; set; } = new HashSet<AmenityViewModel>();
-
-        /// <summary>
         /// Gets or sets a collection of the hotel's images.
         /// </summary>
         [Required]

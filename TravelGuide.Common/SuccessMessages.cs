@@ -2,6 +2,13 @@
 {
     public static class SuccessMessages
     {
+        public static class RestaurantSuccessMessages
+        {
+            public const string SuccessfullyEditedRestaurant = "The restaurant has been successfully edited!";
+
+            public const string SuccessfullyDeletedRestaurant = "The restaurant has been successfully deleted!";
+        }
+
         public static class HotelSuccessMessages
         {
             public const string SuccessfullyEditedHotel = "The hotel has been successfully edited!";

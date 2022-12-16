@@ -107,6 +107,13 @@
                 .To<T>()
                 .ToListAsync();
 
+        public async Task<ICollection<T>> GetAllAsync<T>() => await this.restaurantRepository.AllAsNoTrackingWithDeleted()
+                .Include(x => x.WorkingHours)
+                .ThenInclude(wh => wh.WorkingHours)
+                .OrderByDescending(x => x.CreatedOn)
+                .To<T>()
+                .ToListAsync();
+
         /// <summary>
         /// Gets all user restaurants and maps them to a view model.
         /// </summary>
@@ -117,6 +124,14 @@
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
+                .To<T>()
+                .ToListAsync();
+
+        public async Task<IEnumerable<T>> GetAllUserRestaurantsAsync<T>(string userId) => await this.restaurantRepository.AllAsNoTracking()
+                .Include(x => x.WorkingHours)
+                .ThenInclude(wh => wh.WorkingHours)
+                .Where(x => x.OwnerId.ToString() == userId)
+                .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToListAsync();
 
@@ -131,6 +146,16 @@
             .Where(x => x.Id.ToString() == restaurantId)
             .To<T>()
             .FirstOrDefaultAsync();
+
+        public async Task<Restaurant> GetById(string restaurantId) => await this.restaurantRepository.AllAsNoTracking()
+            .Include(x => x.Reservations)
+            .Include(x => x.Images)
+            .Include(x => x.Reviews)
+            .Include(x => x.WorkingHours)
+            .ThenInclude(wh => wh.WorkingHours)
+            .Include(x => x.Address)
+            .ThenInclude(a => a.Town)
+            .FirstOrDefaultAsync(x => x.Id.ToString() == restaurantId);
 
         /// <summary>
         /// Gets the count of all hotels.

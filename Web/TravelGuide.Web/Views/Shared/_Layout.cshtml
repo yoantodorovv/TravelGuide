@@ -77,16 +77,15 @@
                                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             @if (User.IsInRole(HotelierRoleName)
-                                                   || User.IsInRole(AdministratorRoleName))
+                                                  || User.IsInRole(AdministratorRoleName))
                                             {
-                                                @*TODO: Add other administration links!*@
                                                 <a class="dropdown-item" asp-area="Administration" asp-controller="Hotel" asp-action="Index">Hotels</a>
                                                 <a class="dropdown-item" asp-area="Administration" asp-controller="HotelReservations" asp-action="Index">Hotel Reservations</a>
                                             }
                                             @if (User.IsInRole(RestauranteurRoleName)
-                                                   || User.IsInRole(AdministratorRoleName))
+                                                  || User.IsInRole(AdministratorRoleName))
                                             {
-                                                @*TODO: Add other administration links!*@
+                                                <a class="dropdown-item" asp-area="Administration" asp-controller="Restaurant" asp-action="Index">Restaurants</a>
                                                 <a class="dropdown-item" asp-area="Administration" asp-controller="RestaurantReservations" asp-action="Index">Restaurant Reservations</a>
                                             }
                                         </div>
