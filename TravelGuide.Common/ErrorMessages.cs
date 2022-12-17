@@ -17,6 +17,11 @@
             public const string InvalidEmail = "Email cannot be different from yours! Please try again.";
         }
 
+        public static class ApproveErrorMessages
+        {
+            public const string SomethingWentWrong = "Something went wrong!";
+        }
+
         public static class RestaurantErrorMessages
         {
             public const string SomethingWentWrong = "Something went wrong!";

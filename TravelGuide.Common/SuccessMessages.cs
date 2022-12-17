@@ -2,6 +2,15 @@
 {
     public static class SuccessMessages
     {
+        public static class ApproveSuccessMessages
+        {
+            public const string SuccessfullyApprovedUser = "The user has been successfully approved!";
+
+            public const string SuccessfullyRejectedUser = "The user has been successfully rejected!";
+
+            public const string SuccessfullyDemotedUser = "The user has been successfully demoted!";
+        }
+
         public static class RestaurantSuccessMessages
         {
             public const string SuccessfullyEditedRestaurant = "The restaurant has been successfully edited!";

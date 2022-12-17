@@ -1,13 +1,16 @@
 ﻿namespace TravelGuide.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
+    using TravelGuide.Services.Mapping;
 
     /// <summary>
     /// Service for approves.
@@ -64,6 +67,79 @@
             return true;
         }
 
+        public async Task<Approve> ApproveAsync(string approveId)
+        {
+            var approve = await this.GetByIdAsync(approveId);
+
+            await this.userManager.AddToRoleAsync(approve.User, approve.Position);
+
+            approve.IsApproved = true;
+
+            await this.UpdateAsync(approve);
+
+            return approve;
+        }
+
         public bool Contains(Guid userId, string position) => this.approveRepository.AllAsNoTracking().Any(a => a.User.Id == userId && a.Position == position);
+
+        public async Task UpdateAsync(Approve approve)
+        {
+            this.approveRepository.Update(approve);
+
+            await this.approveRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Approve approve)
+        {
+            this.approveRepository.Delete(approve);
+
+            await this.approveRepository.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<T>> GetAllAsync<T>() => await this.approveRepository.AllAsNoTracking()
+            .Where(x => x.IsApproved == false)
+            .OrderByDescending(x => x.CreatedOn)
+            .To<T>()
+            .ToListAsync();
+
+        public async Task<Approve> GetByIdAsync(string id) => await this.approveRepository.All()
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.Id.ToString() == id);
+
+        public async Task<ICollection<T>> GetAllApprovedAsync<T>() => await this.approveRepository.AllAsNoTracking()
+            .Where(x => x.IsApproved == true)
+            .OrderByDescending(x => x.CreatedOn)
+            .To<T>()
+            .ToListAsync();
+
+        public async Task<Approve> RejectAsync(string approveId)
+        {
+            var approve = await this.GetByIdAsync(approveId);
+
+            await this.DeleteAsync(approve);
+
+            return approve;
+        }
+
+        public async Task<ApplicationUser> DemoteAsync(string approveId)
+        {
+            var approve = await this.GetByIdAsync(approveId);
+
+            var user = approve.User;
+
+            await this.userManager.RemoveFromRoleAsync(user, approve.Position);
+
+            approve.IsApproved = false;
+
+            await this.UpdateAsync(approve);
+
+            return user;
+        }
+
+        public async Task<ICollection<T>> GetAllRejectedAsync<T>() => await this.approveRepository.AllAsNoTrackingWithDeleted()
+            .Where(x => x.IsApproved == false && x.IsDeleted == true)
+            .OrderByDescending(x => x.CreatedOn)
+            .To<T>()
+            .ToListAsync();
     }
 }

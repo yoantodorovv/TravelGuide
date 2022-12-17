@@ -39,6 +39,7 @@
     <None Remove="Administration\Hotel\" />
     <None Remove="Administration\Restaurant\" />
     <None Remove="Administration\RestaurantReservations\" />
+    <None Remove="Administration\Approve\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Hotel\" />
@@ -54,5 +55,6 @@
     <Folder Include="Administration\Hotel\" />
     <Folder Include="Administration\Restaurant\" />
     <Folder Include="Administration\RestaurantReservations\" />
+    <Folder Include="Administration\Approve\" />
   </ItemGroup>
 </Project>
