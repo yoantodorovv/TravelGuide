@@ -31,4 +31,12 @@
     <ProjectReference Include="..\..\Services\TravelGuide.Services.Data\TravelGuide.Services.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Mocks\" />
+    <None Remove="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mocks\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
 </Project>

@@ -38,7 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\TravelGuide.Data.Models\TravelGuide.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\TravelGuide.Data\TravelGuide.Data.csproj" />
     <ProjectReference Include="..\..\Services\TravelGuide.Services.Data\TravelGuide.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\TravelGuide.Services.Mapping\TravelGuide.Services.Mapping.csproj" />

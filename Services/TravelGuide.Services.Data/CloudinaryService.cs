@@ -26,7 +26,6 @@
             this.cloudinary = new Cloudinary(this.account);
         }
 
-        // TODO: Turn it into collection of images
         public string UploadImage(IFormFile image)
         {
             var file = image;
@@ -51,11 +50,6 @@
             }
 
             return string.Empty;
-        }
-
-        public IFormFile GetImage()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -5,8 +5,5 @@
     public interface ICloudinaryService
     {
         string UploadImage(IFormFile image);
-
-        // TODO: Change return type.
-        IFormFile GetImage();
     }
 }
