@@ -92,7 +92,6 @@
         /// <summary>
         /// Returns the view that visualises the view to submit a request to become a hotelier.
         /// </summary>
-        // TODO: Test
         [Authorize(Roles = UserRoleName)]
         public async Task<IActionResult> BecomeHotelier()
         {
