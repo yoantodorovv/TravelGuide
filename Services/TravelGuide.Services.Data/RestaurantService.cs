@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Ganss.Xss;
     using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
@@ -23,6 +24,7 @@
         private readonly IAddressService addressService;
         private readonly IImageService imageService;
         private readonly IWorkingHoursService workingHoursService;
+        private readonly IHtmlSanitizer htmlSanitizer;
 
         /// <summary>
         /// IoC.
@@ -41,6 +43,7 @@
             this.addressService = addressService;
             this.imageService = imageService;
             this.workingHoursService = workingHoursService;
+            this.htmlSanitizer = new HtmlSanitizer();
         }
 
         /// <summary>
@@ -61,15 +64,15 @@
                 var restaurant = new Restaurant()
                 {
                     OwnerId = Guid.Parse(userId),
-                    Name = model.Name,
-                    Location = model.Location,
-                    PhoneNumber = model.PhoneNumber,
-                    Email = model.Email,
-                    WebsiteUrl = model.WebsiteUrl,
+                    Name = this.htmlSanitizer.Sanitize(model.Name),
+                    Location = this.htmlSanitizer.Sanitize(model.Location),
+                    PhoneNumber = this.htmlSanitizer.Sanitize(model.PhoneNumber),
+                    Email = this.htmlSanitizer.Sanitize(model.Email),
+                    WebsiteUrl = this.htmlSanitizer.Sanitize(model.WebsiteUrl),
                     Rating = model.Rating,
-                    Description = model.Description,
-                    MenuUrl = model.MenuUrl,
-                    PriceRange = model.PriceRange,
+                    Description = this.htmlSanitizer.Sanitize(model.Description),
+                    MenuUrl = this.htmlSanitizer.Sanitize(model.MenuUrl),
+                    PriceRange = this.htmlSanitizer.Sanitize(model.PriceRange),
                 };
 
                 try
