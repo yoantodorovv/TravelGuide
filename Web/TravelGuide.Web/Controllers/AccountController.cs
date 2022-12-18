@@ -1,7 +1,7 @@
 ﻿namespace TravelGuide.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using Ganss.Xss;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -24,6 +24,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<ApplicationRole> roleManager;
+        private readonly IHtmlSanitizer htmlSanitizer;
 
         /// <summary>
         /// IoC.
@@ -39,6 +40,7 @@
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.htmlSanitizer = new HtmlSanitizer();
         }
 
         /// <summary>
@@ -62,14 +64,14 @@
 
             var user = new ApplicationUser()
             {
-                UserName = model.FirstName,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
+                UserName = this.htmlSanitizer.Sanitize(model.FirstName),
+                FirstName = this.htmlSanitizer.Sanitize(model.FirstName),
+                LastName = this.htmlSanitizer.Sanitize(model.LastName),
+                Email = this.htmlSanitizer.Sanitize(model.Email),
                 //// EmailConfirmed = true,
             };
 
-            var result = await this.userManager.CreateAsync(user, model.Password);
+            var result = await this.userManager.CreateAsync(user, this.htmlSanitizer.Sanitize(model.Password));
 
             if (result.Succeeded)
             {
@@ -117,7 +119,7 @@
                 return this.View(model);
             }
 
-            var user = await this.userManager.FindByNameAsync(model.UsernameOrEmailField);
+            var user = await this.userManager.FindByNameAsync(this.htmlSanitizer.Sanitize(model.UsernameOrEmailField));
 
             if (user != null)
             {

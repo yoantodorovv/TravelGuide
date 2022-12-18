@@ -34,10 +34,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
     <PackageReference Include="toastr" Version="2.1.1" />
+    <PackageReference Include="HtmlSanitizer" Version="8.0.601" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TravelGuide.Common\TravelGuide.Common.csproj" />
     <ProjectReference Include="..\..\Data\TravelGuide.Data.Models\TravelGuide.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\TravelGuide.Data\TravelGuide.Data.csproj" />
     <ProjectReference Include="..\..\Services\TravelGuide.Services.Data\TravelGuide.Services.Data.csproj" />
@@ -63,6 +63,7 @@
     <None Remove="Areas\Administration\Views\Hotel\" />
     <None Remove="Areas\Administration\Views\Restaurant\" />
     <None Remove="Areas\Administration\Views\RestaurantReservations\" />
+    <None Remove="HtmlSanitizer" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Account\" />

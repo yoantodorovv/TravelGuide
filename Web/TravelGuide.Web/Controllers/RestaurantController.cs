@@ -4,6 +4,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Ganss.Xss;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@
         private readonly IRestaurantService restaurantService;
         private readonly IApproveService approveService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IHtmlSanitizer htmlSanitizer;
 
         public RestaurantController(
             IRestaurantService restaurantService,
@@ -33,6 +35,7 @@
             this.restaurantService = restaurantService;
             this.approveService = approveService;
             this.userManager = userManager;
+            this.htmlSanitizer = new HtmlSanitizer();
         }
 
         [AllowAnonymous]
@@ -109,7 +112,7 @@
                 return this.View(model);
             }
 
-            var success = await this.approveService.AddToApprovalsAsync(model.Email, RestauranteurPosition);
+            var success = await this.approveService.AddToApprovalsAsync(this.htmlSanitizer.Sanitize(model.Email), RestauranteurPosition);
 
             if (!success)
             {
@@ -135,13 +138,10 @@
                 return this.View(model);
             }
 
-            //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
-
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             try
             {
-                // TODO: SaveChanges for last!
                 await this.restaurantService.AddAsync(model, userId);
             }
             catch (Exception ex)

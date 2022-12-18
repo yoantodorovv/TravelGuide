@@ -1,9 +1,9 @@
 ﻿namespace TravelGuide.Services.Data
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Ganss.Xss;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
     using TravelGuide.Services.Data.ServiceInterfaces;
@@ -12,10 +12,12 @@
     public class TownService : ITownService
     {
         private readonly IDeletableEntityRepository<Town> townRepository;
+        private readonly IHtmlSanitizer htmlSanitizer;
 
         public TownService(IDeletableEntityRepository<Town> townRepository)
         {
             this.townRepository = townRepository;
+            this.htmlSanitizer = new HtmlSanitizer();
         }
 
         public async Task<Town> GetTownAsync<T>(T model)
@@ -27,7 +29,7 @@
             {
                 var town = new Town()
                 {
-                    Name = model.AddressTownName,
+                    Name = this.htmlSanitizer.Sanitize(model.AddressTownName),
                 };
 
                 await this.townRepository.AddAsync(town);

@@ -4,6 +4,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Ganss.Xss;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IHotelService hotelService;
         private readonly IApproveService approveService;
+        private readonly IHtmlSanitizer htmlSanitizer;
 
         /// <summary>
         /// IoC.
@@ -41,6 +43,7 @@
             this.userManager = userManager;
             this.hotelService = hotelService;
             this.approveService = approveService;
+            this.htmlSanitizer = new HtmlSanitizer();
         }
 
         /// <summary>
@@ -124,7 +127,7 @@
                 return this.View(model);
             }
 
-            var success = await this.approveService.AddToApprovalsAsync(model.Email, HotelierPosition);
+            var success = await this.approveService.AddToApprovalsAsync(this.htmlSanitizer.Sanitize(model.Email), HotelierPosition);
 
             if (!success)
             {
@@ -155,8 +158,6 @@
             {
                 return this.View(model);
             }
-
-            //// TODO: Check if all inputs are correct and none of them are faulty. /injections/
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Ganss.Xss;
     using Microsoft.EntityFrameworkCore;
     using TravelGuide.Data.Common.Repositories;
     using TravelGuide.Data.Models;
@@ -24,6 +25,7 @@
         private readonly IAddressService addressService;
         private readonly IWorkingHoursService workingHoursService;
         private readonly IImageService imageService;
+        private readonly IHtmlSanitizer htmlSanitizer;
 
         /// <summary>
         /// IoC.
@@ -45,6 +47,7 @@
             this.addressService = addressService;
             this.workingHoursService = workingHoursService;
             this.imageService = imageService;
+            this.htmlSanitizer = new HtmlSanitizer();
         }
 
         /// <summary>
@@ -69,14 +72,14 @@
                 var hotel = new Hotel()
                 {
                     OwnerId = Guid.Parse(userId),
-                    Name = model.Name,
-                    Location = model.Location,
+                    Name = this.htmlSanitizer.Sanitize(model.Name),
+                    Location = this.htmlSanitizer.Sanitize(model.Location),
                     Price = model.Price,
-                    Details = model.Details,
+                    Details = this.htmlSanitizer.Sanitize(model.Details),
                     Rating = model.Rating,
-                    PhoneNumber = model.PhoneNumber,
-                    WebsiteUrl = model.WebsiteUrl,
-                    Email = model.Email,
+                    PhoneNumber = this.htmlSanitizer.Sanitize(model.PhoneNumber),
+                    WebsiteUrl = this.htmlSanitizer.Sanitize(model.WebsiteUrl),
+                    Email = this.htmlSanitizer.Sanitize(model.Email),
                 };
 
                 try
